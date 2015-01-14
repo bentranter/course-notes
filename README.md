@@ -26,6 +26,10 @@ Originally, [hood.ie](http://hood.ie) sounded like it was going to be a good ide
 
 1. I don't know enough about accounts to have any concrete ideas, but hopefully there's a way to consume some token once logged in so if the user goes offline, they aren't signed out and there is no possible way for the service to be disrupted.
 
+##Proposed API Endpoints
+
+Each **note** might have an id, date, subject name, author, last time reviewed, folder location, folder it belongs to, amount of times reviewed. In the next iteration, you could have which school it belongs to.
+
 ##Dev Stuff
 
 ####Starting the fake API for development
