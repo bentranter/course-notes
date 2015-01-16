@@ -32,7 +32,9 @@
     "templatizer": "^1.0.0",
     "underscore": "^1.6.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "rethinkdb": "^1.15.0"
+  },
   "jshintConfig": {
     "asi": false,
     "browser": true,

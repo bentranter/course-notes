@@ -1,5 +1,9 @@
 var _ = require('underscore');
+var r = require('rethinkdb');
 
+r.connect({host: 'localhost', port: 28015 }, function (err, connection) {
+    console.log('Connected to RethinkDB');
+});
 
 var people = [
     {
