@@ -11,6 +11,7 @@ var semiStatic = require('semi-static');
 var serveStatic = require('serve-static');
 var stylizer = require('stylizer');
 var templatizer = require('templatizer');
+var chalk = require('chalk');
 var app = express();
 
 // a little helper for fixing paths for various environments
@@ -44,11 +45,18 @@ app.use(helmet.nosniff());
 
 app.set('view engine', 'jade');
 
+// -----------------
+// Set up the database
+// -----------------
+
+var db = require('./server/db');
+
+db.setup();
 
 // -----------------
 // Set up our little demo API
 // -----------------
-var api = require('./fakeApi');
+var api = require('./server/api');
 app.get('/api/people', api.list);
 app.get('/api/people/:id', api.get);
 app.delete('/api/people/:id', api.delete);
