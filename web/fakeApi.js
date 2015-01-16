@@ -1,8 +1,12 @@
 var _ = require('underscore');
 var r = require('rethinkdb');
+var chalk = require('chalk');
 
-r.connect({host: 'localhost', port: 28015 }, function (err, connection) {
-    console.log('Connected to RethinkDB');
+var host = 'localhost';
+var port = 28015;
+
+r.connect({host: host, port: port }, function (err, connection) {
+    console.log('Connected to ' + chalk.green('RethinkDB') + ' on port ' + chalk.blue(port));
 });
 
 var people = [
