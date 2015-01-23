@@ -1,4 +1,8 @@
 var _ = require('underscore');
+var db = require('./db');
+
+// Setup the DB
+db.setup();
 
 var host = 'localhost';
 var port = 28015;

@@ -1,0 +1,20 @@
+2015-01-21T10:55:49.252873000 0.632476s info: Initializing directory /Users/Ben/course-notes/web/rethinkdb_data
+2015-01-21T10:55:49.253158000 0.632762s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/Users/Ben/course-notes/web/rethinkdb_data' did not already exist or is empty.)
+2015-01-21T10:55:49.253243000 0.632846s info: Running rethinkdb 1.15.2 (CLANG 6.0 (clang-600.0.54))...
+2015-01-21T10:55:49.323800000 0.703404s info: Running on Darwin 14.0.0 x86_64
+2015-01-21T10:55:49.323869000 0.703472s info: Using cache size of 100 MB
+2015-01-21T10:55:49.323914000 0.703518s warn: Cache size does not leave much memory for server and query overhead (available memory: 243 MB).
+2015-01-21T10:55:49.324116000 0.703720s warn: Cache size is very low and may impact performance.
+2015-01-21T10:55:49.324152000 0.703755s info: Loading data from directory /Users/Ben/course-notes/web/rethinkdb_data
+2015-01-21T10:55:50.993299000 2.372993s info: Listening for intracluster connections on port 29015
+2015-01-21T10:55:50.994729000 2.374423s info: Listening for client driver connections on port 28015
+2015-01-21T10:55:50.994874000 2.374567s info: Listening for administrative HTTP connections on port 8080
+2015-01-21T10:55:50.994902000 2.374595s info: Listening on addresses: 127.0.0.1, ::1
+2015-01-21T10:55:50.994925000 2.374618s info: To fully expose RethinkDB on the network, bind to all addresses
+2015-01-21T10:55:50.994945000 2.374638s info: by running rethinkdb with the `--bind all` command line option.
+2015-01-21T10:55:50.994965000 2.374659s info: Server ready
+2015-01-21T10:56:40.424892000 51.806750s info: Server got SIGINT from pid 95572, uid 501; shutting down...
+2015-01-21T10:56:40.425188000 51.807046s info: Shutting down client connections...
+2015-01-21T10:56:40.427169000 51.809028s info: All client connections closed.
+2015-01-21T10:56:40.427195000 51.809053s info: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-01-21T10:56:40.427211000 51.809069s info: Storage engine shut down.
