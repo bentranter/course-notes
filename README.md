@@ -41,3 +41,52 @@ $ cd server && npm install && npm start
 ```
 
 This will be on `0.0.0.0:3000`. There are only two API endpoints so far: `http://0.0.0.0:3000/api/people` and `http://0.0.0.0:3000/api/people/:id`. The first supports **GET** and **POST** and the latter supports **GET**, **DELETE**, and **PUT**. Try anything you want because once the server is restarted the JSON will be reset so you can't mess anything up. Also, the `id`'s are just incremented starting at 1 (instead of using UUID or something) so if you go to `http://0.0.0.0:3000/api/people/2` you should expect to see the JSON payload `{"id":2,"firstName":"Bob","lastName":"Saget","coolnessFactor":2}`.
+
+###Data Models
+
+######USERS
+- First Name
+- Last Name
+- Email
+- Email isVerified
+- Password
+- Date they signed up
+- Something for two factor auth (phone number???)
+- School
+- Program
+- Major
+- Year Level
+- Country
+- State/Province/Whatever
+- City
+- Language
+- Date they last signed in
+- Date they last wrote a note
+- Date they last reviewed a note
+- AppleID/Google Play Stuff
+- Amount of times they signed in
+
+######NOTES
+- Title
+- Date created
+- Date updated
+- User it belongs to:
+    - All their info for tracking stats 
+- Content (this is gonna be hard to store)
+- Note number (auto-increment)
+- Folder name
+- Path to the document
+- Time last reviewed
+- Times reviewed
+
+######How notes will be accessed:
+
+`https://api.speedstudy.co/bentranter/databases/table-joins.json`
+
+This'll be raw json data.
+
+######How they'll appear to the user in a web browser:
+
+`https://www.speedstudy.co/bentranter/databases/table-joins.html`
+
+That will be a rendered document.
