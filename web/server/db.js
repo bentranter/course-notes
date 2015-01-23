@@ -1,6 +1,7 @@
 // Include RethinkDB in this file only!
 
 var r = require('rethinkdb');
+var thinky = require('thinky');
 var chalk = require('chalk');
 
 // Configure RethinkDB
