@@ -64,10 +64,6 @@ function onConnect(callback) {
   });
 }
 
-function test() {
-	onConnect(function(err, conn) {
-		console.log(chalk.green('All tests passed!'));
-	});
-}
-
-test();
+module.exports.newUser = function(username, password, callback) {
+	// AHHHH
+};
