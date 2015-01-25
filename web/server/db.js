@@ -68,3 +68,5 @@ function onConnect(callback) {
 module.exports.newUser = function(username, password, callback) {
 	// AHHHH
 };
+
+// $TODO: Wrap everything in Thinky and build API from there
