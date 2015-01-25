@@ -82,3 +82,4 @@ exports.update = function (req, res) {
     res.send(found);
 };
 
+// Model routes from this exaple before going further
