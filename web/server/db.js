@@ -1,3 +1,4 @@
+
 /**
  * Module dependencies.
  *
@@ -22,6 +23,7 @@ var chalk = require('chalk');
  *
  * @api private
  */
+ 
 var thinky = require('thinky')({
 	host: process.env.RDB_HOST || 'localhost',
   port: parseInt(process.env.RDB_PORT || 28015),
@@ -34,7 +36,7 @@ var thinky = require('thinky')({
  * @param {String} model name
  * @param {Object} data types
  *
- *@api private
+ * @api private
  *
  */
 

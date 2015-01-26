@@ -1,5 +1,5 @@
 /**
- * Module dependencies
+ * Module dependencies.
  */
 
 var path = require('path');
@@ -17,36 +17,56 @@ var templatizer = require('templatizer');
 var chalk = require('chalk');
 var app = express();
 
-// A little helper for fixing paths for various environments
+/**
+ * A helper for fixing paths.
+ *
+ * @param {String} the path string
+ *
+ * @api private
+ *
+ */
+
 var fixPath = function (pathString) {
     return path.resolve(path.normalize(pathString));
 };
 
-// Configure express
+/**
+ * Configure express.
+ */
+
 app.use(compress());
 app.use(serveStatic(fixPath('public')));
 
-// We only want to expose tests in dev
+/**
+ * We only want to expose tests in development.
+ */
+
 if (config.isDev) {
     app.use(serveStatic(fixPath('test/assets')));
     app.use(serveStatic(fixPath('test/spacemonkey')));
 }
-
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// In order to test this with spacemonkey we need frames
+/**
+ * To test with Spacemoneky, you have to use frames.
+ */
 if (!config.isDev) {
     app.use(helmet.xframe());
 }
 app.use(helmet.xssFilter());
 app.use(helmet.nosniff());
 
-// Use Jade for templates
+/**
+ * Set the view engine. We're going to use Jade.
+ */
 app.set('view engine', 'jade');
 
-// Setup fake API
+/**
+ * Setup fake API.
+ */
+
 var api = require('./server/api');
 app.get('/api/people', api.list);
 app.get('/api/people/:id', api.get);
@@ -54,8 +74,10 @@ app.delete('/api/people/:id', api.delete);
 app.put('/api/people/:id', api.update);
 app.post('/api/people', api.add);
 
+/**
+ * Enable the functional test site in development.
+ */
 
-// Enable the functional test site in development
 if (config.isDev) {
     app.get('/test*', semiStatic({
         folderPath: fixPath('test'),
@@ -63,15 +85,19 @@ if (config.isDev) {
     }));
 }
 
+/**
+ * Set our client config cookie.
+ */
 
-// Set our client config cookie
 app.use(function (req, res, next) {
     res.cookie('config', JSON.stringify(config.client));
     next();
 });
 
+/**
+ * Configure Moonboots to serve our client application.
+ */
 
-// Configure Moonboots to serve our client application
 new Moonboots({
     moonboots: {
         jsFileName: 'course-notes',
@@ -89,16 +115,16 @@ new Moonboots({
         },
         beforeBuildJS: function () {
             // This re-builds our template files from jade each time the app's main
-            // js file is requested. Which means you can seamlessly change jade and
+            // js file is requested, which means you can seamlessly change jade and
             // refresh in your browser to get new templates.
             if (config.isDev) {
                 templatizer(fixPath('templates'), fixPath('client/templates.js'));
             }
         },
         beforeBuildCSS: function (done) {
-            // This re-builds css from stylus each time the app's main
-            // css file is requested. Which means you can seamlessly change stylus files
-            // and see new styles on refresh.
+            // This re-builds css from stylus each time the app's main css file is 
+            // requested. Which means you can seamlessly change stylus files and see
+            // new styles on refresh.
             if (config.isDev) {
                 stylizer({
                     infile: fixPath('public/css/app.styl'),
@@ -114,8 +140,14 @@ new Moonboots({
 });
 
 
-// Listen for incoming http requests on the port as specified in our config
+/**
+ * Listen for incoming http requests on the port as specified in our config.
+ */
+
 app.listen(config.http.port);
 
-// Startup message
+/**
+ * Send startup message to user in the console.
+ */
+ 
 console.log(chalk.blue(config.client.name) + ' is running at: http://localhost:' + config.http.port);

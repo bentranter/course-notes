@@ -1,11 +1,27 @@
+
+/** 
+ * Module dependencies.
+ */
+
 var _ = require('underscore');
 var db = require('./db');
 
-// Setup the DB
+/**
+ * Setup the DB
+ */
+
 // db.setup();
+
+/**
+ * Configure the host and port for the connection to RethinkDB
+ */
 
 var host = 'localhost';
 var port = 28015;
+
+/**
+ * Setup some dummy data for the fake API
+ */
 
 var people = [
     {
@@ -46,6 +62,17 @@ var people = [
     }
 ];
 var id = 7;
+
+/**
+ * Get a user by id.
+ *
+ * @param {Int} id
+ * @return Object
+ *
+ * @api public
+ *
+ * @HTTP GET
+ */
 
 function get(id) {
     return _.findWhere(people, {id: parseInt(id + '', 10)});
