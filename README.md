@@ -90,3 +90,14 @@ This'll be raw json data.
 `https://www.speedstudy.co/bentranter/databases/table-joins.html`
 
 That will be a rendered document.
+
+####Other Stuff
+
+When browsing through code, power search for the following stuff:
+
+- `@param` this describes the paramters every function takes, including their type
+- `@return` this describes the type of the return value of a function
+- `@api` will either be private or public. Private means that this function can only be called by another function, public means that this function can be called by a user action
+- `@HTTP` this describes the HTTP method intended to be used by the function. This only appears in `server/api.js`
+- `@TODO` this is placed anywhere something still needs to be done
+- `@REVIEW` this is placed anywhere the code is in need of a review

@@ -7,12 +7,6 @@ var _ = require('underscore');
 var db = require('./db');
 
 /**
- * Setup the DB
- */
-
-// db.setup();
-
-/**
  * Configure the host and port for the connection to RethinkDB
  */
 
@@ -69,18 +63,32 @@ var id = 7;
  * @param {Int} id
  * @return Object
  *
- * @api public
- *
- * @HTTP GET
+ * @api private
  */
 
 function get(id) {
     return _.findWhere(people, {id: parseInt(id + '', 10)});
 }
 
+/**
+ * Get a list of all users
+ *
+ * @api public
+ *
+ * @HTTP GET
+ */
+
 exports.list = function (req, res) {
     res.send(people);
 };
+
+/**
+ * Create a new user
+ *
+ * @api public
+ *
+ * @HTTP POST
+ */
 
 exports.add = function (req, res) {
     var person = req.body;
@@ -89,11 +97,27 @@ exports.add = function (req, res) {
     res.status(201).send(person);
 };
 
+/**
+ * Get a user by id
+ *
+ * @api public
+ *
+ * @HTTP GET
+ */
+
 exports.get = function (req, res) {
     var found = get(req.params.id);
     res.status(found ? 200 : 404);
     res.send(found);
 };
+
+/**
+ * Delete a user by id
+ * 
+ * @api public
+ *
+ * @HTTP DELETE
+ */
 
 exports.delete = function (req, res) {
     var found = get(req.params.id);
@@ -102,6 +126,14 @@ exports.delete = function (req, res) {
     res.send(found);
 };
 
+/**
+ * Update an existing user by id
+ *
+ * @api public
+ *
+ * @HTTP PUT
+ */
+
 exports.update = function (req, res) {
     var found = get(req.params.id);
     if (found) _.extend(found, req.body);
@@ -109,4 +141,4 @@ exports.update = function (req, res) {
     res.send(found);
 };
 
-// Model routes from this exaple before going further
+// @TODO model routes from this exaple before going further
