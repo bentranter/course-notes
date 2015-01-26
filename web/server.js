@@ -1,4 +1,7 @@
-// Includes
+/**
+ * Module dependencies
+ */
+
 var path = require('path');
 var express = require('express');
 var helmet = require('helmet');
