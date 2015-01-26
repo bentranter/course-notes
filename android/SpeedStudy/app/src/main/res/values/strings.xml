@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="edit_message">Enter a Message</string>
+    <string name="button_send">Send</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_display_message">My Message</string>
+    <string name="action_search">Search Title?</string>
+    <string name="title_activity_hopefully_alist">HopefullyAList</string>
+    <string name="app_name">SpeedStudy</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_speed_reader">SpeedReader</string>
+    <string name="title_activity_local_files_browser">LocalFilesBrowser</string>
+    <string name="title_activity_display_document">DisplayDocument</string>
+
+</resources>
