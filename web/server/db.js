@@ -66,6 +66,9 @@ var User = thinky.createModel('User', {
  * Date they last reviewed a note
  * AppleID/Google Play Stuff
  * Amount of times they signed in
+ *
+ * @REVIEW Since strict schema validation must occur on
+ * the client, it is still useful to do it here?
  */
 
 var Note = thinky.createModel("Note", {
@@ -85,7 +88,7 @@ var Note = thinky.createModel("Note", {
  * Dummy data for testing with Ampersand
  */
 
-var People = thinky.createModel('Peopel', {
+var People = thinky.createModel('People', {
   id: Number,
   firstName: String,
   lastName:  String,
