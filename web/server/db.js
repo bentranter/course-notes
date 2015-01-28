@@ -95,6 +95,14 @@ var People = thinky.createModel('People', {
   coolnessFactor: Number
 });
 
+People.save([
+    {firstName: 'Michel', lastName: 'John', coolnessFactor: 8}
+]).then(function(result) {
+    console.log(result);
+}).error(function(error) {
+    console.log(error);
+});
+
 /**
  * Log a success message to the user.
  */
