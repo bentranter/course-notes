@@ -1,3 +1,6 @@
+'use strict';
+
+
 /**
  * Module dependencies.
  */
@@ -15,18 +18,21 @@ var serveStatic = require('serve-static');
 var stylizer = require('stylizer');
 var templatizer = require('templatizer');
 var chalk = require('chalk');
-var r = require('rethinkdb');
+// var r = require('rethinkdb');
 var thinky = require('thinky')({
     host: process.env.RDB_HOST || 'localhost',
     port: parseInt(process.env.RDB_PORT || 28015),
     db:   process.env.RDB_DB || 'StudyFast'
 });
+var r = thinky.r;
 var app = express();
+
 
 /**
  * A helper for fixing paths.
  *
  * @param {String} the path string
+ * @return {String} the resolved path
  *
  * @api private
  *
@@ -36,41 +42,30 @@ var fixPath = function (pathString) {
     return path.resolve(path.normalize(pathString));
 };
 
+
 /**
  * Configure express.
  */
 
 app.use(compress());
 app.use(serveStatic(fixPath('public')));
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
-/**
- * We only want to expose tests in development.
- */
-
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+// Only expose tests in development mode
 if (config.isDev) {
     app.use(serveStatic(fixPath('test/assets')));
     app.use(serveStatic(fixPath('test/spacemonkey')));
 }
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-/**
- * To test with Spacemoneky, you have to use frames.
- */
+// Setup frames to test with SpaceMOnkey
 if (!config.isDev) {
     app.use(helmet.xframe());
 }
 app.use(helmet.xssFilter());
 app.use(helmet.nosniff());
-
-/**
- * Set the view engine. We're going to use Jade.
- */
+// Use Jade
 app.set('view engine', 'jade');
+
 
 /**
  * Setup fake API.
@@ -94,6 +89,7 @@ if (config.isDev) {
     }));
 }
 
+
 /**
  * Set our client config cookie.
  */
@@ -103,8 +99,10 @@ app.use(function (req, res, next) {
     next();
 });
 
+
 /**
  * Use a router for testing.
+ . @TODO: You don't need to use express.Router() as of Express 4
  */
 
 var router = express.Router();
@@ -121,11 +119,26 @@ router.get('/test', function(req, res) {
 var People = thinky.createModel('People', {
   firstName: String,
   lastName:  String,
-  coolnessFactor: Number
+  coolnessFactor: Number,
+  date: { _type: Date, default: r.now() }
 });
+
+// Ensure that date can be used as an index
+People.ensureIndex('date');
 
 // Create route for 'people'
 var peopleRoute = router.route('/people');
+
+/*
+ * Inserts a new document into the table 'People' with the 
+ * request body.
+ *
+ * @param {Object} The HTTP request object
+ * @param (Object) The HTTP response object
+ * @HTTP POST
+ * ENDPOINT `/api/people`
+ * @API public
+ */
 
 peopleRoute.post(function(req, res) {
 
@@ -142,6 +155,8 @@ peopleRoute.post(function(req, res) {
     // Inform where execution gets to
     console.log(chalk.green('Looks good so far...'));
 
+    // @TODO: Open issue in Thinky about promises not resolving according to docs
+
     // Save the person and check for errors kind-of
     person.save(function(err, doc) {
         if (err) {
@@ -157,10 +172,37 @@ peopleRoute.post(function(req, res) {
 });
 
 /**
+ * Responds with every person in the database haha.
+ *
+ * @param {Object} The HTTP request object
+ * @param (Object) The HTTP response object
+ * @HTTP GET
+ * ENDPOINT `/api/people`
+ * @API public
+ */
+
+peopleRoute.get(function(req, res) {
+
+    People.orderBy({ index: r.desc('date') }).run().then(function(posts) {
+        res.json(posts);
+    });
+
+// res.json(allPeople);
+  // Use the Beer model to find all beer
+  // Beer.find(function(err, beers) {
+  //   if (err)
+  //     res.send(err);
+
+  //   res.json(beers);
+  // });
+});
+
+/**
  * Register test with router.
  */
 
 app.use('/api', router);
+
 
 /**
  * Configure Moonboots to serve our client application.
@@ -218,4 +260,4 @@ app.listen(config.http.port);
  * Send startup message to user in the console.
  */
  
-console.log(chalk.magenta(config.client.name) + ' is running at: http://localhost:' + config.http.port);
+console.log(chalk.green(config.client.name) + ' is running at: http://localhost:' + config.http.port);

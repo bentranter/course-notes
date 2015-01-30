@@ -25,6 +25,8 @@ console.log(chalk.green('Database connection ok.'));
  * Dummy data for testing with Ampersand.
  */
 
+// @TODO: Try just saying 'function' instead of 'var'
+
 var People = thinky.createModel('People', {
   id: Number,
   firstName: String,
@@ -32,6 +34,4 @@ var People = thinky.createModel('People', {
   coolnessFactor: Number
 });
 
-module.exports = function() {
-	return People;
-};
+module.exports = People;
