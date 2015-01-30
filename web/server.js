@@ -15,6 +15,12 @@ var serveStatic = require('serve-static');
 var stylizer = require('stylizer');
 var templatizer = require('templatizer');
 var chalk = require('chalk');
+var r = require('rethinkdb');
+var thinky = require('thinky')({
+    host: process.env.RDB_HOST || 'localhost',
+    port: parseInt(process.env.RDB_PORT || 28015),
+    db:   process.env.RDB_DB || 'StudyFast'
+});
 var app = express();
 
 /**
@@ -36,6 +42,9 @@ var fixPath = function (pathString) {
 
 app.use(compress());
 app.use(serveStatic(fixPath('public')));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 /**
  * We only want to expose tests in development.
@@ -67,12 +76,12 @@ app.set('view engine', 'jade');
  * Setup fake API.
  */
 
-var api = require('./server/api');
-app.get('/api/people', api.list);
-app.get('/api/people/:id', api.get);
-app.delete('/api/people/:id', api.delete);
-app.put('/api/people/:id', api.update);
-app.post('/api/people', api.add);
+// var api = require('./server/api');
+// app.get('/api/people', api.list);
+// app.get('/api/people/:id', api.get);
+// app.delete('/api/people/:id', api.delete);
+// app.put('/api/people/:id', api.update);
+// app.post('/api/people', api.add);
 
 /**
  * Enable the functional test site in development.
@@ -93,6 +102,64 @@ app.use(function (req, res, next) {
     res.cookie('config', JSON.stringify(config.client));
     next();
 });
+
+/**
+ * Use a router for testing.
+ */
+
+var router = express.Router();
+
+/**
+ * Initial dummy route for testing.
+ */
+
+router.get('/test', function(req, res) {
+    res.json({ message: 'Test passed.' });
+});
+
+// Put stupid constructor here
+var People = thinky.createModel('People', {
+  id: Number,
+  firstName: String,
+  lastName:  String,
+  coolnessFactor: Number
+});
+
+// Create route for 'people'
+var peopleRoute = router.route('/people');
+
+peopleRoute.post(function(req, res) {
+
+    // Set the new person properties from the POST data
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var coolnessFactor = req.body.coolnessFactor;
+
+    // Create new instance of 'People' model
+    var person = new People({
+        firstName: firstName,
+        lastName: lastName, 
+        coolnessFactor: coolnessFactor
+    });
+
+    // Save the person and check for errors kind-of
+    person.save([{
+        firstName: person.firstName,
+        lastName: person.lastname, 
+        coolnessFactor: person.coolnessFactor
+    }]).then(function(result) {
+        res.json({ message: 'Person added to RethinkDB', data: person});
+        console.log(result);
+    }).error(function(error) {
+        res.send(error);
+    });
+});
+
+/**
+ * Register test with router.
+ */
+
+app.use('/api', router);
 
 /**
  * Configure Moonboots to serve our client application.
@@ -150,4 +217,4 @@ app.listen(config.http.port);
  * Send startup message to user in the console.
  */
  
-console.log(chalk.blue(config.client.name) + ' is running at: http://localhost:' + config.http.port);
+console.log(chalk.magenta(config.client.name) + ' is running at: http://localhost:' + config.http.port);
