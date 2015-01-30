@@ -119,7 +119,6 @@ router.get('/test', function(req, res) {
 
 // Put stupid constructor here
 var People = thinky.createModel('People', {
-  id: Number,
   firstName: String,
   lastName:  String,
   coolnessFactor: Number
@@ -130,28 +129,30 @@ var peopleRoute = router.route('/people');
 
 peopleRoute.post(function(req, res) {
 
-    // Set the new person properties from the POST data
-    var firstName = req.body.firstName;
-    var lastName = req.body.lastName;
-    var coolnessFactor = req.body.coolnessFactor;
+    // Log the request body in case
+    console.log(req.body.firstName);
 
     // Create new instance of 'People' model
     var person = new People({
-        firstName: 'Test',
-        lastName: 'test', 
-        coolnessFactor: 8
+        firstName: req.body.firstName,
+        lastName: req.body.lastName, 
+        coolnessFactor: parseInt(req.body.coolnessFactor)
     });
 
+    // Inform where execution gets to
+    console.log(chalk.green('Looks good so far...'));
+
     // Save the person and check for errors kind-of
-    person.save([{
-        firstName: person.firstName,
-        lastName: person.lastname, 
-        coolnessFactor: person.coolnessFactor
-    }]).then(function(result) {
-        res.send(result);
-        console.log(result);
-    }).error(function(error) {
-        res.send(error);
+    person.save(function(err, doc) {
+        if (err) {
+            res.send(err);
+            console.log(err);
+            console.log('Error');
+        } else {
+            res.json(doc);
+            console.log(doc);
+            console.log('Success');
+        }
     });
 });
 
