@@ -137,9 +137,9 @@ peopleRoute.post(function(req, res) {
 
     // Create new instance of 'People' model
     var person = new People({
-        firstName: firstName,
-        lastName: lastName, 
-        coolnessFactor: coolnessFactor
+        firstName: 'Test',
+        lastName: 'test', 
+        coolnessFactor: 8
     });
 
     // Save the person and check for errors kind-of
@@ -148,7 +148,7 @@ peopleRoute.post(function(req, res) {
         lastName: person.lastname, 
         coolnessFactor: person.coolnessFactor
     }]).then(function(result) {
-        res.json({ message: 'Person added to RethinkDB', data: person});
+        res.send(result);
         console.log(result);
     }).error(function(error) {
         res.send(error);
