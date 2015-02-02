@@ -47,7 +47,7 @@
 
     // pages/info.jade compiled template
     templatizer["pages"]["info"] = function tmpl_pages_info() {
-        return '<section class="page pageTwo"><h2>Simple Page Example</h2><p>This page was rendered by a simple page view file at client/pages/info.js.</p><p>Render Test</p></section>';
+        return '<section class="page pageTwo"><h2>Simple Page Example</h2><div id="wrapper"><h1>Off Canvas Menu</h1><div class="mobile"><input type="checkbox" id="tm"/><ul class="sidenav"><li><a href="#"><i class="fa fa-check"><b>Tasks</b></i></a></li><li><a href="#"><i class="fa fa-inbox"><b>Inbox</b></i></a></li><li><a href="#"><i class="fa fa-pencil"><b>New Note</b></i></a></li><li><a href="#"><i class="fa fa-cog"><b>Settings</b></i></a></li><li><a href="#"><i class="fa fa-power-off"><b>Log Off</b></i></a></li></ul><section><label for="tm">Click Me</label></section></div></div></section>';
     };
 
     // pages/personAdd.jade compiled template

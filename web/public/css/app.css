@@ -1,3 +1,98 @@
 body {
   background: #fff;
 }
+.mobile {
+  float: left;
+  position: relative;
+  box-shadow: 0 0 25px 0 rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+#tm {
+  display: none;
+}
+.mobile section {
+  background: url("http://thecodeplayer.com/uploads/media/mb1.png");
+  width: 285px;
+  height: 500px;
+  position: relative;
+  transition: all 0.25s;
+}
+.mobile section label {
+  color: #fff;
+  text-align: center;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  display: block;
+  padding: 10px 0;
+  width: 60%;
+  position: absolute;
+  left: 20%;
+  top: 100px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.sidenav {
+  background: #323c3c;
+  width: 150px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  padding-top: 100px;
+}
+.sidenav li {
+  list-style-type: none;
+}
+.sidenav a {
+  color: #fff;
+  text-decoration: none;
+}
+.sidenav b {
+  font: bold 12px/48px Avenir;
+  display: block;
+  opacity: 0;
+  -webkit-transform: translateX(50px);
+  -moz-transform: translateX(50px);
+  -ms-transform: translateX(50px);
+  transform: translateX(50px);
+  transition: all 0.4s;
+}
+.sidenav i {
+  display: block;
+  width: 50px;
+  float: left;
+  font-size: 16px;
+  line-height: 48px;
+  text-align: center;
+}
+#tm:checked ~ section {
+  -webkit-transform: translateX(150px);
+  -moz-transform: translateX(150px);
+  -ms-transform: translateX(150px);
+  transform: translateX(150px);
+}
+#tm:checked ~ .sidenav b {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+}
+#tm:checked ~ .sidenav li:nth-child(1) b {
+  transition-delay: 0.08s;
+}
+#tm:checked ~ .sidenav li:nth-child(2) b {
+  transition-delay: 0.16s;
+}
+#tm:checked ~ .sidenav li:nth-child(3) b {
+  transition-delay: 0.24s;
+}
+#tm:checked ~ .sidenav li:nth-child(4) b {
+  transition-delay: 0.32s;
+}
+#tm:checked ~ .sidenav li:nth-child(5) b {
+  transition-delay: 0.4s;
+}
+#tm:checked ~ .sidenav li:nth-child(6) b {
+  transition-delay: 0.48s;
+}
