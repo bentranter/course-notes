@@ -128,6 +128,7 @@ People.ensureIndex('date');
 
 // Create route for 'people'
 var peopleRoute = router.route('/people');
+var personRoute = router.route('/people/:person_id');
 
 /*
  * Inserts a new document into the table 'People' with the 
@@ -171,6 +172,7 @@ peopleRoute.post(function(req, res) {
     });
 });
 
+
 /**
  * Responds with every person in the database haha.
  *
@@ -183,18 +185,26 @@ peopleRoute.post(function(req, res) {
 
 peopleRoute.get(function(req, res) {
 
-    People.orderBy({ index: r.desc('date') }).run().then(function(posts) {
-        res.json(posts);
+    People.orderBy({ index: r.desc('date') }).run().then(function(people) {
+        res.json(people);
     });
+});
 
-// res.json(allPeople);
-  // Use the Beer model to find all beer
-  // Beer.find(function(err, beers) {
-  //   if (err)
-  //     res.send(err);
+/**
+ * Responds with the person matching the ID passed.
+ *
+ * @param {Object} The HTTP request object
+ * @param (Object) The HTTP response object
+ * @HTTP GET
+ * ENDPOINT `/api/people/:person_id`
+ * @API public
+ */
 
-  //   res.json(beers);
-  // });
+personRoute.get(function(req, res) {
+
+    People.get(req.params.person_id).run().then(function(person) {
+        res.json(person);
+    });
 });
 
 /**
@@ -261,3 +271,4 @@ app.listen(config.http.port);
  */
  
 console.log(chalk.green(config.client.name) + ' is running at: http://localhost:' + config.http.port);
+
