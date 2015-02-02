@@ -85,11 +85,18 @@ transform($param)
   -ms-transform: $param
   transform: $param
 
-// transition($attr, $dur, $timing, $delay)
-//   -webkit-transition: $attr $dur $timing $delay
-//   -o-transition: $attr $dur $timing $delay
-//   transition: $attr $dur $timing $delay
-//   -moz-transition: $attr $dur $timing $delay
+transition($attr, $dur)
+  -webkit-transition: $attr $dur
+  -o-transition: $attr $dur
+  transition: $attr $dur
+  -moz-transition: $attr $dur
+  
+transition-delay($param)
+  -webkit-transition-delay: $param
+  -moz-transition-delay: $param
+  -ms-transition-delay: $param
+  -o-transition-delay: $param
+  transition-delay: $param
 
 flip-horizontal()
   -moz-transform: scaleX(-1)
