@@ -208,6 +208,67 @@ personRoute.get(function(req, res) {
 });
 
 /**
+ * Updates a user based on whatever you pass it.
+ *
+ * @param {Object} The HTTP request object
+ * @param (Object) The HTTP response object
+ * @HTTP PUT
+ * ENDPOINT `/api/people/:person_id`
+ * @API public
+ */
+
+personRoute.put(function(req, res) {
+
+    console.log(req.body);
+
+    // NOTE TO DUMB SELF: Use `x-www-url-formencoded` for put req's you idiot
+    People.get(req.params.person_id).run().then(function(person) {
+
+        // So &yet does this with Underscore's `_.extend` but it's more
+        // readable with if statements IMHO. Obv here we're just checking
+        // to see if the field is sent in the body of the req.
+
+        if (req.body.firstName) {
+            person.firstName = req.body.firstName;
+        }
+
+        if (req.body.lastName) {
+            person.lastName = req.body.lastName;
+        }
+
+        if (req.body.coolnessFactor) {
+            person.coolnessFactor = parseInt(req.body.coolnessFactor);
+        }
+        // Shoudl I update this??
+        person.date = r.now();
+
+        // Save the person and check for errors kind-of
+        person.save(function(err, doc) {
+            if (err) {
+                res.send(err);
+                console.log(err);
+                console.log('Error');
+            } else {
+                res.json(doc);
+                console.log(doc);
+                console.log('Success');
+            }
+        });
+    });
+});
+
+
+personRoute.delete(function(req, res) {
+
+    People.get(req.params.person_id).delete().run().then(function(error, result) {
+        res.json({
+            error: error,
+            result: result
+        });
+    });
+});
+
+/**
  * Register test with router.
  */
 
