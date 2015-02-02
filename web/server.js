@@ -68,15 +68,15 @@ app.set('view engine', 'jade');
 
 
 /**
- * Setup fake API.
+ * API.
  */
 
-// var api = require('./server/api');
-// app.get('/api/people', api.list);
-// app.get('/api/people/:id', api.get);
-// app.delete('/api/people/:id', api.delete);
-// app.put('/api/people/:id', api.update);
-// app.post('/api/people', api.add);
+var api = require('./api');
+app.get('/api/people', api.list);
+app.get('/api/people/:id', api.get);
+app.delete('/api/people/:id', api.delete);
+app.put('/api/people/:id', api.update);
+app.post('/api/people', api.add);
 
 /**
  * Enable the functional test site in development.
@@ -98,181 +98,6 @@ app.use(function (req, res, next) {
     res.cookie('config', JSON.stringify(config.client));
     next();
 });
-
-
-/**
- * Use a router for testing.
- . @TODO: You don't need to use express.Router() as of Express 4
- */
-
-var router = express.Router();
-
-/**
- * Initial dummy route for testing.
- */
-
-router.get('/test', function(req, res) {
-    res.json({ message: 'Test passed.' });
-});
-
-// Put stupid constructor here
-var People = thinky.createModel('People', {
-  firstName: String,
-  lastName:  String,
-  coolnessFactor: Number,
-  date: { _type: Date, default: r.now() }
-});
-
-// Ensure that date can be used as an index
-People.ensureIndex('date');
-
-// Create route for 'people'
-var peopleRoute = router.route('/people');
-var personRoute = router.route('/people/:person_id');
-
-/*
- * Inserts a new document into the table 'People' with the 
- * request body.
- *
- * @param {Object} The HTTP request object
- * @param (Object) The HTTP response object
- * @HTTP POST
- * ENDPOINT `/api/people`
- * @API public
- */
-
-peopleRoute.post(function(req, res) {
-
-    // Log the request body in case
-    console.log(req.body.firstName);
-
-    // Create new instance of 'People' model
-    var person = new People({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName, 
-        coolnessFactor: parseInt(req.body.coolnessFactor)
-    });
-
-    // Inform where execution gets to
-    console.log(chalk.green('Looks good so far...'));
-
-    // @TODO: Open issue in Thinky about promises not resolving according to docs
-
-    // Save the person and check for errors kind-of
-    person.save(function(err, doc) {
-        if (err) {
-            res.send(err);
-            console.log(err);
-            console.log('Error');
-        } else {
-            res.json(doc);
-            console.log(doc);
-            console.log('Success');
-        }
-    });
-});
-
-
-/**
- * Responds with every person in the database haha.
- *
- * @param {Object} The HTTP request object
- * @param (Object) The HTTP response object
- * @HTTP GET
- * ENDPOINT `/api/people`
- * @API public
- */
-
-peopleRoute.get(function(req, res) {
-
-    People.orderBy({ index: r.desc('date') }).run().then(function(people) {
-        res.json(people);
-    });
-});
-
-/**
- * Responds with the person matching the ID passed.
- *
- * @param {Object} The HTTP request object
- * @param (Object) The HTTP response object
- * @HTTP GET
- * ENDPOINT `/api/people/:person_id`
- * @API public
- */
-
-personRoute.get(function(req, res) {
-
-    People.get(req.params.person_id).run().then(function(person) {
-        res.json(person);
-    });
-});
-
-/**
- * Updates a user based on whatever you pass it.
- *
- * @param {Object} The HTTP request object
- * @param (Object) The HTTP response object
- * @HTTP PUT
- * ENDPOINT `/api/people/:person_id`
- * @API public
- */
-
-personRoute.put(function(req, res) {
-
-    console.log(req.body);
-
-    // NOTE TO DUMB SELF: Use `x-www-url-formencoded` for put req's you idiot
-    People.get(req.params.person_id).run().then(function(person) {
-
-        // So &yet does this with Underscore's `_.extend` but it's more
-        // readable with if statements IMHO. Obv here we're just checking
-        // to see if the field is sent in the body of the req.
-
-        if (req.body.firstName) {
-            person.firstName = req.body.firstName;
-        }
-
-        if (req.body.lastName) {
-            person.lastName = req.body.lastName;
-        }
-
-        if (req.body.coolnessFactor) {
-            person.coolnessFactor = parseInt(req.body.coolnessFactor);
-        }
-        // Shoudl I update this??
-        person.date = r.now();
-
-        // Save the person and check for errors kind-of
-        person.save(function(err, doc) {
-            if (err) {
-                res.send(err);
-                console.log(err);
-                console.log('Error');
-            } else {
-                res.json(doc);
-                console.log(doc);
-                console.log('Success');
-            }
-        });
-    });
-});
-
-
-personRoute.delete(function(req, res) {
-
-    People.get(req.params.person_id).delete().run().then(function(error, result) {
-        res.json({
-            error: error,
-            result: result
-        });
-    });
-});
-
-/**
- * Register test with router.
- */
-
-app.use('/api', router);
 
 
 /**
