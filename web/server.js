@@ -72,6 +72,12 @@ app.set('view engine', 'jade');
  */
 
 var api = require('./api');
+
+// Users
+app.post('/api/user', api.addUser);
+app.get('/api/user', api.getUserList);
+
+// People
 app.get('/api/people', api.list);
 app.get('/api/people/:id', api.get);
 app.delete('/api/people/:id', api.delete);
