@@ -94,11 +94,11 @@ passport.use(new BasicStrategy(function(username, password, callback) {
             console.log(c.blue('Password matched: ') + res);
             return callback(err, res);
         });
-    }).error(function() {
+    }).error(function(err) {
         console.log(c.red('\nError: could not find user with username: ') + username);
 
         // This is where you need to setup the logic to suggest that new users sign up.
-        console.log(c.yellow('Maybe you should creat an account?'));
+        console.log(c.yellow('Maybe you should create an account?'));
     });
 }));
 
