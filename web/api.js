@@ -13,6 +13,7 @@ var thinky = require('thinky')({
     db:   process.env.RDB_DB || 'StudyFast'
 });
 var r = thinky.r;
+var c = require('chalk');
 
 /**
  * Creating Users -- The Good Parts
@@ -22,6 +23,8 @@ var User = thinky.createModel('User', {
     username: String,
     password: String,
     date: { _type: Date, default: r.now() }
+}, {
+    pk: 'username'
 });
 
 // Put stupid constructor here
@@ -35,7 +38,6 @@ var People = thinky.createModel('People', {
 // Ensure that date can be used as an index
 People.ensureIndex('date');
 User.ensureIndex('date');
-User.ensureIndex('username');
 
 
 /**
@@ -55,8 +57,6 @@ User.ensureIndex('username');
 // THIS IS HORRIBLY UNSTABLE! -- YOU CANT CALL `NEXT()` UNLESS YOU'RE SURE THERE ARE NO ERRORS
 User.pre('save', function(next) {
 
-    // Test to see if password changed -- why does this dump the username?
-
     // Get object from req
     var user = this;
 
@@ -65,34 +65,64 @@ User.pre('save', function(next) {
 
     // Password changed so we need to hash it
     bcrypt.genSalt(5, function(err, salt) {
-      if (err) console.log(err);
-
-      bcrypt.hash(user.password, salt, null, function(err, hash) {
         if (err) {
-            return console.log(err);
-        } else {
-            user.password = hash;
-            next();
+            console.log(c.red('Errors while generating salt: ') + err);
         }
-      });
+
+        bcrypt.hash(user.password, salt, null, function(err, hash) {
+            if (err) {
+                return console.log(c.red('Errors while hashing password: ') + err);
+            } else {
+                user.password = hash;
+                next();
+            }
+        });
     });
 });
 
+//For verify password, you can use `User.define(key, function(){ ... });`
+
 //Setup Basic Auth strategy
 passport.use(new BasicStrategy(function(username, password, callback) {
-    User.get('070b0db6-9ae9-4938-97f2-49a2f4753408').run().then(function(user) {
-        console.log(username);
-        console.log(password);
-        console.log(user.password);
+
+    User.get(username).run().then(function(user) {
+
+        console.log(c.green('\nFound user: ') + username);
 
         bcrypt.compare(password, user.password, function(err, res) {
-            console.log(err);
-            console.log(res);
+            console.log(c.red('Errors: ') + err);
+            console.log(c.blue('Password matched: ') + res);
+            return callback(err, res);
         });
     }).error(function() {
-        console.log('Could not find user. Maybe in this case, you need to tell the user to create an account.');
+        console.log(c.red('\nError: could not find user with username: ') + username);
+
+        // This is where you need to setup the logic to suggest that new users sign up.
+        console.log(c.yellow('Maybe you should creat an account?'));
     });
 }));
+
+// passport.use(new BasicStrategy(
+//   function(username, password, callback) {
+//     User.findOne({ username: username }, function (err, user) {
+//       if (err) { return callback(err); }
+
+//       // No user found with that username
+//       if (!user) { return callback(null, false); }
+
+//       // Make sure the password is correct
+//       user.verifyPassword(password, function(err, isMatch) {
+//         if (err) { return callback(err); }
+
+//         // Password did not match
+//         if (!isMatch) { return callback(null, false); }
+
+//         // Success
+//         return callback(null, user);
+//       });
+//     });
+//   }
+// ));
 
 exports.isAuthenticated = passport.authenticate('basic', { session: false });
 
@@ -108,8 +138,12 @@ exports.addUser = function(req, res) {
     // Save the person and check for errors kind-of. It'll also call `save`'s `pre` hook
     user.save(function(err, doc) {
         if (err) {
+            console.log(c.red('Error: ') + err);
             res.send(err);
         } else {
+
+            // If you want to be fancy, you'll need to wire the token creation function
+            // into this response. For now, it's okay the way it is.
             res.json(doc.username + doc.password + 'Successfully added new user');
         }
     });
@@ -162,8 +196,10 @@ exports.add = function (req, res) {
     // Save the person and check for errors kind-of
     person.save(function(err, doc) {
         if (err) {
+            console.log(c.red('Errors:') + err);
             res.send(err);
         } else {
+            console.log(c.green('\nSuccessfully added new person.\n') + '\nFirst name: ' + doc.firstName + '\nLast name: ' + doc.lastName + '\nCoolness factor: ' + doc.coolnessFactor);
             res.json(doc);
         }
     });
