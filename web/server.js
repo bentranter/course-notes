@@ -7,6 +7,7 @@
 
 var path = require('path');
 var express = require('express');
+var passport = require('passport');
 var helmet = require('helmet');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -78,7 +79,7 @@ app.post('/api/user', api.addUser);
 app.get('/api/user', api.getUserList);
 
 // People
-app.get('/api/people', api.list);
+app.get('/api/people', api.isAuthenticated, api.list);
 app.get('/api/people/:id', api.get);
 app.delete('/api/people/:id', api.delete);
 app.put('/api/people/:id', api.update);

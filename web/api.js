@@ -5,6 +5,8 @@
  */
 
 var bcrypt = require('bcrypt-nodejs');
+var passport = require('passport');
+var BasicStrategy = require('passport-http').BasicStrategy;
 var thinky = require('thinky')({
     host: process.env.RDB_HOST || 'localhost',
     port: parseInt(process.env.RDB_PORT || 28015),
@@ -33,6 +35,7 @@ var People = thinky.createModel('People', {
 // Ensure that date can be used as an index
 People.ensureIndex('date');
 User.ensureIndex('date');
+User.ensureIndex('username');
 
 
 /**
@@ -52,7 +55,7 @@ User.ensureIndex('date');
 // THIS IS HORRIBLY UNSTABLE! -- YOU CANT CALL `NEXT()` UNLESS YOU'RE SURE THERE ARE NO ERRORS
 User.pre('save', function(next) {
 
-    // Test to see if password changed
+    // Test to see if password changed -- why does this dump the username?
 
     // Get object from req
     var user = this;
@@ -65,14 +68,35 @@ User.pre('save', function(next) {
       if (err) console.log(err);
 
       bcrypt.hash(user.password, salt, null, function(err, hash) {
-        if (err) return console.log(err);
-        user.password = hash;
-        next();
+        if (err) {
+            return console.log(err);
+        } else {
+            user.password = hash;
+            next();
+        }
       });
     });
 });
 
-// Create endpoint /api/users for POST
+//Setup Basic Auth strategy
+passport.use(new BasicStrategy(function(username, password, callback) {
+    User.get('070b0db6-9ae9-4938-97f2-49a2f4753408').run().then(function(user) {
+        console.log(username);
+        console.log(password);
+        console.log(user.password);
+
+        bcrypt.compare(password, user.password, function(err, res) {
+            console.log(err);
+            console.log(res);
+        });
+    }).error(function() {
+        console.log('Could not find user. Maybe in this case, you need to tell the user to create an account.');
+    });
+}));
+
+exports.isAuthenticated = passport.authenticate('basic', { session: false });
+
+// Create endpoint /api/users for POST -- USE x-www-url-formencoded
 exports.addUser = function(req, res) {
 
     // Create new instance of 'User' model
@@ -86,7 +110,7 @@ exports.addUser = function(req, res) {
         if (err) {
             res.send(err);
         } else {
-            res.json(doc + 'Successfully added new user');
+            res.json(doc.username + doc.password + 'Successfully added new user');
         }
     });
 };
