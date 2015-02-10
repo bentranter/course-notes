@@ -7,7 +7,8 @@
 
 var path = require('path');
 var express = require('express');
-var passport = require('passport');
+// var passport = require('passport');
+var jwt = require('jwt-simple');
 var helmet = require('helmet');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -53,7 +54,7 @@ app.use(serveStatic(fixPath('public')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(passport.initialize());
+// app.use(passport.initialize());
 // Only expose tests in development mode
 if (config.isDev) {
     app.use(serveStatic(fixPath('test/assets')));
@@ -75,12 +76,16 @@ app.set('view engine', 'jade');
 
 var api = require('./api');
 
+// Login so you get a token. Please switch to `GET` and get
+// username and password from headers
+app.post('/api/login', api.login);
+
 // Users
 app.post('/api/user', api.addUser);
 app.get('/api/user', api.getUserList);
 
 // People
-app.get('/api/people', api.isAuthenticated, api.list);
+app.get('/api/people', api.authorizeToken, api.list);
 app.get('/api/people/:id', api.get);
 app.delete('/api/people/:id', api.delete);
 app.put('/api/people/:id', api.update);

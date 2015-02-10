@@ -5,8 +5,10 @@
  */
 
 var bcrypt = require('bcrypt-nodejs');
-var passport = require('passport');
-var BasicStrategy = require('passport-http').BasicStrategy;
+var jwt = require('jwt-simple');
+var moment = require('moment');
+// var passport = require('passport');
+// var BasicStrategy = require('passport-http').BasicStrategy;
 var thinky = require('thinky')({
     host: process.env.RDB_HOST || 'localhost',
     port: parseInt(process.env.RDB_PORT || 28015),
@@ -54,7 +56,9 @@ User.ensureIndex('date');
  *
  */
 
-// THIS IS HORRIBLY UNSTABLE! -- YOU CANT CALL `NEXT()` UNLESS YOU'RE SURE THERE ARE NO ERRORS
+// THIS IS HORRIBLY UNSTABLE! -- YOU CANT CALL `NEXT()` 
+// UNLESS YOU'RE SURE THERE ARE NO ERRORS AND THE PASSWORD 
+// HASN'T CHANGED
 User.pre('save', function(next) {
 
     // Get object from req
@@ -80,51 +84,117 @@ User.pre('save', function(next) {
     });
 });
 
-//For verify password, you can use `User.define(key, function(){ ... });`
+/**
+ * The great JSON Web Tokens Test
+ */
 
-//Setup Basic Auth strategy
-passport.use(new BasicStrategy(function(username, password, callback) {
+exports.login = function(req, res) {
 
-    User.get(username).run().then(function(user) {
+    // Start by finding the username
+    User.get(req.body.username).run().then(function(user) {
 
-        console.log(c.green('\nFound user: ') + username);
+        console.log(c.green('\nFound user: ') + req.body.username);
 
-        bcrypt.compare(password, user.password, function(err, res) {
+        // Compare the password here with the password in the database
+        bcrypt.compare(req.body.password, user.password, function(err, res) {
             console.log(c.red('Errors: ') + err);
             console.log(c.blue('Password matched: ') + res);
-            return callback(err, res);
         });
+
+        // Create a token that expires 7 days from now
+        var expires = moment().add(7, 'days').valueOf();
+        var token = jwt.encode({
+            iss: user.username,
+            exp: expires
+        }, 'mysecret');
+
+        // Issue the token in the response
+        res.json({
+            token: token,
+            expires: expires,
+            user: user.username
+        });
+
     }).error(function(err) {
-        console.log(c.red('\nError: could not find user with username: ') + username);
+        console.log(c.red('\nError: could not find user with username: ') + req.body.username);
 
         // This is where you need to setup the logic to suggest that new users sign up.
         console.log(c.yellow('Maybe you should create an account?'));
+        res.send(404);
     });
-}));
+};
 
-// passport.use(new BasicStrategy(
-//   function(username, password, callback) {
-//     User.findOne({ username: username }, function (err, user) {
-//       if (err) { return callback(err); }
+// Setup token-based auth. This _does_ work perfectly for 
+// multiple clients connection, ie iOS/Android/Web sessions.
+// However, this means a user can sign in as many times as
+// they like and generate more and more tokens. This is something
+// we can prevent client side though.
+//
+// Also, once you have a token, you can request all the data, and
+// it'll return success. We need to lock down the API so that the
+// response only gives you your own data, and your username or
+// userId has to _come from the token_ when you make the request.
+exports.authorizeToken = function(req, res, next) {
 
-//       // No user found with that username
-//       if (!user) { return callback(null, false); }
+    // Get the token, wherever it may be
+    var token = (req.body && req.body.accessToken) || (req.query && req.query.accessToken) || req.headers['x-access-token'];
 
-//       // Make sure the password is correct
-//       user.verifyPassword(password, function(err, isMatch) {
-//         if (err) { return callback(err); }
+    if (token) {
+        try {
+            
+            // Decode the token with the secret
+            var decoded = jwt.decode(token, 'mysecret');
+            console.log(c.green('Authenticated!'));
+            // Use `decoded.iss` to grab username when making requests
+            console.log(c.yellow('User: ') + decoded.iss);
+            next();
 
-//         // Password did not match
-//         if (!isMatch) { return callback(null, false); }
+            if (decoded.exp <= Date.now()) {
+                res.status(400).json({
+                    message: 'Authorization token expired'
+                });
+            }
+        } catch (err) {
 
-//         // Success
-//         return callback(null, user);
-//       });
+            var message = err + '. This means that the your token does not match the one given to you when you logged in. Are you trying to hack us? ;)';
+            // Log the error for debugging
+            console.log(c.red(err));
+            res.status(403).json({
+                message: message
+            });
+        }
+    } else {
+        console.log(c.red('Error: No token provided'));
+        res.status(401).json({
+            message: 'No token provided'
+        });
+    }
+
+};
+
+//For verify password, you can use `User.define(key, function(){ ... });`
+
+//Setup Basic Auth strategy
+// passport.use(new BasicStrategy(function(username, password, callback) {
+
+//     User.get(username).run().then(function(user) {
+
+//         console.log(c.green('\nFound user: ') + username);
+
+//         bcrypt.compare(password, user.password, function(err, res) {
+//             console.log(c.red('Errors: ') + err);
+//             console.log(c.blue('Password matched: ') + res);
+//             return callback(err, res);
+//         });
+//     }).error(function(err) {
+//         console.log(c.red('\nError: could not find user with username: ') + username);
+
+//         // This is where you need to setup the logic to suggest that new users sign up.
+//         console.log(c.yellow('Maybe you should create an account?'));
 //     });
-//   }
-// ));
+// }));
 
-exports.isAuthenticated = passport.authenticate('basic', { session: false });
+// exports.isAuthenticated = passport.authenticate('basic', { session: false });
 
 // Create endpoint /api/users for POST -- USE x-www-url-formencoded
 exports.addUser = function(req, res) {
@@ -141,10 +211,19 @@ exports.addUser = function(req, res) {
             console.log(c.red('Error: ') + err);
             res.send(err);
         } else {
+            // Create a token that expires 7 days from now
+            var expires = moment().add(7, 'days').valueOf();
+            var token = jwt.encode({
+                iss: user.username,
+                exp: expires
+            }, 'mysecret');
 
-            // If you want to be fancy, you'll need to wire the token creation function
-            // into this response. For now, it's okay the way it is.
-            res.json(doc.username + doc.password + 'Successfully added new user');
+            // Issue the token in the response
+            res.json({
+                token: token,
+                expires: expires,
+                user: user.username
+            });
         }
     });
 };
