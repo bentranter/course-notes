@@ -21,6 +21,24 @@ The RethinkDB admin console will be on `0.0.0.0:8080` and the Express app will b
 
 I haven't updated to RethinkDB 1.16 or to Thinky 1.16. In Thinky 1.16, `then` is a shortcut for `run().then` so that might cause problems if you're running the latest version.
 
+###Endpoints
+
+######Not Secure
+
+- `/api/signup` Post (requires `x-www-form-urlencoded`)
+- `/api/login` Post (requires `x-www-form-urlencoded`)
+
+######Secure
+
+A request to a secure endpoint requires a valid **JSON web token**, You can get one when you sign up. You must send your token with every request to any secure endpoint. Its recommended that you set it as an `X-Access-Token` in the request header.
+
+- `/api/notes` Get
+- `/api/notes/:id` Get
+- `/api/notes/:id` Put (requires `x-www-form-urlencoded`)
+- `/api/notes/:id` Delete
+- `/api/notes` Post (requires `x-www-form-urlencoded`)
+
+
 ###Proposed Data Models
 
 ######USERS

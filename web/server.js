@@ -82,12 +82,12 @@ app.set('view engine', 'jade');
 
 var api = require('./api');
 
-// Login so you get a token. Please switch to `GET` and get
-// username and password from headers
+// Nonsecure endpoints. You can sign up or login 
+// at these.
 app.post('/api/login', api.login);
+app.post('/api/signup', api.signUp);
 
-// Users
-app.post('/api/user', api.addUser);
+// Secure endpoints
 app.get('/api/user', api.getUserList);
 
 // People

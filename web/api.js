@@ -42,6 +42,7 @@ var Notes = thinky.createModel('Notes', {
     subtitle: String,
     content: String,
     author: String,
+    folder: String,
     dateCreated: { _type: Date, default: r.now() },
     dateUpdated: { _type: Date, default: r.now() },
     timesReviewed: Number
@@ -182,32 +183,8 @@ exports.authorizeToken = function(req, res, next) {
 
 };
 
-//For verify password, you can use `User.define(key, function(){ ... });`
-
-//Setup Basic Auth strategy
-// passport.use(new BasicStrategy(function(username, password, callback) {
-
-//     User.get(username).run().then(function(user) {
-
-//         console.log(c.green('\nFound user: ') + username);
-
-//         bcrypt.compare(password, user.password, function(err, res) {
-//             console.log(c.red('Errors: ') + err);
-//             console.log(c.blue('Password matched: ') + res);
-//             return callback(err, res);
-//         });
-//     }).error(function(err) {
-//         console.log(c.red('\nError: could not find user with username: ') + username);
-
-//         // This is where you need to setup the logic to suggest that new users sign up.
-//         console.log(c.yellow('Maybe you should create an account?'));
-//     });
-// }));
-
-// exports.isAuthenticated = passport.authenticate('basic', { session: false });
-
 // Create endpoint /api/users for POST -- USE x-www-url-formencoded
-exports.addUser = function(req, res) {
+exports.signUp = function(req, res) {
 
     // Create new instance of 'User' model
     var user = new User({
@@ -403,6 +380,7 @@ exports.addNote = function (req, res) {
         subtitle: req.body.subtitle,
         content: req.body.content,
         author: req.body.author,
+        folder: req.body.folder,
         dateCreated: r.now(),
         dateUpdated: r.now(),
         timesReviewed: 0 // Initialize at 0
@@ -481,6 +459,9 @@ exports.updateNote = function (req, res) {
         }
         if (req.body.author) {
             note.author = req.body.author;
+        }
+        if (req.body.folder) {
+            note.folder = req.body.folder;
         }
         // Can't modify date created
 
