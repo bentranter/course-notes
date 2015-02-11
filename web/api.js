@@ -395,22 +395,26 @@ exports.listNotes = function (req, res) {
  * @HTTP POST
  */
 
-exports.add = function (req, res) {
+exports.addNote = function (req, res) {
 
     // Create new instance of 'People' model
-    var person = new People({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName, 
-        coolnessFactor: parseInt(req.body.coolnessFactor)
-    });
+    var note = new Notes({
+        title: req.body.title,
+        subtitle: req.body.subtitle,
+        content: req.body.content,
+        author: req.body.author,
+        dateCreated: { _type: Date, default: r.now() },
+        dateUpdated: { _type: Date, default: r.now() },
+        timesReviewed: 0 // Initialize at 0
+        });
 
     // Save the person and check for errors kind-of
-    person.save(function(err, doc) {
+    note.save(function(err, doc) {
         if (err) {
             console.log(c.red('Errors:') + err);
             res.send(err);
         } else {
-            console.log(c.green('\nSuccessfully added new person.\n') + '\nFirst name: ' + doc.firstName + '\nLast name: ' + doc.lastName + '\nCoolness factor: ' + doc.coolnessFactor);
+            console.log(c.green('\nSuccessfully added note'));
             res.json(doc);
         }
     });
@@ -418,33 +422,33 @@ exports.add = function (req, res) {
 
 
 /**
- * Get a user by id.
+ * Get a note by id.
  *
  * @param {Int} id
  * @return Object
  *
- * @api private
+ * @api public
  */
 
-exports.get = function (req, res) {
+exports.getNote = function (req, res) {
 
-    People.get(req.params.id).run().then(function(person) {
-        res.json(person);
+    Notes.get(req.params.id).run().then(function(note) {
+        res.json(note);
     });
 };
 
 
 /**
- * Delete a user by id
+ * Delete a note by id
  * 
  * @api public
  *
  * @HTTP DELETE
  */
 
-exports.delete = function (req, res) {
+exports.deleteNote = function (req, res) {
 
-    People.get(req.params.id).delete().run().then(function(error, result) {
+    Notes.get(req.params.id).delete().run().then(function(error, result) {
         res.json({
             error: error,
             result: result
@@ -454,34 +458,37 @@ exports.delete = function (req, res) {
 
 
 /**
- * Update an existing user by id
+ * Update an existing note by id
  *
  * @api public
  *
  * @HTTP PUT
  */
 
-exports.update = function (req, res) {
+exports.updateNote = function (req, res) {
 
     // NOTE TO DUMB SELF: Use `x-www-url-formencoded` for put req's you idiot
-    People.get(req.params.id).run().then(function(person) {
+    Notes.get(req.params.id).run().then(function(note) {
 
-        // So &yet does this with Underscore's `_.extend` but it's more
-        // readable with if statements IMHO. Obv here we're just checking
-        // to see if the field is sent in the body of the req.
-        if (req.body.firstName) {
-            person.firstName = req.body.firstName;
+        if (req.body.title) {
+            note.title = req.body.title;
         }
-        if (req.body.lastName) {
-            person.lastName = req.body.lastName;
+        if (req.body.subtitle) {
+            note.subtitle = req.body.subtitle;
         }
-        if (req.body.coolnessFactor) {
-            person.coolnessFactor = parseInt(req.body.coolnessFactor);
+        if (req.body.content) {
+            note.content = req.body.content;
         }
-        person.date = r.now();
+        if (req.body.author) {
+            note.author = req.body.author;
+        }
+        // Can't modify date created
+
+        note.dateUpdated = r.now();
+        note.timesReviewed = parseInt(note.timesReviewed) + 1;
 
         // Save the person and check for errors kind-of
-        person.save(function(err, doc) {
+        note.save(function(err, doc) {
             if (err) {
                 res.send(err); 
             } else {
