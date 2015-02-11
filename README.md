@@ -21,7 +21,7 @@ The RethinkDB admin console will be on `0.0.0.0:8080` and the Express app will b
 
 I haven't updated to RethinkDB 1.16 or to Thinky 1.16. In Thinky 1.16, `then` is a shortcut for `run().then` so that might cause problems if you're running the latest version.
 
-###Endpoints
+###API Endpoints
 
 ######Not Secure
 
