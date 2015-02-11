@@ -91,6 +91,8 @@ app.delete('/api/people/:id', api.delete);
 app.put('/api/people/:id', api.update);
 app.post('/api/people', api.add);
 
+// Notes
+
 /**
  * Enable the functional test site in development.
  */
