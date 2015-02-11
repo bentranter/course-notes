@@ -66,9 +66,9 @@ Notes.ensureIndex('title'); // Sorts notes alphabetically?
  *
  */
 
-// THIS IS HORRIBLY UNSTABLE! -- YOU CANT CALL `NEXT()` 
-// UNLESS YOU'RE SURE THERE ARE NO ERRORS AND THE PASSWORD 
-// HASN'T CHANGED
+// This might be fine - you'd only be caling 'save' right 
+// now when a user is created or when they change their
+// password
 User.pre('save', function(next) {
 
     // Get object from req
@@ -116,6 +116,7 @@ exports.login = function(req, res) {
         var token = jwt.encode({
             iss: user.username,
             exp: expires
+            //@TODO: CHANGE THIS SECRET
         }, 'mysecret');
 
         // Issue the token in the response
@@ -130,7 +131,7 @@ exports.login = function(req, res) {
 
         // This is where you need to setup the logic to suggest that new users sign up.
         console.log(c.yellow('Maybe you should create an account?'));
-        res.send(404);
+        res.status(404).json(err);
     });
 };
 
@@ -151,7 +152,6 @@ exports.authorizeToken = function(req, res, next) {
 
     if (token) {
         try {
-            
             // Decode the token with the secret
             var decoded = jwt.decode(token, 'mysecret');
             console.log(c.green('Authenticated!'));
@@ -166,7 +166,7 @@ exports.authorizeToken = function(req, res, next) {
             }
         } catch (err) {
 
-            var message = err + '. This means that the your token does not match the one given to you when you logged in. Are you trying to hack us? ;)';
+            var message = err + '. This means that the token does not match the one given to you when you logged in. Are you trying to hack us? ;)';
             // Log the error for debugging
             console.log(c.red(err));
             res.status(403).json({
@@ -403,19 +403,19 @@ exports.addNote = function (req, res) {
         subtitle: req.body.subtitle,
         content: req.body.content,
         author: req.body.author,
-        dateCreated: { _type: Date, default: r.now() },
-        dateUpdated: { _type: Date, default: r.now() },
+        dateCreated: r.now(),
+        dateUpdated: r.now(),
         timesReviewed: 0 // Initialize at 0
         });
 
     // Save the person and check for errors kind-of
-    note.save(function(err, doc) {
+    note.save(function(err, note) {
         if (err) {
             console.log(c.red('Errors:') + err);
-            res.send(err);
+            res.json(err);
         } else {
             console.log(c.green('\nSuccessfully added note'));
-            res.json(doc);
+            res.json(note);
         }
     });
 };

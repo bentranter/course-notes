@@ -54,8 +54,5 @@
     "trailing": true,
     "undef": true,
     "white": true
-  },
-  "scripts": {
-    "server": "node server.js"
   }
 }

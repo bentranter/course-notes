@@ -20,13 +20,13 @@ var serveStatic = require('serve-static');
 var stylizer = require('stylizer');
 var templatizer = require('templatizer');
 var chalk = require('chalk');
-// var r = require('rethinkdb');
 var thinky = require('thinky')({
     host: process.env.RDB_HOST || 'localhost',
     port: parseInt(process.env.RDB_PORT || 28015),
     db:   process.env.RDB_DB || 'StudyFast'
 });
 var r = thinky.r;
+
 var app = express();
 
 
@@ -66,7 +66,7 @@ if (config.isDev) {
     app.use(serveStatic(fixPath('test/assets')));
     app.use(serveStatic(fixPath('test/spacemonkey')));
 }
-// Setup frames to test with SpaceMOnkey
+// Setup frames to test with SpaceMonkey
 if (!config.isDev) {
     app.use(helmet.xframe());
 }
@@ -102,7 +102,7 @@ app.get('/api/notes', api.listNotes);
 app.get('/api/notes/:id', api.getNote);
 app.delete('/api/notes/:id', api.deleteNote);
 app.put('/api/notes/:id', api.updateNote);
-app.post('/api/notes/:id', api.addNote);
+app.post('/api/notes', api.addNote);
 
 /**
  * Enable the functional test site in development.
