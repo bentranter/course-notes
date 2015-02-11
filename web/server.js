@@ -92,6 +92,11 @@ app.put('/api/people/:id', api.update);
 app.post('/api/people', api.add);
 
 // Notes
+app.get('/api/notes', api.listNotes);
+app.get('/api/notes/:id', api.getNote);
+app.delete('/api/notes/:id', api.deleteNote);
+app.put('/api/notes/:id', api.updateNote);
+app.post('/api/notes/:id', api.addNote);
 
 /**
  * Enable the functional test site in development.
