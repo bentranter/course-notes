@@ -38,6 +38,21 @@ A request to a secure endpoint requires a valid **JSON web token**, You can get 
 - `/api/notes/:id` Delete
 - `/api/notes` Post (requires `x-www-form-urlencoded`)
 
+######Making a request
+
+A sample POST request would look something like, 
+
+```http
+POST /api/signup HTTP/1.1
+Host: localhost:3000
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+username=YourUserName&password=YourPassword
+```
+
+Your username and password are just sent as a string in the request body.
+
 ###Tests
 
 To run the tests, `cd` into `/web/test`, and run `$ jasmine-node .`. If every test fails, make sure you have RethinkDB and the server running, and then try again.
