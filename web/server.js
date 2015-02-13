@@ -91,19 +91,21 @@ app.post('/api/signup', api.signUp);
 // Secure endpoints
 app.get('/api/user', api.getUserList);
 
-// People
-app.get('/api/people', api.authorizeToken, api.list);
+// People -- use this for testing
+app.get('/api/people', api.list);
 app.get('/api/people/:id', api.get);
 app.delete('/api/people/:id', api.delete);
 app.put('/api/people/:id', api.update);
-app.post('/api/people', api.add);
+app.post('/api/people', api.authorizeToken, api.add);
 
-// Notes
-app.get('/api/notes', api.listNotes);
-app.get('/api/notes/:id', api.getNote);
-app.delete('/api/notes/:id', api.deleteNote);
-app.put('/api/notes/:id', api.updateNote);
-app.post('/api/notes', api.addNote);
+// Notes -- this is the real stuff. The server won't actually
+// accept a username from you, it'll grab it instead from your
+// token
+app.get('/api/notes', api.authorizeToken, api.listNotes);
+app.get('/api/notes/:id', api.authorizeToken, api.getNote);
+app.delete('/api/notes/:id', api.authorizeToken, api.deleteNote);
+app.put('/api/notes/:id', api.authorizeToken, api.updateNote);
+app.post('/api/notes', api.authorizeToken, api.addNote);
 
 /**
  * Enable the functional test site in development.
