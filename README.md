@@ -27,11 +27,15 @@ I haven't updated to RethinkDB 1.16 or to Thinky 1.16. In Thinky 1.16, `then` is
 
 - `/api/signup` Post (requires `x-www-form-urlencoded`)
 - `/api/login` Post (requires `x-www-form-urlencoded`)
-- `/api/people`
+- `/api/people` Get
+- `/api/people/:id` Get
+- `/api/people/:id` Put (requires `x-www-form-urlencoded`)
+- `/api/people/:id` Delete
+- `/api/people` Post (requires `x-www-form-urlencoded`)
 
 ######Secure
 
-A request to a secure endpoint requires a valid **JSON web token**, You can get one when you sign up. You must send your token with every request to any secure endpoint. Its recommended that you set it as an `X-Access-Token` in the request header.
+A request to a secure endpoint requires a valid **JSON web token**, You can get one when you sign up, or login. It will be sent in the response. You must send your token with every request to any secure endpoint. Its recommended that you set it as an `X-Access-Token` in the request header. See below for alternative to ways to send your token.
 
 - `/api/notes` Get
 - `/api/notes/:id` Get
@@ -39,7 +43,7 @@ A request to a secure endpoint requires a valid **JSON web token**, You can get 
 - `/api/notes/:id` Delete
 - `/api/notes` Post (requires `x-www-form-urlencoded`)
 
-######Making a request
+####Making a request
 
 A sample POST request would look something like, 
 
