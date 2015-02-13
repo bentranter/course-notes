@@ -89,7 +89,7 @@ app.post('/api/login', api.login);
 app.post('/api/signup', api.signUp);
 
 // Secure endpoints
-app.get('/api/user', api.getUserList);
+app.get('/api/user', api.authorizeToken, api.getUserList);
 
 // People -- use this for testing
 app.get('/api/people', api.list);

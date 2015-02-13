@@ -27,6 +27,7 @@ I haven't updated to RethinkDB 1.16 or to Thinky 1.16. In Thinky 1.16, `then` is
 
 - `/api/signup` Post (requires `x-www-form-urlencoded`)
 - `/api/login` Post (requires `x-www-form-urlencoded`)
+- `/api/people`
 
 ######Secure
 
@@ -52,6 +53,32 @@ username=YourUserName&password=YourPassword
 ```
 
 Your username and password are just sent as a string in the request body.
+
+When you make a request to any other endpoint, you must send your token. There are three **ways** that you can send your token:
+
+1. As an `x-access-token` in the header.
+2. As an `accessToken` in the body.
+3. As an `accessToken` in the URL params, example: `/api/notes?accessToken=yoursupercrazylongtoken`
+
+Supported Data Models:
+
+######User
+
+- `username`: String
+- `password`: String
+
+######Notes
+
+- `title`: String
+- `subtitle`: String
+- `content`: String
+- `folder`: String
+
+######People (our test endpoint)
+
+- `firstName`: String
+- `lastName`: String
+- `coolnessFactor`: Number
 
 ###Tests
 
