@@ -14,5 +14,6 @@ results
 
 node_modules
 npm-debug.log
+angular-seed-test/node_modules
 
 *.rdb

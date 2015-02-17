@@ -7,7 +7,6 @@
 
 var path = require('path');
 var express = require('express');
-// var passport = require('passport');
 var jwt = require('jwt-simple');
 var helmet = require('helmet');
 var bodyParser = require('body-parser');
