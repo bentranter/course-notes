@@ -16,6 +16,8 @@ var bcrypt = require('bcrypt-nodejs'),
 
 var r = thinky.r;
 
+
+
 /**
  * Creating Users -- The Good Parts
  */
@@ -25,10 +27,11 @@ var User = thinky.createModel('User', {
     password: String,
     date: { _type: Date, default: r.now() }
 }, {
+    // pk = primary key. Defines primary key for 
+    // this model.
     pk: 'username'
 });
 
-// Put stupid constructor here
 var People = thinky.createModel('People', {
     firstName: String,
     lastName:  String,
@@ -47,13 +50,15 @@ var Notes = thinky.createModel('Notes', {
     timesReviewed: Number
 });
 
-// Ensure that date can be used as an index
+// Ensure indices. Used when ordering results.
 People.ensureIndex('date');
 User.ensureIndex('date');
-Notes.ensureIndex('title'); // Sorts notes alphabetically?
+Notes.ensureIndex('title'); // @TODO: Sorts notes alphabetically?
+
+
 
 /**
- * API Endpoints
+ * API Endpoints.
  *
  * USER
  */
@@ -66,15 +71,15 @@ Notes.ensureIndex('title'); // Sorts notes alphabetically?
  *
  */
 
-// This might be fine - you'd only be caling 'save' right 
+// @REVIEW This might be fine - you'd only be caling 'save' right 
 // now when a user is created or when they change their
-// password
+// password.
 User.pre('save', function(next) {
 
     // Get object from req
     var user = this;
 
-    // Break out if the password hasn't changed
+    // @TODO: Break out if the password hasn't changed
     // if (!user.isModified('password')) return callback();
 
     // Password changed so we need to hash it
@@ -94,8 +99,14 @@ User.pre('save', function(next) {
     });
 });
 
+
+
 /**
- * The great JSON Web Tokens Test
+ * Get a login token based on your username.
+ *
+ * @return String
+ * @HTTP GET
+ * @api private
  */
 
 exports.login = function(req, res) {
@@ -116,7 +127,7 @@ exports.login = function(req, res) {
         var token = jwt.encode({
             iss: user.username,
             exp: expires
-            //@TODO: CHANGE THIS SECRET
+            // @TODO: CHANGE THIS SECRET
         }, 'mysecret');
 
         // Issue the token in the response
@@ -134,6 +145,8 @@ exports.login = function(req, res) {
         res.status(404).json(err);
     });
 };
+
+
 
 // Setup token-based auth. This _does_ work perfectly for 
 // multiple clients connection, ie iOS/Android/Web sessions.
@@ -182,6 +195,8 @@ exports.authorizeToken = function(req, res, next) {
 
 };
 
+
+
 // Create endpoint /api/users for POST -- USE x-www-url-formencoded
 exports.signUp = function(req, res) {
 
@@ -214,6 +229,8 @@ exports.signUp = function(req, res) {
     });
 };
 
+
+
 // Create endpoint /api/users for GET all users
 exports.getUserList = function(req, res) {
 
@@ -222,6 +239,23 @@ exports.getUserList = function(req, res) {
         res.json(user);
     });
 };
+
+
+
+// Deletes a user's account. @TODO: Get username by token instead of
+// by body. (this is currently only for testing)
+exports.deleteUser = function(req, res) {
+
+    // @TODO: Send success message after deletion
+    User.get(req.body.username).delete().run().then(function(error, result) {
+        res.json({
+            error: error,
+            result: result
+        });
+    });
+};
+
+
 
 /**
  * PEOPLE
@@ -239,6 +273,7 @@ exports.list = function (req, res) {
         res.json(people);
     });
 };
+
 
 
 /**
@@ -271,6 +306,7 @@ exports.add = function (req, res) {
 };
 
 
+
 /**
  * Get a user by id.
  *
@@ -286,6 +322,7 @@ exports.get = function (req, res) {
         res.json(person);
     });
 };
+
 
 
 /**
@@ -305,6 +342,7 @@ exports.delete = function (req, res) {
         });
     });
 };
+
 
 
 /**
@@ -345,6 +383,8 @@ exports.update = function (req, res) {
     });
 };
 
+
+
 /**
  * Notes
  *
@@ -361,6 +401,7 @@ exports.listNotes = function (req, res) {
         res.json(notes);
     });
 };
+
 
 
 /**
@@ -398,6 +439,7 @@ exports.addNote = function (req, res) {
 };
 
 
+
 /**
  * Get a note by id.
  *
@@ -413,6 +455,7 @@ exports.getNote = function (req, res) {
         res.json(note);
     });
 };
+
 
 
 /**
@@ -432,6 +475,7 @@ exports.deleteNote = function (req, res) {
         });
     });
 };
+
 
 
 /**

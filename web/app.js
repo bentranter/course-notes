@@ -26,6 +26,7 @@ var r = thinky.r;
 var app = module.exports = express();
 
 
+
 /**
  * Configuration
  */
@@ -49,6 +50,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+// Enable development
 var env = process.env.NODE_ENV || 'development';
 
 // Development only
@@ -62,15 +64,20 @@ if (env === 'production') {
 }
 
 
+
 /**
- * Routes
+ * Routes - Partials
  */
 
 // Serve index and view partials
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
-// API
+
+
+/**
+ * Routes - API
+ */
 
 // Nonsecure endpoints. You can sign up or login 
 // at these.
@@ -79,6 +86,7 @@ app.post('/api/signup', api.signUp);
 
 // Secure endpoints
 app.get('/api/user', api.authorizeToken, api.getUserList);
+app.delete('/api/user', api.authorizeToken, api.deleteUser);
 
 // People -- use this for testing
 app.get('/api/people', api.list);
@@ -89,15 +97,16 @@ app.post('/api/people', api.authorizeToken, api.add);
 
 // Notes -- this is the real stuff. The server won't actually
 // accept a username from you, it'll grab it instead from your
-// token
+// token.
 app.get('/api/notes', api.authorizeToken, api.listNotes);
 app.get('/api/notes/:id', api.authorizeToken, api.getNote);
 app.delete('/api/notes/:id', api.authorizeToken, api.deleteNote);
 app.put('/api/notes/:id', api.authorizeToken, api.updateNote);
 app.post('/api/notes', api.authorizeToken, api.addNote);
 
-// redirect all others to the index (HTML5 history)
+// Redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
+
 
 
 /**
