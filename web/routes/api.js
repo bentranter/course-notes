@@ -4,18 +4,17 @@
  * Module dependencies.
  */
 
-var bcrypt = require('bcrypt-nodejs');
-var jwt = require('jwt-simple');
-var moment = require('moment');
-// var passport = require('passport');
-// var BasicStrategy = require('passport-http').BasicStrategy;
-var thinky = require('thinky')({
+var bcrypt = require('bcrypt-nodejs'),
+    jwt = require('jwt-simple'),
+    moment = require('moment'),
+    c = require('chalk'),
+    thinky = require('thinky')({
     host: process.env.RDB_HOST || 'localhost',
     port: parseInt(process.env.RDB_PORT || 28015),
     db:   process.env.RDB_DB || 'StudyFast'
 });
+
 var r = thinky.r;
-var c = require('chalk');
 
 /**
  * Creating Users -- The Good Parts
