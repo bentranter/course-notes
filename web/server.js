@@ -25,7 +25,7 @@ var thinky = require('thinky')({
     db:   process.env.RDB_DB || 'StudyFast'
 });
 var r = thinky.r;
-
+ 
 var app = express();
 
 

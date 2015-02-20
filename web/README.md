@@ -1,3 +1,8 @@
 ## Course Notes
 
-This is the server component of the app.
+This is the web and server component of the app.
+
+####Mocks
+
+######Desktop:
+![alt text](studyfast-mock-feb19-desktop.png "Desktop mockup")
