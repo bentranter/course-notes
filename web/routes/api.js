@@ -5,6 +5,7 @@
  */
 
 var bcrypt = require('bcrypt-nodejs'),
+    util = require('util'),
     jwt = require('jwt-simple'),
     moment = require('moment'),
     c = require('chalk'),
@@ -248,10 +249,10 @@ exports.deleteUser = function(req, res) {
 
     var user = req.body.username;
 
-    User.get(user).delete().run().then(function(error, result) {
+    User.get(user).delete().run().then(function(result) {
+
         res.json({
-            error: error,
-            result: result
+            result: util.inspect(result)
         });
     });
 };
@@ -336,10 +337,9 @@ exports.get = function (req, res) {
 
 exports.delete = function (req, res) {
 
-    People.get(req.params.id).delete().run().then(function(error, result) {
+    People.get(req.params.id).delete().run().then(function(result) {
         res.json({
-            error: error,
-            result: result
+            result: util.inspect(result)
         });
     });
 };
@@ -469,10 +469,9 @@ exports.getNote = function (req, res) {
 
 exports.deleteNote = function (req, res) {
 
-    Notes.get(req.params.id).delete().run().then(function(error, result) {
+    Notes.get(req.params.id).delete().run().then(function(result) {
         res.json({
-            error: error,
-            result: result
+            result: util.inspect(result)
         });
     });
 };

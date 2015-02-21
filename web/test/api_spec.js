@@ -75,20 +75,8 @@ frisby.create('Signup as a new user')
             // emulate the real use case.
             var token = api.token;
 
-            /**
-             * Get the username from the web token.
-             */
-
-            function getUsername(token) {
-
-                var decoded = jwt.decode(token, 'mysecret');
-                console.log(decoded.iss);
-                return decoded.iss;
-            }
-            var username = getUsername(token);
 
 
-            
         /**
          * Create a new note
          */
@@ -98,7 +86,7 @@ frisby.create('Signup as a new user')
                 title: 'testnote',
                 subtitle: 'testsubtitle',
                 content: 'testcontent',
-                author: username,
+                author: 'Test1234',
                 folder: 'test'
             }, {
                 json: true
@@ -124,12 +112,12 @@ frisby.create('Signup as a new user')
 
         frisby.create('Delete user')
             .delete(userURL + '?accessToken=' + token, {
-                username: username,
+                username: 'Test1234',
             }, {
                 json: true
             })
             .expectStatus(200)
-            // .expectHeaderContains('content-type', 'application/json')
+            .expectHeaderContains('content-type', 'application/json')
             // .expectJSONTypes({
             //     title: String,
             //     subtitle: String,
