@@ -127,7 +127,7 @@ exports.login = function(req, res) {
         var token = jwt.encode({
             iss: user.username,
             exp: expires
-            // @TODO: CHANGE THIS SECRET
+            // @TODO: CHANGE THIS SECRET IN PRODUCTION
         }, 'mysecret');
 
         // Issue the token in the response
@@ -246,8 +246,9 @@ exports.getUserList = function(req, res) {
 // by body. (this is currently only for testing)
 exports.deleteUser = function(req, res) {
 
-    // @TODO: Send success message after deletion
-    User.get(req.body.username).delete().run().then(function(error, result) {
+    var user = req.body.username;
+
+    User.get(user).delete().run().then(function(error, result) {
         res.json({
             error: error,
             result: result

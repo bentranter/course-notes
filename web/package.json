@@ -5,7 +5,8 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "jasmine-node test/"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -18,7 +19,7 @@
     "method-override": "^1.0.0",
     "moment": "^2.9.0",
     "morgan": "^1.0.0",
-    "thinky": "^1.15.9"
+    "thinky": "^1.16.2"
   },
   "devDependencies": {
     "chalk": "^0.5.1",
