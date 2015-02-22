@@ -107,7 +107,13 @@ frisby.create('Signup as a new user')
         .toss();
 
         /**
-         * Create a new note
+         * Get the note.
+         */
+
+        
+
+        /**
+         * Delete the user.
          */
 
         frisby.create('Delete user')

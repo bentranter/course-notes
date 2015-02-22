@@ -38,4 +38,11 @@ angular.module('myApp.controllers', []).
     error(function(data, status, headers, config) {
       $scope.name = 'Error!';
     });
+  }).
+  controller('SidebarCtrl', function($scope, $http) {
+    
+    /**
+     * Whatever goes here
+     */
+
   });

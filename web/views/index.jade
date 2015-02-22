@@ -1,19 +1,26 @@
 extends layout
 
 block body
+  div(ng-controller='SidebarCtrl')
+    aside.col.col-3
+      header
+        h1.h3.caps.center.regular.m0.py2.bg-blk0.lg1 Account ▼
+      nav
+        a.h5.bg-red.lg1.p1.block(href='#') ▼ History
   div(ng-controller='AppCtrl')
-    h2 Hello {{name}}
-    ul.menu
-      li
-        a(href='view1') view1
-      li
-        a(href='view2') view2
+    main.col.col-9
+      h2 Hello {{name}}
+      ul.menu
+        li
+          a(href='view1') view1
+        li
+          a(href='view2') view2
 
-    div(ng-view)
+      div(ng-view)
 
-    div
-      | Angular seed app: v
-      span(app-version)
+      div
+        | Angular seed app: v
+        span(app-version)
 
   script(src='js/lib/angular/angular.js')
   script(src='js/app.js')
