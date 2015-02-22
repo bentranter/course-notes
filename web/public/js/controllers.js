@@ -40,9 +40,9 @@ angular.module('myApp.controllers', []).
     });
   }).
   controller('SidebarCtrl', function($scope, $http) {
-    
+
     /**
-     * Whatever goes here
+     * @TODO: Setup sidebar
      */
 
   });
