@@ -79,7 +79,7 @@ app.get('/partials/:name', routes.partials);
  * Routes - API
  */
 
-// Nonsecure endpoints. You can sign up or login 
+// Nonsecure endpoints. You can sign up or login
 // at these.
 app.post('/api/login', api.login);
 app.post('/api/signup', api.signUp);

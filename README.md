@@ -77,6 +77,9 @@ Supported Data Models:
 - `subtitle`: String
 - `content`: String
 - `folder`: String
+- `dateCreated`: Date
+- `dateUpdated`: Date
+- `timesReviewed`: Number
 
 ######People (our test endpoint)
 

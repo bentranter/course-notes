@@ -4,8 +4,6 @@
  * Authored by Ben Tranter.
  */
 
-
-
 body,
 button {
   margin: 0;
@@ -189,6 +187,7 @@ textarea {
   margin-left: 0;
   margin-right: 0;
   border: 0;
+  outline: 0;
 }
 
 .fieldset-reset legend {
@@ -1230,6 +1229,8 @@ hr {
   color: #8f5536;
 }
 
+
+
 /**
 * Background colors.
 */
@@ -1297,6 +1298,144 @@ hr {
 .bg-brown {
   background-color: #8f5536;
 }
+
+/**
+ * Color Hover Utility
+ */
+
+.blk0-h:hover { 
+  color: #151515; 
+}
+
+.blk1-h:hover { 
+  color: #202020;
+}
+
+.blk2-h:hover {
+  color: #303030;
+
+}
+.gray0-h:hover {
+  color: #505050;
+}
+
+.gray1-h:hover {
+  color: #b0b0b0;
+}
+
+.gray2-h:hover {
+  color: #d0d0d0;
+}
+
+.lg0-h:hover {
+  color: #e0e0e0;
+}
+
+.lg1-h:hover {
+  color: #f5f5f5;
+}
+
+.red-h:hover {
+  color: #ac4142;
+}
+
+.orange-h:hover {
+  color: #d28445;
+}
+
+.yellow-h:hover {
+  color: #f4bf75;
+}
+
+.green-h:hover { 
+  color: #90a959;
+}
+
+.cyan-h:hover {
+  color: #75b5aa;
+}
+
+.blue-h:hover {
+  color: #6a9fb5;
+}
+
+.purple-h:hover {
+  color: #aa759f;
+}
+
+.brown-h:hover {
+  color: #8f5536;
+}
+
+/**
+* Background Color Hover Utility.
+*/
+
+.bg-blk0-h:hover { 
+  background-color: #151515; 
+}
+
+.bg-blk1-h:hover { 
+  background-color: #202020;
+}
+
+.bg-blk2-h:hover {
+  background-color: #303030;
+
+}
+.bg-gray0-h:hover {
+  background-color: #505050;
+}
+
+.bg-gray1-h:hover {
+  background-color: #b0b0b0;
+}
+
+.bg-gray2-h:hover {
+  background-color: #d0d0d0;
+}
+
+.bg-lg0-h:hover {
+  background-color: #e0e0e0;
+}
+
+.bg-lg1-h:hover {
+  background-color: #f5f5f5;
+}
+
+.bg-red-h:hover {
+  background-color: #ac4142;
+}
+
+.bg-orange-h:hover {
+  background-color: #d28445;
+}
+
+.bg-yellow-h:hover {
+  background-color: #f4bf75;
+}
+
+.bg-green-h:hover { 
+  background-color: #90a959;
+}
+
+.bg-cyan-h:hover {
+  background-color: #75b5aa;
+}
+
+.bg-blue-h:hover {
+  background-color: #6a9fb5;
+}
+
+.bg-purple-h:hover {
+  background-color: #aa759f;
+}
+
+.bg-brown-h:hover {
+  background-color: #8f5536;
+}
+
+
 
 /**
  * Flexbox Utility
@@ -1434,4 +1573,16 @@ hr {
   .lg-flex > div {
     box-sizing: border-box;
   }
+}
+
+/**
+ * Project specific utilities
+ */
+
+.container {
+	max-width: 850px;
+}
+
+.h100 {
+  min-height: 100vh;
 }
