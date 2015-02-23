@@ -11,12 +11,15 @@ block body
             path(d='M4 8 H28 L16 26 z ')
 
         //- Sign In View
-        div(ng-show='showAccount', id='account')
+        div.fade-in(ng-show='showAccount', id='account')
           h4.mt0.py1.regular.center.caps.lg1 Sign in
           form
-            input.fieldset-reset.ml1.mr1.bg-gray0.lg1(type='email', placeholder='Email')
-            input.fieldset-reset.ml1.mr1.mx-auto.bg-gray0.lg1(type='password', placeholder='Password')
-            input.fieldset-reset.full-width.ml1.mr1.mx-auto.button.bg-gray0.lg1(type='submit', value='Submit')
+            div.ml1.mr1
+              input.fieldset-reset.full-width.bg-blk2.lg1(type='email', placeholder='Email')
+            div.ml1.mr1
+              input.fieldset-reset.full-width.bg-blk2.lg1(type='password', placeholder='Password')
+            div.ml1.mr1
+              input.fieldset-reset.full-width.mx-auto.mb2.button.bg-blk2.bg-cyan-h.lg1(type='submit', value='Submit')
 
       nav(ng-controller='AppCtrl')
         a.h5.bg-red.lg1.p1.block(href='#') History 
@@ -33,7 +36,7 @@ block body
 
   //- Main View
   div(ng-controller='AppCtrl')
-    main.col.col-9
+    main.col.col-9.h100
       div.bg-blk0
         h5.m0.py1.regular.center.lg1 Note Title
       ul.menu.list-reset

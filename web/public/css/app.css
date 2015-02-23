@@ -1576,6 +1576,51 @@ hr {
 }
 
 /**
+ * Animations
+ */
+
+.fade-in {
+    opacity:0;
+    -webkit-animation: fade-in 1;
+    animation: fade-in 1;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-duration:0.3s;
+    -moz-animation-duration:0.3s;
+    animation-duration:0.3s;
+}
+
+@-webkit-keyframes fade-in {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fade-in {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.slide-in {
+  /** Needs to use translateY **/
+  translateY(-100%);
+  -webkit-animation: slide-in 1;
+  animation: slide-in 1;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-duration:0.3s;
+  -moz-animation-duration:0.3s;
+  animation-duration:0.3s;
+}
+
+@-webkit-keyframes fade-in {
+  from {transform: translateY(-100%);}
+  to {transform: translateY(0%);}
+}
+
+@keyframes fade-in {
+  from {transform: translateY(-100%);}
+  to {transform: translateY(0%);}
+}
+
+/**
  * Project specific utilities
  */
 
