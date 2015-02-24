@@ -1100,37 +1100,67 @@ hr {
 
 
 /**
- * @REVIEW Color Borders
+ * Borders
  */
 
-.border {
+.border-light {
   border-style: solid;
   border-width: 1px;
-  border-color: #ccc;
+  border-color: #d0d0d0;
 }
 
-.border-top {
+.border-top-light {
   border-top-style: solid;
   border-top-width: 1px;
-  border-top-color: #ccc;
+  border-top-color: #d0d0d0;
 }
 
-.border-right {
+.border-right-light {
   border-right-style: solid;
   border-right-width: 1px;
-  border-right-color: #ccc;
+  border-right-color: #d0d0d0;
 }
 
-.border-bottom {
+.border-bottom-light {
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  border-bottom-color: #ccc;
+  border-bottom-color: #d0d0d0;
 }
 
-.border-left {
+.border-left-light {
   border-left-style: solid;
   border-left-width: 1px;
-  border-left-color: #ccc;
+  border-left-color: #d0d0d0;
+}
+
+.border-dark {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #202020;
+}
+
+.border-top-dark {
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #202020;
+}
+
+.border-right-dark {
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-right-color: #202020;
+}
+
+.border-bottom-dark {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #202020;
+}
+
+.border-left-dark {
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: #202020;
 }
 
 .rounded {
@@ -1622,11 +1652,3 @@ hr {
 /**
  * Project specific utilities
  */
-
-.container {
-	max-width: 850px;
-}
-
-.h100 {
-  min-height: 100vh;
-}
