@@ -5,21 +5,21 @@ block body
 
     //- Sidebar View
     aside.col.col-3.h100.bg-blk0
-      header
+      header.relative.z4
         a.h3.caps.center.regular.m0.py2.block.bg-blk0.bg-blk1-h.lg1(ng-click='showAccount = !showAccount') Account
           svg(width='16', height='16', viewbox='0 0 32 32', fill='#f5f5f5')
             path(d='M4 8 H28 L16 26 z ')
 
-        //- Sign In View
-        div.fade-in(ng-show='showAccount', id='account')
-          h4.mt0.py1.regular.center.caps.lg1 Sign in
-          form
-            div.ml1.mr1
-              input.fieldset-reset.full-width.bg-blk2.lg1(type='email', placeholder='Email')
-            div.ml1.mr1
-              input.fieldset-reset.full-width.bg-blk2.lg1(type='password', placeholder='Password')
-            div.ml1.mr1
-              input.fieldset-reset.full-width.mx-auto.mb2.button.bg-blk2.bg-cyan-h.lg1(type='submit', value='Submit')
+      //- Sign In View
+      div.slide-in.bg-blk2relative.z1(ng-show='showAccount', id='account')
+        h4.mt0.py1.regular.center.caps.lg1 Sign in
+        form
+          div.ml1.mr1
+            input.fieldset-reset.full-width.bg-gray0.lg1(type='email', placeholder='Email')
+          div.ml1.mr1
+            input.fieldset-reset.full-width.bg-gray0.lg1(type='password', placeholder='Password')
+          div.ml1.mr1
+            input.fieldset-reset.full-width.mx-auto.mb2.button.bg-gray0.bg-gray1-h.lg1(type='submit', value='Submit')
 
       nav(ng-controller='AppCtrl')
         a.h5.bg-red.lg1.p1.block(href='#') History 

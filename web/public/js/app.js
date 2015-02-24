@@ -24,3 +24,10 @@ config(function ($routeProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true);
 });
+
+/**
+ * WHOA -- Battery API. Chrome only.
+ */
+navigator.getBattery().then(function(result) {
+  console.log(result);
+});
