@@ -1103,61 +1103,61 @@ hr {
  * Borders
  */
 
-.border-light {
+.bl {
   border-style: solid;
   border-width: 1px;
   border-color: #d0d0d0;
 }
 
-.border-top-light {
+.btl {
   border-top-style: solid;
   border-top-width: 1px;
   border-top-color: #d0d0d0;
 }
 
-.border-right-light {
+.brl {
   border-right-style: solid;
   border-right-width: 1px;
   border-right-color: #d0d0d0;
 }
 
-.border-bottom-light {
+.bbl{
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #d0d0d0;
 }
 
-.border-left-light {
+.bll {
   border-left-style: solid;
   border-left-width: 1px;
   border-left-color: #d0d0d0;
 }
 
-.border-dark {
+.bd {
   border-style: solid;
   border-width: 1px;
   border-color: #202020;
 }
 
-.border-top-dark {
+.btd {
   border-top-style: solid;
   border-top-width: 1px;
   border-top-color: #202020;
 }
 
-.border-right-dark {
+.brd {
   border-right-style: solid;
   border-right-width: 1px;
   border-right-color: #202020;
 }
 
-.border-bottom-dark {
+.bbd {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #202020;
 }
 
-.border-left-dark {
+.bld {
   border-left-style: solid;
   border-left-width: 1px;
   border-left-color: #202020;
@@ -1259,6 +1259,10 @@ hr {
   color: #8f5536;
 }
 
+.white {
+  color: #fff;
+}
+
 
 
 /**
@@ -1329,6 +1333,10 @@ hr {
   background-color: #8f5536;
 }
 
+.bg-white {
+  background-color: #fff;
+}
+
 /**
  * Color Hover Utility
  */
@@ -1397,6 +1405,10 @@ hr {
   color: #8f5536;
 }
 
+.white-h:hover {
+  color: #fff;
+}
+
 /**
 * Background Color Hover Utility.
 */
@@ -1463,6 +1475,10 @@ hr {
 
 .bg-brown-h:hover {
   background-color: #8f5536;
+}
+
+.bg-white-h:hover {
+  background-color: #fff;
 }
 
 
