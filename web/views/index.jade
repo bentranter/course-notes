@@ -5,7 +5,7 @@ block body
 
     //- Sidebar View
     aside.col.col-3.h100.bg-blk0
-      header.relative.z4
+      header.relative.z2
         a.h3.caps.center.regular.m0.py2.block.bg-blk0.bg-blk1-h.lg1(ng-click='showAccount = !showAccount') Account
           svg(width='16', height='16', viewbox='0 0 32 32', fill='#f5f5f5')
             path(d='M4 8 H28 L16 26 z ')
@@ -36,7 +36,7 @@ block body
 
   //- Main View
   div(ng-controller='AppCtrl')
-    main.col.col-9.h100
+    main.col.col-9.h100.relative
       div.bg-blk0
         h5.m0.py1.regular.center.lg1 Note Title
       ul.menu.list-reset
@@ -50,6 +50,12 @@ block body
       div
         | Angular seed app: v
         span(app-version)
+
+      div
+        button.right.bg-blue.bg-cyan-h.white.regular Save
+        div.overflow-hidden
+          input.fieldset-reset.full-width.bg-lg0.blk0(type='text', placeholder='Find...')
+
 
   script(src='js/lib/angular/angular.js')
   script(src='js/app.js')
