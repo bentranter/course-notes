@@ -13,13 +13,15 @@ block body
       //- Sign In View
       div.slide-in.bg-blk2relative.z1(ng-show='showAccount', id='account')
         h4.mt0.py1.regular.center.caps.lg1 Sign in
-        form
+        form(name='loginForm', ng-controller='LoginCtrl', ng-submit='login()')
           div.ml1.mr1
-            input.fieldset-reset.full-width.bg-gray0.lg1(type='email', placeholder='Email')
+            input.fieldset-reset.full-width.bg-gray0.lg1(ng-model='username', type='email', placeholder='Email')
           div.ml1.mr1
-            input.fieldset-reset.full-width.bg-gray0.lg1(type='password', placeholder='Password')
+            input.fieldset-reset.full-width.bg-gray0.lg1(ng-model='password', type='password', placeholder='Password')
           div.ml1.mr1
             input.fieldset-reset.full-width.mx-auto.mb2.button.bg-gray0.bg-gray1-h.lg1(type='submit', value='Submit')
+          div.mr1.ml1
+            p.small.lg1 {{message}}
 
       nav(ng-controller='AppCtrl')
         a.h5.bg-red.lg1.p1.block(href='#') History 
@@ -38,23 +40,25 @@ block body
   div(ng-controller='AppCtrl')
     main.col.col-9.h100.relative
       div.bg-blk0
-        h5.m0.py1.regular.center.lg1 Note Title
+        h5.m0.py1.regular.center.lg1 Unsaved Note
       ul.menu.list-reset
         li.inline-block
           a.h6.px2.py1.bg-blk1.bg-blk2-h.gray0.lg1-h(href='view1') First Note View
         li.inline-block
-          a.h6.px2.py1.bg-blk1.bg-blk2-h.gray0.lg1-h(href='view2') Second Note View
+          a.h6.px2.py1.bg-blk2.bg-gray0-h.gray1.lg1-h.no-underline(href='/new') +
 
       div.container(ng-view)
 
       div
-        | Angular seed app: v
-        span(app-version)
-
-      div
-        button.right.bg-blue.bg-cyan-h.white.regular Save
-        div.overflow-hidden
-          input.fieldset-reset.full-width.bg-lg0.blk0(type='text', placeholder='Find...')
+        form(name='newNote', ng-controller='NewNoteCtrl', ng-submit='test()')
+          div.ml2.mr2.fade-in
+            h4.right.h4(contenteditable='true', spellcheck='true', data-ph='Folder', ng-model='folder')
+            h2.h2(contenteditable='true', spellcheck='true', data-ph='Title', ng-model='title')
+            h4.h4(contenteditable='true', spellcheck='true', data-ph='Subtitle', ng-model='subtitle')
+            p(contenteditable='true', spellcheck='true', data-ph='Start writing...', ng-model='content')
+          input.button.right.bg-blue.bg-cyan-h.white.regular(type='submit', value='Save')
+          div.overflow-hidden
+            input.fieldset-reset.m0.full-width.bg-lg0.blk0(type='text', placeholder='Find...')
 
 
   script(src='js/lib/angular/angular.js')

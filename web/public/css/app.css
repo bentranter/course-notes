@@ -1669,6 +1669,35 @@ hr {
  * Project specific utilities
  */
 
- .h100 {
+.h100 {
   min-height: 100vh;
- }
+}
+
+.small {
+  font-size: .75rem;
+}
+
+.no-underline:hover {
+  text-decoration: none;
+}
+
+
+
+/**
+ * I HATE CONTENTEDITABLE
+ */
+
+[contenteditable='true']:active,
+[contenteditable='true']:focus {
+  border:none;
+  outline:none;
+}
+
+[contentEditable=true]:hover {
+  cursor: text;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+  color: #e0e0e0;
+  content: attr(data-ph)
+}
