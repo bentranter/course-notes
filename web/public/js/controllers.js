@@ -10,7 +10,39 @@ angular.module('myApp.controllers', []).
      * much everything right now.
      */
 
-      }).
+    // THE PROBLEM IS SHITTY CONTENTEDITABLE
+    $scope.test = function() {
+      console.log($scope.title);
+      console.log($scope.subtitle);
+      console.log($scope.content);
+      console.log($scope.folder);
+    };
+
+    $scope.save = function() {
+
+      var config = {headers: {
+          'x-access-token': $window.localStorage.getItem('token')
+        }
+      };
+
+      $http.post('http://localhost:3000/api/notes', {
+        
+        title: $scope.title,
+        subtitle: $scope.subtitle,
+        content: $scope.content,
+        author: $window.localStorage.getItem('username'),
+        folder: $scope.folder
+
+      }, config).success(function(data, status, headers, config) {
+
+        console.log(data, status, headers, config);
+
+      }).error(function(data, status, headers, config) {
+
+        console.log('FUCK');
+      });
+    };
+  }).
   controller('NewCtrl', function($scope) {
     // write new logic here
   }).
@@ -69,37 +101,5 @@ angular.module('myApp.controllers', []).
 
   }).
   controller('NewNoteCtrl', function($scope, $http, $window) {
-
-    $scope.test = function() {
-      console.log($scope.title);
-      console.log($scope.subtitle);
-      console.log($scope.content);
-      console.log($scope.folder);
-    };
-
-    $scope.save = function() {
-
-      var config = {headers: {
-          'x-access-token': $window.localStorage.getItem('token')
-        }
-      };
-
-      $http.post('http://localhost:3000/api/notes', {
-        
-        title: $scope.title,
-        subtitle: $scope.subtitle,
-        content: $scope.content,
-        author: $window.localStorage.getItem('username'),
-        folder: $scope.folder
-
-      }, config).success(function(data, status, headers, config) {
-
-        console.log(data, status, headers, config);
-
-      }).error(function(data, status, headers, config) {
-
-        console.log('FUCK');
-      });
-    };
-
+    // @TODO: Enable contenteditable
   });

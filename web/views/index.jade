@@ -37,7 +37,7 @@ block body
             path(d='M4 8 H28 L16 26 z ')
 
   //- Main View
-  div(ng-controller='AppCtrl')
+  div(ng-controller='AppCtrl', ng-submit='save()')
     main.col.col-9.h100.relative
       div.bg-blk0
         h5.m0.py1.regular.center.lg1 Unsaved Note
@@ -49,16 +49,16 @@ block body
 
       div.container(ng-view)
 
-      div
-        form(name='newNote', ng-controller='NewNoteCtrl', ng-submit='test()')
-          div.ml2.mr2.fade-in
-            h4.right.h4(contenteditable='true', spellcheck='true', data-ph='Folder', ng-model='folder')
-            h2.h2(contenteditable='true', spellcheck='true', data-ph='Title', ng-model='title')
-            h4.h4(contenteditable='true', spellcheck='true', data-ph='Subtitle', ng-model='subtitle')
-            p(contenteditable='true', spellcheck='true', data-ph='Start writing...', ng-model='content')
-          input.button.right.bg-blue.bg-cyan-h.white.regular(type='submit', value='Save')
-          div.overflow-hidden
-            input.fieldset-reset.m0.full-width.bg-lg0.blk0(type='text', placeholder='Find...')
+      div.ml2.mr2.fade-in
+        form(name='newNote')
+          input.fieldset-reset.block.right(type='text', ng-model='folder', placeholder='Folder')
+          input.fieldset-reset.block.left(type='text', ng-model='title', placeholder='Title')
+          input.fieldset-reset.full-width.right(type='text', ng-model='subtitle', placeholder='Subtitle')
+          input.fieldset-reset.full-width.block.right(type='text', ng-model='content', placeholder='Start writing...')  
+          div.fixed.bottom-0
+            input.button.right.bg-blue.bg-cyan-h.white.regular(type='submit', value='Save')
+            div.overflow-hidden
+              input.fieldset-reset.m0.full-width.bg-lg0.blk0(type='text', placeholder='Find...')
 
 
   script(src='js/lib/angular/angular.js')
