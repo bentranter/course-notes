@@ -16,6 +16,7 @@ var express = require('express'),
   http = require('http'),
   path = require('path'),
   c = require('chalk'),
+  liveServer = require('live-server'),
   thinky = require('thinky')({
     host: process.env.RDB_HOST || 'localhost',
     port: parseInt(process.env.RDB_PORT || 28015),
@@ -117,3 +118,8 @@ http.createServer(app)
   .listen(app.get('port'), function () {
     console.log('\nExpress server listening on port ' + c.green(app.get('port')));
   });
+
+/**
+ * Start live-server at 3001 and launch your browser
+ */
+liveServer.start(3001, 'backbone-test', false);

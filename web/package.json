@@ -23,7 +23,8 @@
   },
   "devDependencies": {
     "chalk": "^0.5.1",
-    "frisby": "^0.8.5"
+    "frisby": "^0.8.5",
+    "live-server": "^0.6.4"
   },
   "jshintConfig": {
     "asi": false,

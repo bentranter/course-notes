@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <title>Study Piggy</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <link rel='stylesheet' href='main.css'>
+  </head>
+
+  <body>
+
+    <!-- Wrap the page in a 100% height flexbox -->
+    <div class='flex'>
+
+      <!-- Sidebar -->
+      <aside class='z1 absolute w220 bg-blk0' id='sidebar'>
+        <header class='relative z2'>
+          <a class='h3 caps center regular m0 py2 block bg-blk0 bg-blk1-h lg1' href=''>Account</a>
+        </header>
+        <a href='' class='h5 bg-red lg1 p1 block'>History</a>
+        <ul class='list-reset m0'>
+          <li>
+            <a href='' class='h5 m0 px2 py1 block bg-blk2-h gray0 lg1-h'>First Note View</a>
+          </li>
+          <li>
+            <a href='' class='h5 m0 px2 py1 block bg-blk2-h gray0 lg1-h'>Second Note View</a>
+          </li>
+          <li>
+            <a href='' class='h5 blue bg-blue-h lg1-h p1 block'>Biology</a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Writing Area -->
+      <main class='z2 flex-auto'>
+        <h1 class='h1 m0 px4 py4 bg-purple'>StudyPiggy</h1>
+        <button id='toggleSidebar'>Sidebar Toggle</button>
+        <p contenteditable='true' id='noteBody'>Test</p>
+        <button id='save'>Click me to save to backbone model</button>
+      </main>
+
+    </div>
+
+  <!-- Scripts -->  
+  <script src='exoskeleton.js'></script>
+  <script src='main.js'></script>
+
+  </body>
+</html>

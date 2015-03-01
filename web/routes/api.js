@@ -475,6 +475,8 @@ exports.deleteNote = function (req, res) {
 
     Notes.get(req.params.id).delete().run().then(function(result) {
         res.json({
+            // Something is broken is RethinkDBDash - this is
+            // a hotfix for it
             result: util.inspect(result)
         });
     });
@@ -495,6 +497,10 @@ exports.updateNote = function (req, res) {
     // NOTE TO DUMB SELF: Use `x-www-url-formencoded` for put req's you idiot
     Notes.get(req.params.id).run().then(function(note) {
 
+        // Get the JSON web token
+        var token = (req.body && req.body.accessToken) || (req.query && req.query.accessToken) || req.headers['x-access-token'];
+        var decoded = jwt.decode(token, 'mysecret');
+
         if (req.body.title) {
             note.title = req.body.title;
         }
@@ -504,13 +510,12 @@ exports.updateNote = function (req, res) {
         if (req.body.content) {
             note.content = req.body.content;
         }
-        if (req.body.author) {
-            note.author = req.body.author;
-        }
+        // Always get author from token on every request
+        note.author = decoded.iss;
         if (req.body.folder) {
             note.folder = req.body.folder;
         }
-        // Can't modify date created
+        // Can't modify date created, but you have to update it somehow?
 
         note.dateUpdated = r.now();
         note.timesReviewed = parseInt(note.timesReviewed) + 1;
