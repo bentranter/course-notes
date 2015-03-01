@@ -415,12 +415,16 @@ exports.listNotes = function (req, res) {
 
 exports.addNote = function (req, res) {
 
+    // Get the username from the users web token
+    var token = (req.body && req.body.accessToken) || (req.query && req.query.accessToken) || req.headers['x-access-token'];
+    var decoded = jwt.decode(token, 'mysecret');
+
     // Create new instance of 'People' model
     var note = new Notes({
         title: req.body.title,
         subtitle: req.body.subtitle,
         content: req.body.content,
-        author: req.body.author,
+        author: decoded.iss,
         folder: req.body.folder,
         dateCreated: r.now(),
         dateUpdated: r.now(),
