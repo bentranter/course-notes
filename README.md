@@ -91,39 +91,16 @@ Supported Data Models:
 
 To run the tests, `cd` into `/web/test`, and run `$ jasmine-node .`. If every test fails, make sure you have RethinkDB and the server running, and then try again.
 
-###Proposed Data Models
+###Roadmap
 
-######USERS
-- First Name
-- Last Name
-- Email
-- Email isVerified
-- Password
-- Date they signed up
-- Something for two factor auth (phone number???)
-- School
-- Program
-- Major
-- Year Level
-- Country
-- State/Province/Whatever
-- City
-- Language
-- Date they last signed in
-- Date they last wrote a note
-- Date they last reviewed a note
-- AppleID/Google Play Stuff
-- Amount of times they signed in
+######Server
+- **get notes from signed in user**
+- look into push notification event queue
 
-######NOTES
-- Title
-- Date created
-- Date updated
-- User it belongs to:
-    - All their info for tracking stats 
-- Content (this is gonna be hard to store)
-- Note number (auto-increment)
-- Folder name
-- Path to the document
-- Time last reviewed
-- Times reviewed
+######Client
+- implement functionality
+- implement Stripe API
+- handle contentEditable stuff
+
+######Android
+- 
