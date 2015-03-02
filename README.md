@@ -93,6 +93,9 @@ To run the tests, `cd` into `/web/test`, and run `$ jasmine-node .`. If every te
 
 ###Roadmap
 
+######General
+- finalize UI design and layouts
+
 ######Server
 - **get notes from signed in user**
 - look into push notification event queue
