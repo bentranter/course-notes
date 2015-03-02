@@ -12,7 +12,7 @@
   <body>
 
     <!-- Sidebar -->
-    <aside class='w16 fixed scroll-y h100 bg-lg1'>
+    <aside class='w16 fixed scroll-y h100 bg-lg1' id='sidebar'>
       <h3 class='h3 m0 px1 py2 center bg-lg0'>Navigation</h3>
       <ul class='list-reset ml1 mr1'>
 
@@ -40,7 +40,7 @@
       </ul>
     </aside>
 
-    <div class='ml16'>
+    <div class='ml16' id='main'>
 
     <!-- Main Header -->
       <header class='bg-blue'>
@@ -50,6 +50,8 @@
       <!-- Main Content -->
       <main class='bg-white'>
         <div class='container px2'>
+
+          <p class='m0 mt2 px2 py2 center bg-lg1'>All the code for this project is available at <a href='https://github.com/bentranter/course-notes'>github.com/bentranter/course-notes</a></p>
 
           <h2 class='h2 caps'>Introduction</h2>
           <h3 class='h3'><a name='about'>About</a></h3>
@@ -154,10 +156,10 @@
           <h4 class='h4'>General Priorities</h4>
           <p>The main priority of the application is that it be easy to use for the user. This includes having the application respond in a way that the user would expect when the user interacts with it. The user should be able to easily navigate their way through the application. This also includes not giving a user the opportunity to break the application. The application is also designed to be easily expanded as well as to be easily maintained, handling changes on the server side.  The classes for updating and logging in should be designed in a way that allows the application to do more tasks with the information it receives from the server.</p>
           <img class='block center mx-auto' src='img/uml-android.png' />
-          <h4 class='h4'>Major Design Issues</h4>
+          <h4 class='h4'>Major Architecture Issues</h4>
           <p>One design issue was in what way to deal with the information coming in from the server, and how to store both the content from each document as well as the data related to each document such as its id, date last modified, etc. One solution was to store the incoming data as a String, then parse through the String and create a bunch of ArrayLists containing all the information. One issue with this was that the characters used to separate the information could also be part of the information, which left a possibility of errors in the parsing. One possible solution to this problem was using regular expressions and lexically parsing through, but a much simpler solution was to just store the information from the server as an array of JSON objects, and create new JSON objects to store locally containing the information that needed to be stored.</p>
           <p>Another design issue was setting up menus and changing menus depending on if the user logs in, or if an update fails, etc. This was an issue because networking tasks must be run asynchronously from the UI thread, and retrieving a response was less then intuitive. The solution was to create a singleton of global variables, then on any activity that could modify the menu bar, set a variable telling the application to wait and see if the menu needs to be change, and have the networking tasks set a variable indicating if the menu needs to be changed or not, and to stop waiting.</p>
-          <h4 class='h4'>Details of the Design</h4>
+          <h4 class='h4'>Details of the Architecture</h4>
           <p>The application uses a REST API to make requests to the server. The requests are formed by an OkHttpClient, open source software by Squareup. The response is a JSON object. Doing a POST request with a valid username and password to the server login will return a token, token expiration date and the username. These, along with the password sent in the request, are saved in the applications key-value storage. Sending an GET request to the servers notes endpoint along with a valid token will reply with all of the users documents on the server.</p>
           <p>Once the client has received all the documents from the server, it compares their lastModified date with the lastModified date of the documents saved locally. For each file from the server that has been updated more recently, the local version of the document will be rewritten with the content of the document from the server. The file containing information about the documents its then updated to reflect these changes.</p>
 
@@ -176,39 +178,50 @@
           <p>On the SpeedReader Activity, the buttons on the screen call the methods moveBar, slowDown, SpeedUp, startPauseOrResume depending on the button tapped. These control how the text is rotated through on the screen.</p>
           <p>The Login and Updates Classes are called asynchronously by MainActivity. Both of them Set global variables as well as store information that is used by the application. They make use of the Error class to store errors received from the attempting communication with the server. This Error is used in determining if the MainActivity should be prompted with an Error such as "invalid login information".</p>
           <p>Global variables are passed around by the Singleton GlobalApp.</p>
+          <h4 class='h4'>Functionality Implemented to Date</h4>
+          <ul>
+            <li>Application automatically loads to either the login screen, or the main activity depending on if login information has been saved.</li>
+            <li>'Continue without Login' on the login page will bring the application to the main activity correctly.</li>
+            <li>'Login' on the login page will launch main activity telling it to login using the entered information.</li>
+            <li>The correct menu loads on Main Activity, and correctly changes after login and logout.</li>
+            <li>Selecing 'Login' menu in main activity correctly brings up the login activity.</li>
+            <li>Selecing 'Login' menu in main activity correctly brings up the login activity.</li>
+            <li>After 'Login' has been selected on the login activity, the application will attempt to login to the server with the credentials the user entered, then saving the token, token expiration date and login credentials locally if successful.</li>
+            <li>Selecing 'Update' from the menu attempts to retrieve user information from the server using the stored token, then compare against locally stored files and update required files. Will prompt if an error occurs.</li>
+            <li>Selecting 'Open Local File Browser' will launch the activity to browse through files stored on the device.</li>
+            <li>Selecting a folder on the device will open a file browsing activity to browse within the folder.</li>
+            <li>Selecting a document will open an activity to view the contents of the document, with tabs allowing the user to switch between displaying the entire contents on the speed reader.</li>
+            <li>Selecing the speed reader tab will display the speed reader activity, which will display part of the document text, buttons for speed up, slow down and start/pause, as well as a slider bar to set the speed.</li>
+            <li>Tapping start will make the displayed text rotate through chunks of the document, showing at max 10 characters at a time, at the speed designated by the user. This will stop on the last line of the document.</li>
+            <li>Tapping the pause button will stop the text from changing until the pause (resume) button is pressed again.</li>
+            <li>Dragging the slide bar will change the speed that the text changes.</li>
+            <li>Tapping the + and - buttons will increase and decrease the speed respectively, stopping at max and min speeds.</li>
+          </ul>
+          <img class='block center mx-auto' src='img/uml-android-full.png' />
           
           <h3 class='h3'><a name='ios'>iOS Client</a></h3>
           <p></p>
+
+          <h2 class='h2 caps'>Code</h2>
+          <h3 class='h3'><a name='codeandroid'>Android</a></h3>
+          <p>The Android code docs were generated with Doxygen, and appear <a href='/android' class='bold'>here</a>.</p>
         </div>
       </main>
     </div>
 
+  <script>
+    (function() {
+      'use strict';
+
+      var toggleSidebar = function() {
+
+        var sidebar = document.getElementById('sidebar');
+        var main = document.getElementById('main');
+
+
+
+      };
+    })();
+  </script>
   </body>
 </html>
-
-<!--
-
-(c) Provide an architecture design document (2 - 4 pages), 
-following the guide in reference [1] below. (Do not duplicate 
-material in the code (ex. comments, and material that can be 
-extracted directly from the code)
-
-(d) Code documentation instructive comments,uniform style  
-Employ documentation tools where possible.
-
-(e) List of individual and team contributions 
-(written separately by each team).
-
-(f) Summary of test situations in demo. 
-
-(2) Working demo showing test situations. Each team should demonstrate 
-features they were the primary creator of with credit given to other 
-team(s) regarding required contributions from other team(s) to make 
-the feature(s) work.
-
-Reference:
-[1] Object -Oriented Software Engineering, Practical Software Development using
-UML and Java, Second Edition, Timothy C. Lethbridge, Robert Laganiere, McGraw
-Hill 2005.
-
--->
