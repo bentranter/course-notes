@@ -289,6 +289,11 @@ td {
   -webkit-overflow-scrolling: touch;
 }
 
+.overflow-scroll-inertial-y {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
 .overflow-auto {
   overflow: auto;
 }
