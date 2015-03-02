@@ -36,6 +36,8 @@
 
         <h4 class='h4 center'>Code</h4>
         <li><a href='#codeandroid'>Android</a></li>
+        <li><a href='#codeserver'>Server</a></li>
+        <li><a href='#codeweb'>Web and iOS</a></li>
 
       </ul>
     </aside>
@@ -165,9 +167,14 @@
 
           <h2 class='h2 caps'>Design</h2>
           <h3 class='h3'><a name='server'>Server</a></h3>
-          <p></p>
+          <p>The server has an extremely simple design. Essentially, it is two files: one with some startup code for the server that handles the database connection, which port to serve on, the API endpoint names, and whether to enable development mode or production mode, and the other handles the server's application logic.</p>
+          <p>The applicatino consists of the model schemas, the authentication middleware, and the request/response handling for the API endpoints. There are two schemas: one for the <span class='italic'>user</span> and one for the <span class='italic'>notes</span>.</p>
+          <p>The primary key for the user is the username. The primary key for the notes is the id. A user has a one-to-many relationship with the notes (relations in a NoSQL database? Weird, I know, but it speeds up our queries massively).</p>
+          <p>The authenticatio middleware is two functions.</p>The first is one that executes before the 
+
           <h3 class='h3'><a name='client'>Web Client</a></h3>
-          <p></p>
+          <p>Our web client is currently under development and is at best, a huge mess. We use an MVC approach, and complete documentation will be added once more progress is made on the web client.</p>
+
           <h3 class='h3'><a name='android'>Android Client</a></h3>
           <p>Each Activity (screen / task of the application) is defined as a class. When something on the screen is tapped, such as a button or dragging a bar, a method in the class will be called.</p>
           <p>SpeedStudy launches into the class AppLaunch, where it will check to see if the users username and password are stored. If they are not, it will launch the login screen. If the username and password are found, it will check to see if the token used to authenticate with the server needs to be updated. This includes checking if the token exists, and if the token is not expired. If it fails one of these checks, then the MainActivity will get launched with the instruction to attempt login with the stored credentials. If the token makes it through the checks, the MainActivity will launch with the instruction to update the locally stored files, using the stored token.</p>
@@ -200,11 +207,58 @@
           <img class='block center mx-auto' src='img/uml-android-full.png' />
           
           <h3 class='h3'><a name='ios'>iOS Client</a></h3>
-          <p></p>
+          <p>The iOS client is nothing more than a few blank views at the moment, but complete documentation will be created as development progresses.</p>
 
           <h2 class='h2 caps'>Code</h2>
           <h3 class='h3'><a name='codeandroid'>Android</a></h3>
           <p>The Android code docs were generated with Doxygen, and appear <a href='/android' class='bold'>here</a>.</p>
+
+          <h3 class='h3'><a name='codeserver'>Server</a></h3>
+          <h3 class='h3'><code>app.js</code></h3>
+          <p>This is the main entry point of the server.</p>
+          <p><code>var moduleName = require('module-name');</code></p>
+          <p>This is how modules are imported in Node.js.</p>
+          <p><code>app.set('settingName', options);</code></p>
+          <p>This handles Express's settings.</p>
+          <p><code>app.use('middlewareName', options);</code></p>
+          <p>This handles what middleware we use with Express.</p>
+          <p><code>app.get('route', authFunctionName, functionName);</code></p>
+          <p>This defines a route at an endpoint, and allows you to write a function that defines how to handle it. It also let's you specify an HTTP verb, in this case, it's "GET".</p>
+          <p><code>app.post('route', authFunctionName, functionName);</code></p>
+          <p>This defines a route at an endpoint, and allows you to write a function that defines how to handle it. It also let's you specify an HTTP verb, in this case, it's "POST".</p>
+          <p><code>app.put('route', authFunctionName, functionName);</code></p>
+          <p>This defines a route at an endpoint, and allows you to write a function that defines how to handle it. It also let's you specify an HTTP verb, in this case, it's "PUT".</p>
+          <p><code>app.delete('route', authFunctionName, functionName);</code></p>
+          <p>This defines a route at an endpoint, and allows you to write a function that defines how to handle it. It also let's you specify an HTTP verb, in this case, it's "DELETE".</p>
+
+          <h3 class='h3'><code>routes/api.js</code></h3>
+          <p>This is where all the functionality of the API comes from.</p>
+          <p><code>var Model = thinky.createModel('modelName', options);</code></p>
+          <p>Creates a model and allows you to specify the options. This is covered in full in <span class='bold'><a href='http://thinky.io/'>Thinky</a>'s </span>docs.</p>
+          <p><code>Model.ensureIndex('indexName');</code></p>
+          <p>Let's you specify a model's index.</p>
+          <p><code>Model.pre('actionName', callback);</code></p>
+          <p>Let's you specify an action to do before another action is called. Useful for calling functions before actions like "save", or "update".</p>
+          <p><code>login(request, response);</code></p>
+          <p>Get's a login token based on your username. Returns a JSON web token as a string. API: private, HTTP: GET.</p>
+          <p><code>authorizeToken(request, response, next);</code></p>
+          <p>Handles the token based auth. Get's a token from the request, decodes it with the secret, checks if it's valid, and handles possible errors. API: private.</p>
+          <p><code>signUp(request, response);</code></p>
+          <p>Creates a new user in the database. Returns a JSON web token as a string. API: public, HTTP: GET.</p>
+          <p><code>listNotes(request, response);</code></p>
+          <p>Lists a user's notes. Returns an array of objects containing their notes. API: public, HTTP: GET.</p>
+          <p><code>getNote(request, response);</code></p>
+          <p>Get's a user's note by id. Returns an object containing the requested note. API: public, HTTP: GET.</p>
+          <p><code>addNote(request, response);</code></p>
+          <p>Creates a new note. Returns an object containing the note created. API: public, HTTP: POST.</p>
+          <p><code>updateNote(request, response);</code></p>
+          <p>Updates a note. Returns an object containing the updated note. API: public, HTTP: PUT.</p>
+          <p><code>deleteNote(request, response);</code></p>
+          <p>Deletes a note. Returns a success message as an object. API: public, HTTP: DELETE.</p>
+
+          <h3 class='h3'><a name='codeweb'>Web and iOS</a></h3>
+          <p>The web client and iOS client don't have enough code written yet that isn't spaghetti code to warrant documenting it at this stage, but documentation will be added as code is written and refactored.</p>
+
         </div>
       </main>
     </div>
@@ -218,9 +272,21 @@
         var sidebar = document.getElementById('sidebar');
         var main = document.getElementById('main');
 
+        if (sidebar.classList.contains('w16')) {
+          sidebar.classList.remove('w16');
+        } else {
+          sidebar.classList.add('w16');
+        }
 
-
+        if (main.classList.contains('ml16')) {
+          main.classList.remove('ml16');
+        } else {
+          main.classList.add('ml16');
+        }        
       };
+
+      document.getElementById('toggleSidebar').addEventListener('click', toggleSidebar);
+
     })();
   </script>
   </body>
