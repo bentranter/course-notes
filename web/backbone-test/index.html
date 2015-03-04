@@ -11,49 +11,44 @@
 
   <body>
 
-    <!-- Wrap the page in a 100% height flexbox -->
-    <div class='flex'>
+    <!-- Top Bar -->
+    <div class='gray0-g bbl'>
 
-      <!-- Sidebar -->
-      <aside class='z1 fixed h100 w220 bg-blk0' id='sidebar'>
-        <header class='relative z2'>
-          <a class='h3 caps center regular m0 py2 block bg-blk0 bg-blk1-h lg1' href=''>Account</a>
-        </header>
-        <a href='' class='h5 bg-red lg1 p1 block'>History</a>
-        <ul class='list-reset m0'>
-          <li>
-            <a href='' class='h5 m0 px2 py1 block bg-blk2-h gray0 lg1-h'>First Note View</a>
-          </li>
-          <li>
-            <a href='' class='h5 m0 px2 py1 block bg-blk2-h gray0 lg1-h'>Second Note View</a>
-          </li>
-          <li>
-            <a href='' class='h5 blue bg-blue-h lg1-h p1 block'>Biology</a>
-          </li>
-        </ul>
-      </aside>
+      <ul class='inline-block left'>
+        <li>
+          <a href='#'>Account</a>
+        </li>
+      </ul>
 
-      <!-- Writing Area -->
-      <main class='z2 flex-auto h100 bg-white' id='main'>
-
-        <!-- Top Tab Area -->
-        <ul class='list-reset'>
-          <li class='inline-block'>
-            <a href='' class='small px2 py1 bg-blk1 bg-blk2-h gray0 lg1-h'>First Note View</a>
-          </li>
-          <li>
-            <a href='' class='small px2 py1 bg-blk2 bg-gray0-h gray1 lg1-h'></a>
-          </li>
-        </ul>
-
-        <!-- Writing Area -->
-        <h1 class='h1 m0 px4 py4 bg-purple'>StudyPiggy</h1>
-        <button id='toggleSidebar'>Sidebar Toggle</button>
-        <p contenteditable='true' id='noteBody'>Test</p>
-        <button id='save'>Click me to save to backbone model</button>
-      </main>
-
+      <ul class='inline-block right'>
+        <li>
+          <a href='#'>Whatever</a>
+        </li>
+      </ul>
     </div>
+
+    <!-- Sidebar -->
+    <aside class='z1 fixed top-offset h100 w220 bg-lg1 brl' id='sidebar'>
+      <a href='' class='h5 blk2 p1 block'>History</a>
+      <ul class='list-reset m0'>
+        <li>
+          <a href='' class='h5 m0 px2 py1 block bg-blk2-h gray0 lg1-h'>First Note View</a>
+        </li>
+        <li>
+          <a href='' class='h5 m0 px2 py1 block bg-blk2-h gray0 lg1-h'>Second Note View</a>
+        </li>
+        <li>
+          <a href='' class='h5 blue bg-blue-h lg1-h p1 block'>Biology</a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Writing Area -->
+    <main class='z2 h100 bg-white ml220' id='main'>
+
+      <p contenteditable='true' id='noteBody'>Test</p>
+      <button id='save'>Click me to save to backbone model</button>
+    </main>
 
   <!-- Scripts -->  
   <script src='exoskeleton.js'></script>

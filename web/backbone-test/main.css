@@ -4,6 +4,8 @@
  * Authored by Ben Tranter.
  */
 
+
+
 body,
 button {
   margin: 0;
@@ -32,7 +34,7 @@ svg {
  */
 
 body {
-  font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
   line-height: 1.5;
   font-size: 100%;
 }
@@ -43,7 +45,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
   font-weight: bold;
   line-height: 1.25;
   margin-top: 1em;
@@ -1123,13 +1125,13 @@ hr {
 .brl {
   border-right-style: solid;
   border-right-width: 1px;
-  border-right-color: #d0d0d0;
+  border-right-color: #d3d3d4;
 }
 
-.bbl{
+.bbl {
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  border-bottom-color: #d0d0d0;
+  border-bottom-color: #d3d3d4;
 }
 
 .bll {
@@ -1303,7 +1305,7 @@ hr {
 }
 
 .bg-lg1 {
-  background-color: #f5f5f5;
+  background-color: #f5f5f7;
 }
 
 .bg-red {
@@ -1712,4 +1714,18 @@ hr {
 [contentEditable=true]:empty:not(:focus):before {
   color: #e0e0e0;
   content: attr(data-ph)
+}
+
+.gray0-g {
+  background: #f4f4f6;
+  background: -moz-linear-gradient(top, #f4f4f6 0%, #eaeae9 100%);
+  background: -webkit-linear-gradient(top, #f4f4f6 0%,#eaeae9 100%);
+  background: -o-linear-gradient(top, #f4f4f6 0%,#eaeae9 100%);
+  background: -ms-linear-gradient(top, #f4f4f6 0%,#eaeae9 100%);
+  background: linear-gradient(to bottom, #f4f4f6 0%,#eaeae9 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f4f6', endColorstr='#eaeae9',GradientType=0 );
+}
+
+.top-offset {
+  top: 40;
 }

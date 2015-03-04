@@ -12,16 +12,6 @@
       var data = document.getElementById('noteBody').innerHTML;
       todoItem.set({description: data});
       console.log(todoItem.get('description'));
-    },
-    toggleSidebar: function() {
-
-      var sidebar = document.getElementById('main');
-      
-      if (sidebar.classList.contains('ml220')) {
-        sidebar.classList.remove('ml220');
-      } else {
-        sidebar.classList.add('ml220');
-      }
     }
   });
 
