@@ -13,20 +13,50 @@
 
     <!-- Top Bar -->
     <div class='z2 fixed top-0 full-width bg-white bbl py1'>
-      <a href='#!' class='blk2 px2 left m0 caps mr1'>Account <svg height='16px' width='16px' viewBox='0 0 32 32' style='fill:currentcolor'><path d='M4 8 H28 L16 26 z '></path></svg></a>
+      <a href='#!' id='accountToggle' class='blk2 px2 left m0 caps mr1'>Account 
+        <svg height='16px' width='16px' viewBox='0 0 32 32' style='fill:currentcolor'><path d='M4 8 H28 L16 26 z '></path></svg>
+      </a>
+
+      <span class='sm-show-i'>
+        <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 1</a>
+        <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 2</a>
+        <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 3</a>
+        <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 4</a>
+      </span>
+
+      <a href='#!' id='sidebarToggle' class='right gray1 mr2'>
+        <svg width='22px' height='22px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M3 8 A3 3 0 0 0 9 8 A3 3 0 0 0 3 8 M12 6 L28 6 L28 10 L12 10z M3 16 A3 3 0 0 0 9 16 A3 3 0 0 0 3 16 M12 14 L28 14 L28 18 L12 18z M3 24 A3 3 0 0 0 9 24 A3 3 0 0 0 3 24 M12 22 L28 22 L28 26 L12 26z "></path></svg>
+      </a>
+
+      <a href='#!' id='searchToggle' class='px2 right m0 gray2'>
+        <svg height='22px' width='22px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M12 0 A12 12 0 0 0 0 12 A12 12 0 0 0 12 24 A12 12 0 0 0 18.5 22.25 L28 32 L32 28 L22.25 18.5 A12 12 0 0 0 24 12 A12 12 0 0 0 12 0 M12 4 A8 8 0 0 1 12 20 A8 8 0 0 1 12 4  "></path></svg>
+      </a>
+
+    </div>
+
+    <!-- Mobile-only navigation -->
+    <span class='z4 fixed left-0 right-0 mobile-nav-offset bbl sm-hide nowrap overflow-scroll-inertial'>
       <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 1</a>
       <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 2</a>
       <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 3</a>
       <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 4</a>
-      <a href='#!' class='px2 right m0 gray2'><svg height='22px' width='22px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M12 0 A12 12 0 0 0 0 12 A12 12 0 0 0 12 24 A12 12 0 0 0 18.5 22.25 L28 32 L32 28 L22.25 18.5 A12 12 0 0 0 24 12 A12 12 0 0 0 12 0 M12 4 A8 8 0 0 1 12 20 A8 8 0 0 1 12 4  "></path></svg></a>
-    </div>
+      <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 1</a>
+      <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 2</a>
+      <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 3</a>
+      <a href='#!' class='ml2 small caps gray2 blk2-h bold'>Note 4</a>
+    </span>
 
     <!-- Sidebar -->
     <aside class='z1 fixed top-offset h100 w220 bg-lg1 brl' id='sidebar'>
-      <div class='e0e0e0 py2 px1'>
-        <input type='text' class='fieldset-reset bl' placeholder='Username' />
-        <input type='password' class='fieldset-reset bl' placeholder='Password' />
+
+        
+
+      <div id='account' class='hide e0e0e0 px1 py1 bbl'>
+        <h4 class='center light m0 mb1'>Sign In</h4>
+        <input type='text' class='fieldset-reset bl full-width' placeholder='Username' />
+        <input type='password' class='fieldset-reset bl full-width m0' placeholder='Password' />
       </div>
+
       <a href='' class='h5 blk2 p1 block'>History</a>
       <ul class='list-reset m0'>
         <li>
@@ -42,20 +72,28 @@
     </aside>
 
     <!-- Writing Area -->
-    <main class='z2 h100 bg-white ml220 margin-top-offset px2' id='main'>
 
-      <p contenteditable='true' id='noteBody'>Test</p>
-      <button class='rounded' id='save'>Click me to save to backbone model</button>
-      <p>Next to each paint record you will see the dimensions of the painted area and, if you roll over it, Chrome will highlight the area in the page that had to be repainted. Another way to see the areas that had be repainted is to enable “Show paint rectangles” in Chrome's DevTools settings, which is accessed through that little cog icon in the bottom right corner. This is the first indicator that you get about how your page is performing when you scroll. A reminder: you should be looking for the smallest possible paint areas.</p>
+    <!--
 
-<p>With the side menu visible you'll see that the paint regions are essentially the whole screen, and performance really suffers. The reason for this is that Chrome does a union of damaged regions. In this case the thin, 100% wide strip along the bottom for the content that just came into view and the 100% high side menu it has to draw into the same compositor layer, all of which is unioned to a region 100% wide and 100% high. If you disable the side menu using the checkbox at the top and scroll again you'll notice that the only repainting work that needs to be performed is the thin strip along the bottom, and it all happens much more quickly.</p>
+      Try wrapping it in a div with 0 margin but padding-right 220px??
 
-<p>If you want to see a real world example of this in action, try loading Google+ and then change the side navigation over from position: fixed to position: absolute. Of course this changes the behaviour of the site, but the point here is you can see a real performance boost by switching styles. Your reaction to all this might be to decide that position:fixed should never be used, but actually all of this depends on context and requirements. There is a time and place for most things, the important thing is to be able to measure and understand the impact of your decisions.</p>
+    -->
+    <main class='z1 fixed full-width top-offset overflow-scroll h100 top-0 bottom-0 ml220 fit help px2 py2' id='main'>
 
-<h3>Image Resizes</h3>
+      <!-- Search Bar -->
+      <input id='search' class='hide block bsl mx-auto m0 mr2 fieldset-reset rounded' type='text' placeholder='Search...' />
 
-<p>In addition to the basic paint records we actually get a little more information for some of them, specifically relating to images. If you resize the page down and up while recording you'll see that some of the paint records will allow you to twizzle down for more details. If you do just that you should see some image resize records. This is exactly what it says on the tin: the browser is having to resize the image as part of its paint work.</p>
+      <h2 contentEditable='true' id='noteTitle' data-ph='Title'></h2>
+      <p contentEditable='true' id='noteBody' data-ph='Start writing...'></p>
+      
     </main>
+
+    <!-- <main class='z2 h100 bg-white ml220 margin-top-offset px2' id='main'>
+
+      <h2 contentEditable='true' id='noteTitle' data-ph='Title'></h2>
+      <p contentEditable='true' id='noteBody' data-ph='Start writing...'></p>
+      
+    </main> -->
 
   <!-- Scripts -->  
   <script src='exoskeleton.js'></script>
