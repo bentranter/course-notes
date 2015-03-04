@@ -12,19 +12,8 @@
   <body>
 
     <!-- Top Bar -->
-    <div class='gray0-g bbl'>
-
-      <ul class='inline-block left'>
-        <li>
-          <a href='#'>Account</a>
-        </li>
-      </ul>
-
-      <ul class='inline-block right'>
-        <li>
-          <a href='#'>Whatever</a>
-        </li>
-      </ul>
+    <div class='z2 fixed top-0 full-width gray0-g bbl px2 py2'>
+      <a href='#!'>Account</a>
     </div>
 
     <!-- Sidebar -->
@@ -44,10 +33,19 @@
     </aside>
 
     <!-- Writing Area -->
-    <main class='z2 h100 bg-white ml220' id='main'>
+    <main class='z2 h100 bg-white ml220 margin-top-offset px2' id='main'>
 
       <p contenteditable='true' id='noteBody'>Test</p>
-      <button id='save'>Click me to save to backbone model</button>
+      <button class='rounded' id='save'>Click me to save to backbone model</button>
+      <p>Next to each paint record you will see the dimensions of the painted area and, if you roll over it, Chrome will highlight the area in the page that had to be repainted. Another way to see the areas that had be repainted is to enable “Show paint rectangles” in Chrome's DevTools settings, which is accessed through that little cog icon in the bottom right corner. This is the first indicator that you get about how your page is performing when you scroll. A reminder: you should be looking for the smallest possible paint areas.</p>
+
+<p>With the side menu visible you'll see that the paint regions are essentially the whole screen, and performance really suffers. The reason for this is that Chrome does a union of damaged regions. In this case the thin, 100% wide strip along the bottom for the content that just came into view and the 100% high side menu it has to draw into the same compositor layer, all of which is unioned to a region 100% wide and 100% high. If you disable the side menu using the checkbox at the top and scroll again you'll notice that the only repainting work that needs to be performed is the thin strip along the bottom, and it all happens much more quickly.</p>
+
+<p>If you want to see a real world example of this in action, try loading Google+ and then change the side navigation over from position: fixed to position: absolute. Of course this changes the behaviour of the site, but the point here is you can see a real performance boost by switching styles. Your reaction to all this might be to decide that position:fixed should never be used, but actually all of this depends on context and requirements. There is a time and place for most things, the important thing is to be able to measure and understand the impact of your decisions.</p>
+
+<h3>Image Resizes</h3>
+
+<p>In addition to the basic paint records we actually get a little more information for some of them, specifically relating to images. If you resize the page down and up while recording you'll see that some of the paint records will allow you to twizzle down for more details. If you do just that you should see some image resize records. This is exactly what it says on the tin: the browser is having to resize the image as part of its paint work.</p>
     </main>
 
   <!-- Scripts -->  

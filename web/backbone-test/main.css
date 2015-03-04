@@ -4,8 +4,6 @@
  * Authored by Ben Tranter.
  */
 
-
-
 body,
 button {
   margin: 0;
@@ -204,6 +202,14 @@ textarea {
 
 button,
 .button {
+  background: #3db0eb;
+  background: -moz-linear-gradient(top,  #3db0eb 0%, #2995df 100%);
+  background: -webkit-linear-gradient(top,  #3db0eb 0%,#2995df 100%);
+  background: -o-linear-gradient(top,  #3db0eb 0%,#2995df 100%);
+  background: -ms-linear-gradient(top,  #3db0eb 0%,#2995df 100%);
+  background: linear-gradient(to bottom,  #3db0eb 0%,#2995df 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3db0eb', endColorstr='#2995df',GradientType=0 );
+  color: #fdfdff;
   font-size: inherit;
   font-weight: bold;
   text-decoration: none;
@@ -214,7 +220,7 @@ button,
   padding: .5rem 1rem;
   margin: 0;
   height: auto;
-  border: 1px solid transparent;
+  border: 1px solid #3db0eb;
   vertical-align: middle;
   -webkit-appearance: none;
 }
@@ -1122,6 +1128,12 @@ hr {
   border-top-color: #d0d0d0;
 }
 
+.btw {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #fff;
+}
+
 .brl {
   border-right-style: solid;
   border-right-width: 1px;
@@ -1341,7 +1353,7 @@ hr {
 }
 
 .bg-white {
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 /**
@@ -1696,6 +1708,14 @@ hr {
   font-size: .75rem;
 }
 
+.top-offset {
+  top: 57px;
+}
+
+.margin-top-offset {
+  margin-top: 57px;
+}
+
 
 /**
  * I HATE CONTENTEDITABLE
@@ -1724,8 +1744,4 @@ hr {
   background: -ms-linear-gradient(top, #f4f4f6 0%,#eaeae9 100%);
   background: linear-gradient(to bottom, #f4f4f6 0%,#eaeae9 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f4f6', endColorstr='#eaeae9',GradientType=0 );
-}
-
-.top-offset {
-  top: 40;
 }
