@@ -1119,67 +1119,31 @@ hr {
 .bl {
   border-style: solid;
   border-width: 1px;
-  border-color: #d0d0d0;
+  border-color: #e0e0e0;
 }
 
 .btl {
   border-top-style: solid;
   border-top-width: 1px;
-  border-top-color: #d0d0d0;
-}
-
-.btw {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #fff;
+  border-top-color: #e0e0e0;
 }
 
 .brl {
   border-right-style: solid;
   border-right-width: 1px;
-  border-right-color: #d3d3d4;
+  border-right-color: #e0e0e0;
 }
 
 .bbl {
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  border-bottom-color: #d3d3d4;
+  border-bottom-color: #e0e0e0;
 }
 
 .bll {
   border-left-style: solid;
   border-left-width: 1px;
-  border-left-color: #d0d0d0;
-}
-
-.bd {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #202020;
-}
-
-.btd {
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #202020;
-}
-
-.brd {
-  border-right-style: solid;
-  border-right-width: 1px;
-  border-right-color: #202020;
-}
-
-.bbd {
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #202020;
-}
-
-.bld {
-  border-left-style: solid;
-  border-left-width: 1px;
-  border-left-color: #202020;
+  border-left-color: #e0e0e0;
 }
 
 .rounded {
@@ -1317,7 +1281,11 @@ hr {
 }
 
 .bg-lg1 {
-  background-color: #f5f5f7;
+  background-color: #f5f5f5;
+}
+
+.bg-lg2 {
+  background-color: #f2f2f3;
 }
 
 .bg-red {
@@ -1697,11 +1665,11 @@ hr {
  */
 
 .w220 {
-  width: 220px;
+  width: 160px;
 }
 
 .ml220 {
-  margin-left: 220px;
+  margin-left: 160px;
 }
 
 .small {
@@ -1709,7 +1677,7 @@ hr {
 }
 
 .top-offset {
-  top: 57px;
+  top: 42px;
 }
 
 .margin-top-offset {
