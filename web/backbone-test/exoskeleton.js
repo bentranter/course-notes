@@ -2249,3 +2249,388 @@ _.extend(History.prototype, Events, {
   })();
   return ajax;
 }));
+
+
+// Backbone Localstorage Adapter
+/**
+ * Backbone localStorage Adapter
+ * Version 1.1.16
+ *
+ * https://github.com/jeromegn/Backbone.localStorage
+ */
+(function (root, factory) {
+  if (typeof exports === 'object' && typeof require === 'function') {
+    module.exports = factory(require("backbone"));
+  } else if (typeof define === "function" && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(["backbone"], function(Backbone) {
+      // Use global variables if the locals are undefined.
+      return factory(Backbone || root.Backbone);
+    });
+  } else {
+    factory(Backbone);
+  }
+}(this, function(Backbone) {
+// A simple module to replace `Backbone.sync` with *localStorage*-based
+// persistence. Models are given GUIDS, and saved into a JSON object. Simple
+// as that.
+
+// Generate four random hex digits.
+function S4() {
+   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+};
+
+// Generate a pseudo-GUID by concatenating random hexadecimal.
+function guid() {
+   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+};
+
+function isObject(item) {
+  return item === Object(item);
+}
+
+function contains(array, item) {
+  var i = array.length;
+  while (i--) if (array[i] === item) return true;
+  return false;
+}
+
+function extend(obj, props) {
+  for (var key in props) obj[key] = props[key]
+  return obj;
+}
+
+function result(object, property) {
+    if (object == null) return void 0;
+    var value = object[property];
+    return (typeof value === 'function') ? object[property]() : value;
+}
+
+// Our Store is represented by a single JS object in *localStorage*. Create it
+// with a meaningful name, like the name you'd give a table.
+// window.Store is deprectated, use Backbone.LocalStorage instead
+Backbone.LocalStorage = window.Store = function(name, serializer) {
+  if( !this.localStorage ) {
+    throw "Backbone.localStorage: Environment does not support localStorage."
+  }
+  this.name = name;
+  this.serializer = serializer || {
+    serialize: function(item) {
+      return isObject(item) ? JSON.stringify(item) : item;
+    },
+    // fix for "illegal access" error on Android when JSON.parse is passed null
+    deserialize: function (data) {
+      return data && JSON.parse(data);
+    }
+  };
+  var store = this.localStorage().getItem(this.name);
+  this.records = (store && store.split(",")) || [];
+};
+
+extend(Backbone.LocalStorage.prototype, {
+
+  // Save the current state of the **Store** to *localStorage*.
+  save: function() {
+    this.localStorage().setItem(this.name, this.records.join(","));
+  },
+
+  // Add a model, giving it a (hopefully)-unique GUID, if it doesn't already
+  // have an id of it's own.
+  create: function(model) {
+    if (!model.id && model.id !== 0) {
+      model.id = guid();
+      model.set(model.idAttribute, model.id);
+    }
+    this.localStorage().setItem(this._itemName(model.id), this.serializer.serialize(model));
+    this.records.push(model.id.toString());
+    this.save();
+    return this.find(model);
+  },
+
+  // Update a model by replacing its copy in `this.data`.
+  update: function(model) {
+    this.localStorage().setItem(this._itemName(model.id), this.serializer.serialize(model));
+    var modelId = model.id.toString();
+    if (!contains(this.records, modelId)) {
+      this.records.push(modelId);
+      this.save();
+    }
+    return this.find(model);
+  },
+
+  // Retrieve a model from `this.data` by id.
+  find: function(model) {
+    return this.serializer.deserialize(this.localStorage().getItem(this._itemName(model.id)));
+  },
+
+  // Return the array of all models currently in storage.
+  findAll: function() {
+    var result = [];
+    for (var i = 0, id, data; i < this.records.length; i++) {
+      id = this.records[i];
+      data = this.serializer.deserialize(this.localStorage().getItem(this._itemName(id)));
+      if (data != null) result.push(data);
+    }
+    return result;
+  },
+
+  // Delete a model from `this.data`, returning it.
+  destroy: function(model) {
+    this.localStorage().removeItem(this._itemName(model.id));
+    var modelId = model.id.toString();
+    for (var i = 0, id; i < this.records.length; i++) {
+      if (this.records[i] === modelId) {
+        this.records.splice(i, 1);
+      }
+    }
+    this.save();
+    return model;
+  },
+
+  localStorage: function() {
+    return localStorage;
+  },
+
+  // Clear localStorage for specific collection.
+  _clear: function() {
+    var local = this.localStorage(),
+      itemRe = new RegExp("^" + this.name + "-");
+
+    // Remove id-tracking item (e.g., "foo").
+    local.removeItem(this.name);
+
+    // Match all data items (e.g., "foo-ID") and remove.
+    for (var k in local) {
+      if (itemRe.test(k)) {
+        local.removeItem(k);
+      }
+    }
+
+    this.records.length = 0;
+  },
+
+  // Size of localStorage.
+  _storageSize: function() {
+    return this.localStorage().length;
+  },
+
+  _itemName: function(id) {
+    return this.name+"-"+id;
+  }
+
+});
+
+// localSync delegate to the model or collection's
+// *localStorage* property, which should be an instance of `Store`.
+// window.Store.sync and Backbone.localSync is deprecated, use Backbone.LocalStorage.sync instead
+Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(method, model, options) {
+  var store = result(model, 'localStorage') || result(model.collection, 'localStorage');
+
+  var resp, errorMessage;
+  //If $ is having Deferred - use it.
+  var syncDfd = Backbone.$ ?
+    (Backbone.$.Deferred && Backbone.$.Deferred()) :
+    (Backbone.Deferred && Backbone.Deferred());
+
+  try {
+
+    switch (method) {
+      case "read":
+        resp = model.id != undefined ? store.find(model) : store.findAll();
+        break;
+      case "create":
+        resp = store.create(model);
+        break;
+      case "update":
+        resp = store.update(model);
+        break;
+      case "delete":
+        resp = store.destroy(model);
+        break;
+    }
+
+  } catch(error) {
+    if (error.code === 22 && store._storageSize() === 0)
+      errorMessage = "Private browsing is unsupported";
+    else
+      errorMessage = error.message;
+  }
+
+  if (resp) {
+    if (options && options.success) {
+      if (Backbone.VERSION === "0.9.10") {
+        options.success(model, resp, options);
+      } else {
+        options.success(resp);
+      }
+    }
+    if (syncDfd) {
+      syncDfd.resolve(resp);
+    }
+
+  } else {
+    errorMessage = errorMessage ? errorMessage
+                                : "Record Not Found";
+
+    if (options && options.error)
+      if (Backbone.VERSION === "0.9.10") {
+        options.error(model, errorMessage, options);
+      } else {
+        options.error(errorMessage);
+      }
+
+    if (syncDfd)
+      syncDfd.reject(errorMessage);
+  }
+
+  // add compatibility with $.ajax
+  // always execute callback for success and error
+  if (options && options.complete) options.complete(resp);
+
+  return syncDfd && syncDfd.promise();
+};
+
+Backbone.ajaxSync = Backbone.sync;
+
+Backbone.getSyncMethod = function(model, options) {
+  var forceAjaxSync = options && options.ajaxSync;
+
+  if(!forceAjaxSync && (result(model, 'localStorage') || result(model.collection, 'localStorage'))) {
+    return Backbone.localSync;
+  }
+
+  return Backbone.ajaxSync;
+};
+
+// Override 'Backbone.sync' to default to localSync,
+// the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
+Backbone.sync = function(method, model, options) {
+  return Backbone.getSyncMethod(model, options).apply(this, [method, model, options]);
+};
+
+return Backbone.LocalStorage;
+}));
+
+// Backbone MicroTemplates
+// Simple JavaScript Templating
+// Paul Miller (http://paulmillr.com)
+// http://underscorejs.org
+// (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+(function(globals) {
+  // By default, Underscore uses ERB-style template delimiters, change the
+  // following template settings to use alternative delimiters.
+  var settings = {
+    evaluate    : /<%([\s\S]+?)%>/g,
+    interpolate : /<%=([\s\S]+?)%>/g,
+    escape      : /<%-([\s\S]+?)%>/g
+  };
+
+  // When customizing `templateSettings`, if you don't want to define an
+  // interpolation, evaluation or escaping regex, we need one that is
+  // guaranteed not to match.
+  var noMatch = /(.)^/;
+
+  // Certain characters need to be escaped so that they can be put into a
+  // string literal.
+  var escapes = {
+    "'":      "'",
+    '\\':     '\\',
+    '\r':     'r',
+    '\n':     'n',
+    '\t':     't',
+    '\u2028': 'u2028',
+    '\u2029': 'u2029'
+  };
+
+  var escaper = /\\|'|\r|\n|\t|\u2028|\u2029/g;
+
+  // List of HTML entities for escaping.
+  var htmlEntities = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;'
+  };
+
+  var entityRe = new RegExp('[&<>"\']', 'g');
+
+  var escapeExpr = function(string) {
+    if (string == null) return '';
+    return ('' + string).replace(entityRe, function(match) {
+      return htmlEntities[match];
+    });
+  };
+
+  var counter = 0;
+
+  // JavaScript micro-templating, similar to John Resig's implementation.
+  // Underscore templating handles arbitrary delimiters, preserves whitespace,
+  // and correctly escapes quotes within interpolated code.
+  var tmpl = function(text, data) {
+    var render;
+
+    // Combine delimiters into one regular expression via alternation.
+    var matcher = new RegExp([
+      (settings.escape || noMatch).source,
+      (settings.interpolate || noMatch).source,
+      (settings.evaluate || noMatch).source
+    ].join('|') + '|$', 'g');
+
+    // Compile the template source, escaping string literals appropriately.
+    var index = 0;
+    var source = "__p+='";
+    text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
+      source += text.slice(index, offset)
+        .replace(escaper, function(match) { return '\\' + escapes[match]; });
+
+      if (escape) {
+        source += "'+\n((__t=(" + escape + "))==null?'':escapeExpr(__t))+\n'";
+      }
+      if (interpolate) {
+        source += "'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'";
+      }
+      if (evaluate) {
+        source += "';\n" + evaluate + "\n__p+='";
+      }
+      index = offset + match.length;
+      return match;
+    });
+    source += "';\n";
+
+    // If a variable is not specified, place data values in local scope.
+    if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
+
+    source = "var __t,__p='',__j=Array.prototype.join," +
+      "print=function(){__p+=__j.call(arguments,'');};\n" +
+      source + "return __p;\n//# sourceURL=/microtemplates/source[" + counter++ + "]";
+
+    try {
+      render = new Function(settings.variable || 'obj', 'escapeExpr', source);
+    } catch (e) {
+      e.source = source;
+      throw e;
+    }
+
+    if (data) return render(data, escapeExpr);
+    var template = function(data) {
+      return render.call(this, data, escapeExpr);
+    };
+
+    // Provide the compiled function source as a convenience for precompilation.
+    template.source = 'function(' + (settings.variable || 'obj') + '){\n' + source + '}';
+
+    return template;
+  };
+  tmpl.settings = settings;
+
+  if (typeof define !== 'undefined' && define.amd) {
+    define([], function () {
+      return tmpl;
+    }); // RequireJS
+  } else if (typeof module !== 'undefined' && module.exports) {
+    module.exports = tmpl; // CommonJS
+  } else {
+    globals.microtemplate = tmpl; // <script>
+  }
+})(this);
