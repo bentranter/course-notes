@@ -44,7 +44,7 @@
     var main = document.getElementById('main');
 
     sidebar.classList.toggle('hide');
-    main.classList.toggle('ml220');
+    main.classList.toggle('sidebar-offset');
   }
 
   function search() {
