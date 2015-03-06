@@ -1,0 +1,22 @@
+CACHE MANIFEST
+# 2015-03-05:v0.0.3
+
+CACHE:
+# Defines resources to be cached. Right now we just cache it all.
+index.html
+style.css
+exoskeleton.js
+models/note.js
+collections/notes.js
+views/noteview.js
+views/appview.js
+routers/router.js
+app.js
+
+FALLBACK:
+# Idk if this works
+*
+
+NETWORK:
+# use '*' as a catch-all
+*
