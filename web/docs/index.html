@@ -68,7 +68,7 @@
             <li>A C++ compiler (both Clang and GCC will work)</li>
             <li>Node.js v10.28 (you can install that <a href='http://nodejs.org/'>here</a>)</li>
             <li>Git (version control software, install <a href='http://git-scm.com/book/en/v2/Getting-Started-Installing-Git'>here</a>)</li>
-            <li>NPM (this will come istalled by default when you install Node.js)</li>
+            <li>NPM (this will come installed by default when you install Node.js)</li>
             <li>RethinkDB (you can install that <a href='http://rethinkdb.com/'>here</a>)</li>
           </ul>
 
@@ -91,7 +91,7 @@
 
           <h2 class='h2 caps'>Architecture</h2>
           <h3 class='h3'><a name='overview'>Overview</a></h3>
-          <p>SpeedStudy is multiple client-server application. That means that different clients can connect to the same server. This works by communicating over HTTP via our REST API. As you know, HTTP stands for Hypertext Transfer Protocol. Our application sticks to the four main HTTP verbs: <code>GET, POST, PUT and DELETE</code>. As you probaly also know, REST stands for Representational State Transfer. It is a stateless, client-server, cacheable communication protocol - perfect for a client-server app with multiple clients.</p>
+          <p>SpeedStudy is multiple client-server application. That means that different clients can connect to the same server. This works by communicating over HTTP via our REST API. As you know, HTTP stands for Hypertext Transfer Protocol. Our application sticks to the four main HTTP verbs: <code>GET, POST, PUT and DELETE</code>. As you probably also know, REST stands for Representational State Transfer. It is a stateless, client-server, cacheable communication protocol - perfect for a client-server app with multiple clients.</p>
           <p>Our server runs on Node.js, and uses the <a href='http://expressjs.com/'>Express</a> framework as middleware. We use a NoSQL database called RethinkDB to store our data. The web client uses Backbone.js as a framework (<span class='italic'>update: the web client has been moved to Exoskeleton.js, a lighter-weight implementation of the Backbone framework</span>). There are two mobile clients: one for iOS, and one for Android. The iOS client is in development, but so far id written in Swift. The Android app is written in Java, and relies on the Android SDK and OKHttp by Square for handling HTTP requests.</p>
 
           <h3 class='h3'><a name='security'>Security</a></h3>
@@ -100,7 +100,7 @@
           <p>We use JSON web tokens, and force all communication with the server to be over HTTPS using SSL (to encrypt all traffic). When a user signs up or logs in, they're given a JSON web token that is valid for seven days. They then must send their token with every request to our API. JSON web tokens are 150-character longs strings that are signed and encrypted using a secret that only the server is aware of, so they cannot be decrypted and tampered with by a client.</p>
           <p>Each user's username resides within their token, and the server requests a user's username <span class='italic'>from the token</span>, to ensure that a user can only see their own notes.</p>
           <p>Anytime an operation that is considered to be a security risk occurs (deleting large amounts of notes, changing a password, etc), and email is sent to that user informing them of that action, so that if it was not done by them, they are at least made aware of the particular action.</p>
-        
+
           <h3 class='h3'><a name='endpoints'>API Endpoints</a></h3>
           <p>There are two types of API Endpoints: <span class='bold'>secure</span> and <span class='bold'>insecure</span>.</p>
           <p>A <span class='bold'>secure</span> endpoint is one that is protected by our authorization middleware (that is, that endpoint requires a valid token to be sent with the request). An <span class='bold'>insecure</span> endpoint is one that doesn't require a token to be sent with the request.</p>
@@ -128,7 +128,7 @@
   username=YourUserName&password=YourPassword
           </code></pre>
           <p>You <span class='bold'>must</span> specify that the content-type is application/x-www-form-urlencoded when you make a POST or PUT request, otherwise the request will fail.</p>
-          <p>As we mentioned above, when you makwe a request to a secure endpoint, you must include your token. A token can be send in three different ways:</p>
+          <p>As we mentioned above, when you make a request to a secure endpoint, you must include your token. A token can be send in three different ways:</p>
           <ol>
             <li>As an <code>X-Access-Token</code> in the request header.</li>
             <li>As an <code>accessToken</code> in the request body.</li>
@@ -168,9 +168,9 @@
           <h2 class='h2 caps'>Design</h2>
           <h3 class='h3'><a name='server'>Server</a></h3>
           <p>The server has an extremely simple design. Essentially, it is two files: one with some startup code for the server that handles the database connection, which port to serve on, the API endpoint names, and whether to enable development mode or production mode, and the other handles the server's application logic.</p>
-          <p>The applicatino consists of the model schemas, the authentication middleware, and the request/response handling for the API endpoints. There are two schemas: one for the <span class='italic'>user</span> and one for the <span class='italic'>notes</span>.</p>
+          <p>The application consists of the model schemas, the authentication middleware, and the request/response handling for the API endpoints. There are two schemas: one for the <span class='italic'>user</span> and one for the <span class='italic'>notes</span>.</p>
           <p>The primary key for the user is the username. The primary key for the notes is the id. A user has a one-to-many relationship with the notes (relations in a NoSQL database? Weird, I know, but it speeds up our queries massively).</p>
-          <p>The authenticatio middleware is two functions.</p>The first is one that executes before the 
+          <p>The authentication middleware is two functions.</p>The first is one that executes before the
 
           <h3 class='h3'><a name='client'>Web Client</a></h3>
           <p>Our web client is currently under development and is at best, a huge mess. We use an MVC approach, and complete documentation will be added once more progress is made on the web client.</p>
@@ -205,7 +205,7 @@
             <li>Tapping the + and - buttons will increase and decrease the speed respectively, stopping at max and min speeds.</li>
           </ul>
           <img class='block center mx-auto' src='img/uml-android-full.png' />
-          
+
           <h3 class='h3'><a name='ios'>iOS Client</a></h3>
           <p>The iOS client is nothing more than a few blank views at the moment, but complete documentation will be created as development progresses.</p>
 
@@ -282,7 +282,7 @@
           main.classList.remove('ml16');
         } else {
           main.classList.add('ml16');
-        }        
+        }
       };
 
       document.getElementById('toggleSidebar').addEventListener('click', toggleSidebar);
