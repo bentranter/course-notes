@@ -129,6 +129,7 @@ exports.login = function(req, res) {
             iss: user.username,
             exp: expires
             // @TODO: CHANGE THIS SECRET IN PRODUCTION
+            // Use NODE_ENV to create a secret when you startt he server in production
         }, 'mysecret');
 
         // Issue the token in the response

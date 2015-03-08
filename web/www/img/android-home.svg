@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="418px" height="803px" viewBox="0 0 418 803" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.2 (9983) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#2C3534" offset="0%"></stop>
+            <stop stop-color="#2C3534" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="360" height="640"></rect>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.168 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter2"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter2" result="shadowBlurOuter2"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.084 0" in="shadowBlurOuter2" type="matrix" result="shadowMatrixOuter2"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="shadowMatrixOuter2"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <path id="path-5" d="M1.70530257e-13,0 L8,12 L16,0 L1.70530257e-13,0 Z"></path>
+        <path id="path-7" d="M12,12 L12,0 L-1.13686838e-13,12 L12,12 Z"></path>
+        <path id="path-9" d="M7,1 L6,1 L6,0 L2,0 L2,1 L1,1 C0.4,1 -1.13686838e-13,1.4 -1.13686838e-13,2 L-1.13686838e-13,12 C-1.13686838e-13,12.6 0.4,13 1,13 L7,13 C7.6,13 8,12.6 8,12 L8,2 C8,1.4 7.6,1 7,1 L7,1 Z"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Artboard-1" sketch:type="MSArtboardGroup">
+            <g id="index-scroller" sketch:type="MSLayerGroup" transform="translate(11.000000, 14.000000)">
+                <rect id="Rectangle-19" fill="#39423F" sketch:type="MSShapeGroup" x="0" y="144" width="5" height="120" rx="2"></rect>
+                <rect id="Rectangle-20" fill="#39423F" sketch:type="MSShapeGroup" x="393" y="100" width="5" height="50" rx="2"></rect>
+                <path d="M199,0.469979629 C137.304574,0.469979629 4,6.40653433 4,40.0482624 L4,719.383616 C4,767.516751 130.565892,770.46998 199,770.46998 C260.565892,770.46998 394,767.663406 394,719.383616 C394,671.103825 394,71.9267832 394,40.0482624 C394,8.16974154 260.695426,0.469979629 199,0.469979629 Z" id="bg" fill="url(#linearGradient-1)" sketch:type="MSShapeGroup"></path>
+                <circle id="Oval-12" fill="#3B4141" sketch:type="MSShapeGroup" cx="199" cy="37" r="12"></circle>
+                <g id="camera" transform="translate(59.000000, 37.000000)" stroke="#39423F" sketch:type="MSShapeGroup">
+                    <circle id="Oval-13" fill="#535957" cx="2.5" cy="2.5" r="2.5"></circle>
+                    <circle id="Oval-14" fill="#39423F" cx="2.5" cy="2.5" r="0.5"></circle>
+                </g>
+                <g id="screen" transform="translate(19.000000, 64.000000)">
+                    <mask id="mask-3" sketch:name="bg" fill="white">
+                        <use xlink:href="#path-2"></use>
+                    </mask>
+                    <use id="bg" fill="#FAFAFA" sketch:type="MSShapeGroup" xlink:href="#path-2"></use>
+                    <g id="app-bar" mask="url(#mask-3)">
+                        <path d="M360,0 L0,0 L0,80 L360,80 L360,0 Z" id="app-bar-bg" fill="#03A9F4" filter="url(#filter-4)" sketch:type="MSShapeGroup"></path>
+                        <g id="menu" transform="translate(16.000000, 40.000000)" sketch:type="MSShapeGroup">
+                            <rect id="bounds" x="0" y="0" width="24" height="24"></rect>
+                            <path d="M3,18 L21,18 L21,16 L3,16 L3,18 L3,18 Z M3,13 L21,13 L21,11 L3,11 L3,13 L3,13 Z M3,6 L3,8 L21,8 L21,6 L3,6 L3,6 Z" id="Shape" fill="#FFFFFF"></path>
+                        </g>
+                        <g id="search" transform="translate(284.000000, 40.000000)" sketch:type="MSShapeGroup">
+                            <path d="M24,0 L0,0 L0,24 L24,24 L24,0 Z" id="Shape" transform="translate(12.000000, 12.000000) scale(1, -1) translate(-12.000000, -12.000000) "></path>
+                            <path d="M15.502,9.491 L14.708,9.491 L14.432,9.765 C15.407,10.902 16,12.376 16,13.991 C16,17.581 13.09,20.491 9.5,20.491 C5.91,20.491 3,17.581 3,13.991 C3,10.401 5.91,7.491 9.5,7.491 C11.115,7.491 12.588,8.083 13.725,9.057 L14.001,8.783 L14.001,7.991 L18.999,3 L20.49,4.491 L15.502,9.491 L15.502,9.491 Z M9.5,9.491 C7.014,9.491 5,11.505 5,13.991 C5,16.476 7.014,18.491 9.5,18.491 C11.985,18.491 14,16.476 14,13.991 C14,11.505 11.985,9.491 9.5,9.491 L9.5,9.491 Z" id="Shape" fill="#FFFFFF" transform="translate(11.745000, 11.745500) scale(1, -1) translate(-11.745000, -11.745500) "></path>
+                        </g>
+                        <g id="more" transform="translate(332.000000, 40.000000)" sketch:type="MSShapeGroup">
+                            <path d="M6,16 C7.1,16 8,16.9 8,18 C8,19.1 7.1,20 6,20 C4.9,20 4,19.1 4,18 C4,16.9 4.9,16 6,16 L6,16 Z M6,14 C4.9,14 4,13.1 4,12 C4,10.9 4.9,10 6,10 C7.1,10 8,10.9 8,12 C8,13.1 7.1,14 6,14 L6,14 Z M6,8 C4.9,8 4,7.1 4,6 C4,4.9 4.9,4 6,4 C7.1,4 8,4.9 8,6 C8,7.1 7.1,8 6,8 L6,8 Z" id="Shape" fill="#FFFFFF" transform="translate(6.000000, 12.000000) scale(1, -1) translate(-6.000000, -12.000000) "></path>
+                            <path d="M12,0 L0,0 L0,24 L12,24 L12,0 Z" id="Shape" transform="translate(6.000000, 12.000000) scale(1, -1) translate(-6.000000, -12.000000) "></path>
+                        </g>
+                        <text id="Notes" sketch:type="MSTextLayer" font-family="Roboto" font-size="20" font-weight="420" fill="#FFFFFF">
+                            <tspan x="72" y="59">Notes</tspan>
+                        </text>
+                    </g>
+                    <path d="M0.5,293.5 L316.5,293.5" id="Path" stroke="#979797" opacity="0.17" sketch:type="MSShapeGroup" mask="url(#mask-3)"></path>
+                    <g id="scroller" mask="url(#mask-3)" sketch:type="MSShapeGroup">
+                        <g transform="translate(339.000000, 98.000000)">
+                            <path d="M2.5,0.5 L2.5,474.058868" id="track" stroke-opacity="0.16" stroke="#000000" stroke-width="0.5" stroke-linecap="square" fill="none"></path>
+                            <rect id="knob" stroke="none" fill="#4D4D4D" fill-rule="evenodd" x="0" y="223" width="4" height="32" rx="2"></rect>
+                        </g>
+                    </g>
+                    <g id="status-bar" mask="url(#mask-3)">
+                        <rect id="status-bar-bg" fill="#0277BD" sketch:type="MSShapeGroup" x="0" y="0" width="360" height="24"></rect>
+                        <g id="status-bar-content" transform="translate(242.000000, 0.000000)">
+                            <rect id="bounds" sketch:type="MSShapeGroup" x="0" y="0" width="118" height="24"></rect>
+                            <g id="wifi" transform="translate(8.000000, 6.000000)">
+                                <mask id="mask-6" sketch:name="wifi mask" fill="white">
+                                    <use xlink:href="#path-5"></use>
+                                </mask>
+                                <g id="wifi-mask"></g>
+                                <path d="M8,0 C1.4,0 -4,5.4 -4,12 C-4,18.6 1.4,24 8,24 C14.6,24 20,18.6 20,12 C20,5.4 14.6,0 8,0 L8,0 Z M8,21 C3,21 -1,17 -1,12 C-1,7 3,3 8,3 C13,3 17,7 17,12 C17,17 13,21 8,21 L8,21 Z" id="Shape" fill-opacity="0.3" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-6)"></path>
+                                <path d="M8,3 C3,3 -1,7 -1,12 C-1,17 3,21 8,21 C13,21 17,17 17,12 C17,7 13,3 8,3 L8,3 Z M8,18 C4.7,18 2,15.3 2,12 C2,8.7 4.7,6 8,6 C11.3,6 14,8.7 14,12 C14,15.3 11.3,18 8,18 L8,18 Z" id="Shape" fill-opacity="0.9" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-6)"></path>
+                                <path d="M8,6 C4.7,6 2,8.7 2,12 C2,15.3 4.7,18 8,18 C11.3,18 14,15.3 14,12 C14,8.7 11.3,6 8,6 L8,6 Z M8,15 C6.3,15 5,13.7 5,12 C5,10.3 6.3,9 8,9 C9.7,9 11,10.3 11,12 C11,13.7 9.7,15 8,15 L8,15 Z" id="Shape" fill-opacity="0.9" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-6)"></path>
+                                <circle id="Oval" fill-opacity="0.9" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-6)" cx="8" cy="12" r="3"></circle>
+                            </g>
+                            <g id="reception" transform="translate(34.000000, 6.000000)">
+                                <mask id="mask-8" sketch:name="reception mask" fill="white">
+                                    <use xlink:href="#path-7"></use>
+                                </mask>
+                                <g id="reception-mask"></g>
+                                <rect id="Rectangle-path" fill-opacity="0.3" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-8)" x="9" y="0" width="3" height="12"></rect>
+                                <rect id="Rectangle-path" fill-opacity="0.3" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-8)" x="6" y="0" width="3" height="12"></rect>
+                                <rect id="Rectangle-path" fill-opacity="0.9" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-8)" x="3" y="0" width="3" height="12"></rect>
+                                <rect id="Rectangle-path" fill-opacity="0.9" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-8)" x="0" y="0" width="3" height="12"></rect>
+                            </g>
+                            <g id="battery" transform="translate(60.000000, 5.000000)">
+                                <mask id="mask-10" sketch:name="battery mask" fill="white">
+                                    <use xlink:href="#path-9"></use>
+                                </mask>
+                                <g id="battery-mask"></g>
+                                <rect id="Rectangle-path" fill-opacity="0.9" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-10)" x="0" y="10" width="8" height="3"></rect>
+                                <rect id="Rectangle-path" fill-opacity="0.9" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-10)" x="0" y="7" width="8" height="3"></rect>
+                                <rect id="Rectangle-path" fill-opacity="0.3" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-10)" x="0" y="4" width="8" height="3"></rect>
+                                <rect id="Rectangle-path" fill-opacity="0.3" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-10)" x="0" y="1" width="8" height="3"></rect>
+                                <rect id="Rectangle-path" fill-opacity="0.3" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-10)" x="2" y="0" width="4" height="1"></rect>
+                            </g>
+                            <g id="time" transform="translate(77.000000, 5.000000)" font-size="13" font-family="Roboto" fill="#FFFFFF" sketch:type="MSTextLayer" font-weight="normal">
+                                <text id="12:30">
+                                    <tspan x="2.27373675e-13" y="12" fill="#000000">12:30</tspan>
+                                </text>
+                            </g>
+                        </g>
+                    </g>
+                    <g id="navbar" mask="url(#mask-3)" sketch:type="MSShapeGroup">
+                        <g transform="translate(-1.000000, 593.000000)">
+                            <rect id="navbar-bg" stroke="none" fill="#000000" fill-rule="evenodd" x="0" y="0" width="362" height="48"></rect>
+                            <rect id="recent" stroke="#FFFFFF" stroke-width="2" fill="none" x="274.516667" y="16" width="16.0888889" height="16" rx="2"></rect>
+                            <ellipse id="home" stroke="#FFFFFF" stroke-width="2" fill="none" cx="181" cy="24" rx="8.04444444" ry="8"></ellipse>
+                            <path d="M85.7456812,15.2473593 C86.7053598,14.695639 87.483333,15.1409225 87.483333,16.2463373 L87.4833333,30.7555624 C87.4833334,31.859003 86.7070771,32.3072478 85.7456815,31.7545403 L73.1267944,24.4999276 C72.1671157,23.9482072 72.1653988,23.0546789 73.1267943,22.5019715 L85.7456812,15.2473593 Z" id="back" stroke="#FFFFFF" stroke-width="2" fill="none"></path>
+                        </g>
+                    </g>
+                    <g id="list" mask="url(#mask-3)">
+                        <g transform="translate(-1.000000, 103.000000)">
+                            <g id="row" stroke-width="1" fill-rule="evenodd" sketch:type="MSLayerGroup" transform="translate(0.000000, 33.000000)">
+                                <text id="War-of-Independence" sketch:type="MSTextLayer" font-family="Roboto" font-size="16" font-weight="normal" line-spacing="24" fill="#000000">
+                                    <tspan x="16" y="23">War of Independence</tspan>
+                                </text>
+                                <rect id="row-bounds" sketch:type="MSShapeGroup" x="0" y="0" width="360" height="48"></rect>
+                            </g>
+                            <g id="row" stroke-width="1" fill-rule="evenodd" sketch:type="MSLayerGroup" transform="translate(0.000000, 81.000000)">
+                                <rect id="row-bounds" sketch:type="MSShapeGroup" x="0" y="0" width="360" height="48"></rect>
+                                <text id="Declaration-of-Whate" sketch:type="MSTextLayer" font-family="Roboto" font-size="16" font-weight="normal" line-spacing="24" fill="#000000">
+                                    <tspan x="16" y="23">Declaration of Whatever</tspan>
+                                </text>
+                            </g>
+                            <g id="row" stroke-width="1" fill-rule="evenodd" sketch:type="MSLayerGroup" transform="translate(0.000000, 129.000000)">
+                                <rect id="row-bounds" sketch:type="MSShapeGroup" x="0" y="0" width="360" height="48"></rect>
+                                <text id="Big-Big-War" sketch:type="MSTextLayer" font-family="Roboto" font-size="16" font-weight="normal" line-spacing="24" fill="#000000">
+                                    <tspan x="16" y="23">Big Big War</tspan>
+                                </text>
+                            </g>
+                            <text id="Title" sketch:type="MSTextLayer" font-family="Roboto" font-size="14" font-weight="420">
+                                <tspan x="16" y="13" fill="#0277BD">History</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <path d="M0.5,510.5 L316.5,510.5" id="Path-2" stroke="#979797" opacity="0.17" sketch:type="MSShapeGroup" mask="url(#mask-3)"></path>
+                    <g id="list-2" mask="url(#mask-3)">
+                        <g transform="translate(-1.000000, 316.000000)">
+                            <g id="row" stroke-width="1" fill-rule="evenodd" sketch:type="MSLayerGroup" transform="translate(0.000000, 37.000000)">
+                                <text id="Intro-to-Molecules" sketch:type="MSTextLayer" font-family="Roboto" font-size="16" font-weight="normal" line-spacing="24" fill="#000000">
+                                    <tspan x="16" y="23">Intro to Molecules</tspan>
+                                </text>
+                                <rect id="row-bounds" sketch:type="MSShapeGroup" x="0" y="0" width="360" height="48"></rect>
+                            </g>
+                            <g id="row" stroke-width="1" fill-rule="evenodd" sketch:type="MSLayerGroup" transform="translate(0.000000, 85.000000)">
+                                <rect id="row-bounds" sketch:type="MSShapeGroup" x="0" y="0" width="360" height="48"></rect>
+                                <text id="Chemicals-That-Can-B" sketch:type="MSTextLayer" font-family="Roboto" font-size="16" font-weight="normal" line-spacing="24" fill="#000000">
+                                    <tspan x="16" y="23">Chemicals That Can Burn, Pt. 1</tspan>
+                                </text>
+                            </g>
+                            <g id="row" stroke-width="1" fill-rule="evenodd" sketch:type="MSLayerGroup" transform="translate(0.000000, 133.000000)">
+                                <rect id="row-bounds" sketch:type="MSShapeGroup" x="0" y="0" width="360" height="48"></rect>
+                                <text id="Outro-to-Molecules" sketch:type="MSTextLayer" font-family="Roboto" font-size="16" font-weight="normal" line-spacing="24" fill="#000000">
+                                    <tspan x="16" y="23">Outro to Molecules</tspan>
+                                </text>
+                            </g>
+                            <text id="Title" sketch:type="MSTextLayer" font-family="Roboto" font-size="14" font-weight="420">
+                                <tspan x="16" y="13" fill="#0277BD">Chemistry</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <g id="list-3" mask="url(#mask-3)">
+                        <g transform="translate(-1.000000, 533.000000)">
+                            <g id="row" stroke-width="1" fill-rule="evenodd" sketch:type="MSLayerGroup" transform="translate(0.000000, 37.000000)">
+                                <text id="What’s-A-Particle" sketch:type="MSTextLayer" font-family="Roboto" font-size="16" font-weight="normal" line-spacing="24" fill="#000000">
+                                    <tspan x="16" y="23">What’s A Particle</tspan>
+                                </text>
+                                <rect id="row-bounds" sketch:type="MSShapeGroup" x="0" y="0" width="360" height="48"></rect>
+                            </g>
+                            <g id="row" stroke-width="1" fill-rule="evenodd" sketch:type="MSLayerGroup" transform="translate(0.000000, 85.000000)">
+                                <rect id="row-bounds" sketch:type="MSShapeGroup" x="0" y="0" width="360" height="48"></rect>
+                                <text id="Chemicals-That-Can-B" sketch:type="MSTextLayer" font-family="Roboto" font-size="16" font-weight="normal" line-spacing="24" fill="#000000">
+                                    <tspan x="16" y="23">Chemicals That Can Burn, Pt. 1</tspan>
+                                </text>
+                            </g>
+                            <g id="row" stroke-width="1" fill-rule="evenodd" sketch:type="MSLayerGroup" transform="translate(0.000000, 133.000000)">
+                                <rect id="row-bounds" sketch:type="MSShapeGroup" x="0" y="0" width="360" height="48"></rect>
+                                <text id="Outro-to-Molecules" sketch:type="MSTextLayer" font-family="Roboto" font-size="16" font-weight="normal" line-spacing="24" fill="#000000">
+                                    <tspan x="16" y="23">Outro to Molecules</tspan>
+                                </text>
+                            </g>
+                            <text id="Title" sketch:type="MSTextLayer" font-family="Roboto" font-size="14" font-weight="420">
+                                <tspan x="16" y="13" fill="#0277BD">Physics</tspan>
+                            </text>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
