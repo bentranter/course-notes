@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Sign Up | StudyPiggy</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+
+  <div class='container'>
+    <h1 class='h2 mt1 py3 center'>StudyPiggy</h1>
+
+    <form class='max-width mx-auto p2 bl rounded bg-lg1'>
+      <h4 class='h4 center m0 mb2'>Create your StudyPiggy account</h4>
+      <input id='name' type='text' class='hide' placeholder='Name' />
+      <input id='email' type='email' class='block full-width field-light' placeholder='Email' autofocus>
+      <input id='password' type='password' class='block full-width field-light' placeholder='Password'>
+      <input id='confirmPassword' type='password' class='block full-width field-light' placeholder='Confirm password'>
+      <button id='submit' class='button block full-width mt1 rounded'>Sign Up</button>
+    </form>
+
+    <div id='invalidFormData' class='hide max-width mx-auto bg-red white m0 p2 rounded relative'>
+      <h4 class='white center m0 mb1 caps'>Error</h4>
+      <p class='small m0 mt1'>Please make sure every field is filled out, and that your passwords match.</p>
+      <a id='close' href='#' class='bg-gray gray2 white-h p1 absolute top-0 right-0'>&times;</a>
+    </div>
+
+    <div id='signUpSuccessful' class='hide max-width mx-auto bg-green white m0 p2 rounded relative'>
+      <h4 class='white center m0 mb1 caps'>Success</h4>
+      <p class='small m0 mt1'>Thanks for signing up! Click <a href='http://localhost:3001' class='purple'>here</a> to start taking nootes and using our app now! And don't forget to download our companion mobile app too!</p>
+      <a id='close' href='#' class='bg-gray gray2 white-h p1 absolute top-0 right-0'>&times;</a>
+    </div>
+
+    <footer class='fixed bottom-0 left-0 right-0 bg-gray'>
+      <ul class='container center list-reset m0 p2'>
+        <li class='small px2 inline-block white'>Something</li>
+        <li class='small px2 inline-block white'>Something else</li>
+        <li class='small px2 inline-block white'>Contact</li>
+        <li class='small px2 inline-block white'>Support</li>
+      </ul>
+    </footer>
+
+  </div>
+
+<script src='main.js'></script>
+</body>
+</html>
