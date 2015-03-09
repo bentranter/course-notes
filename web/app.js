@@ -89,13 +89,6 @@ app.post('/api/signup', api.signUp);
 app.get('/api/user', api.authorizeToken, api.getUserList);
 app.delete('/api/user', api.authorizeToken, api.deleteUser);
 
-// People -- use this for testing
-app.get('/api/people', api.list);
-app.get('/api/people/:id', api.get);
-app.delete('/api/people/:id', api.delete);
-app.put('/api/people/:id', api.update);
-app.post('/api/people', api.authorizeToken, api.add);
-
 // Notes -- this is the real stuff. The server won't actually
 // accept a username from you, it'll grab it instead from your
 // token.
@@ -124,3 +117,4 @@ http.createServer(app)
  */
 liveServer.start(3001, 'backbone-test', false);
 liveServer.start(3002, 'www', false);
+

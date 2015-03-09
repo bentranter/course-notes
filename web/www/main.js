@@ -29,6 +29,11 @@
   // Handle form submission
   form.submit.addEventListener('click', function(e) {
 
+    // Check to see if the hidden field was filled in
+    if (form.name.value === null) {
+      console.log('Not a bot signup.');
+    }
+
     // Check to see if email is valid (lots of fake emails can get through, doesn't matter right now tho)
     if (emailRe.test(form.email.value)) {
       formIsValid = true;
@@ -150,25 +155,29 @@
       xhr.addEventListener('readystatechange', end(xhr, options, resolve, reject));
       xhr.open(options.type, options.url, true);
 
-      var allTypes = "*/".concat("*");
+      var allTypes = '*/'.concat('*');
       var xhrAccepts = {
-        "*": allTypes,
-        text: "text/plain",
-        html: "text/html",
-        xml: "application/xml, text/xml",
-        json: "application/json, text/javascript"
+        '*': allTypes,
+        text: 'text/plain',
+        html: 'text/html',
+        xml: 'application/xml, text/xml',
+        json: 'application/json, text/javascript'
       };
       xhr.setRequestHeader(
-        "Accept",
+        'Accept',
         options.dataType && xhrAccepts[options.dataType] ?
-          xhrAccepts[options.dataType] + (options.dataType !== "*" ? ", " + allTypes + "; q=0.01" : "" ) :
-          xhrAccepts["*"]
+          xhrAccepts[options.dataType] + (options.dataType !== '*' ? ', ' + allTypes + '; q=0.01' : '' ) :
+          xhrAccepts['*']
       );
 
-      if (options.headers) for (var key in options.headers) {
-        xhr.setRequestHeader(key, options.headers[key]);
+      if (options.headers) {
+        for (var key in options.headers) {
+          xhr.setRequestHeader(key, options.headers[key]);
+        }
       }
-      if (options.beforeSend) options.beforeSend(xhr);
+      if (options.beforeSend) {
+        options.beforeSend(xhr);
+      }
       xhr.send(options.data);
 
       return promise;

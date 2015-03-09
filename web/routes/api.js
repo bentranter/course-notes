@@ -8,6 +8,7 @@ var bcrypt = require('bcrypt-nodejs'),
     util = require('util'),
     jwt = require('jwt-simple'),
     moment = require('moment'),
+    validator = require('validator'),
     c = require('chalk'),
     thinky = require('thinky')({
     host: process.env.RDB_HOST || 'localhost',
@@ -16,7 +17,7 @@ var bcrypt = require('bcrypt-nodejs'),
 });
 
 var r = thinky.r;
-
+var type = thinky.type;
 
 
 /**
@@ -24,7 +25,8 @@ var r = thinky.r;
  */
 
 var User = thinky.createModel('User', {
-    username: String,
+    id: String,
+    username: type.string().validator(validator.isEmail),
     password: String,
     date: { _type: Date, default: r.now() }
 }, {
@@ -33,14 +35,13 @@ var User = thinky.createModel('User', {
     pk: 'username'
 });
 
-var People = thinky.createModel('People', {
-    firstName: String,
-    lastName:  String,
-    coolnessFactor: Number,
-    date: { _type: Date, default: r.now() }
+// Never return a password, even if it's requested
+User.define('getView', function() {
+    return this.without('password');
 });
 
 var Notes = thinky.createModel('Notes', {
+    id: String,
     title: String,
     subtitle: String,
     content: String,
@@ -52,9 +53,13 @@ var Notes = thinky.createModel('Notes', {
 });
 
 // Ensure indices. Used when ordering results.
-People.ensureIndex('date');
 User.ensureIndex('date');
+Notes.ensureIndex('folder');
 Notes.ensureIndex('title'); // @TODO: Sorts notes alphabetically?
+
+// Specify relations: a note has one author that we will keep in the field `author`.
+Notes.belongsTo(User, 'user', 'username', 'userId');
+User.hasMany(Notes, 'notes', 'userId', 'username');
 
 
 
@@ -129,7 +134,7 @@ exports.login = function(req, res) {
             iss: user.username,
             exp: expires
             // @TODO: CHANGE THIS SECRET IN PRODUCTION
-            // Use NODE_ENV to create a secret when you startt he server in production
+            // Use NODE_ENV to create a secret when you start the server in production
         }, 'mysecret');
 
         // Issue the token in the response
@@ -261,133 +266,6 @@ exports.deleteUser = function(req, res) {
 
 
 /**
- * PEOPLE
- *
- * Get a list of all users
- *
- * @api public
- *
- * @HTTP GET
- */
-
-exports.list = function (req, res) {
-
-    People.orderBy({ index: r.desc('date') }).run().then(function(people) {
-        res.json(people);
-    });
-};
-
-
-
-/**
- * Create a new user.
- *
- * @api public
- *
- * @HTTP POST
- */
-
-exports.add = function (req, res) {
-
-    // Create new instance of 'People' model
-    var person = new People({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName, 
-        coolnessFactor: parseInt(req.body.coolnessFactor)
-    });
-
-    // Save the person and check for errors kind-of
-    person.save(function(err, doc) {
-        if (err) {
-            console.log(c.red('Errors:') + err);
-            res.send(err);
-        } else {
-            console.log(c.green('\nSuccessfully added new person.\n') + '\nFirst name: ' + doc.firstName + '\nLast name: ' + doc.lastName + '\nCoolness factor: ' + doc.coolnessFactor);
-            res.json(doc);
-        }
-    });
-};
-
-
-
-/**
- * Get a user by id.
- *
- * @param {Int} id
- * @return Object
- *
- * @api private
- */
-
-exports.get = function (req, res) {
-
-    People.get(req.params.id).run().then(function(person) {
-        res.json(person);
-    });
-};
-
-
-
-/**
- * Delete a user by id
- * 
- * @api public
- *
- * @HTTP DELETE
- */
-
-exports.delete = function (req, res) {
-
-    People.get(req.params.id).delete().run().then(function(result) {
-        res.json({
-            result: util.inspect(result)
-        });
-    });
-};
-
-
-
-/**
- * Update an existing user by id
- *
- * @api public
- *
- * @HTTP PUT
- */
-
-exports.update = function (req, res) {
-
-    // NOTE TO DUMB SELF: Use `x-www-url-formencoded` for put req's you idiot
-    People.get(req.params.id).run().then(function(person) {
-
-        // So &yet does this with Underscore's `_.extend` but it's more
-        // readable with if statements IMHO. Obv here we're just checking
-        // to see if the field is sent in the body of the req.
-        if (req.body.firstName) {
-            person.firstName = req.body.firstName;
-        }
-        if (req.body.lastName) {
-            person.lastName = req.body.lastName;
-        }
-        if (req.body.coolnessFactor) {
-            person.coolnessFactor = parseInt(req.body.coolnessFactor);
-        }
-        person.date = r.now();
-
-        // Save the person and check for errors kind-of
-        person.save(function(err, doc) {
-            if (err) {
-                res.send(err); 
-            } else {
-                res.json(doc); 
-            }
-        });
-    });
-};
-
-
-
-/**
  * Notes
  *
  * Get a list of all notes
@@ -399,9 +277,27 @@ exports.update = function (req, res) {
 
 exports.listNotes = function (req, res) {
 
+    // Get the JSON web token
+    var token = (req.body && req.body.accessToken) || (req.query && req.query.accessToken) || req.headers['x-access-token'];
+    var decoded = jwt.decode(token, 'mysecret');
+
+    var username = decoded.iss;
+
     Notes.orderBy({ index: r.desc('title') }).run().then(function(notes) {
         res.json(notes);
     });
+
+    User.get(username).getJoin({notes: true}).run().then(function(notes) {
+        res.json({
+            notes: notes
+        });
+    }).error(res);
+
+    // Notes.orderBy({index: r.desc('folder')}).getJoin({author: true}).run().then(function(notes) {
+    //     res.json({
+    //         notes: notes
+    //     });
+    // }).error(res);
 };
 
 
@@ -476,7 +372,7 @@ exports.deleteNote = function (req, res) {
 
     Notes.get(req.params.id).delete().run().then(function(result) {
         res.json({
-            // Something is broken is RethinkDBDash - this is
+            // Something is broken in RethinkDBDash - this is
             // a hotfix for it
             result: util.inspect(result)
         });

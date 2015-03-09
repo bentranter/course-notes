@@ -12,14 +12,15 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.4.3",
     "compression": "^1.0.8",
-    "express-error-handler": "^0.1.4",
     "express": "^4.6.1",
+    "express-error-handler": "^0.1.4",
     "jade": "~0.31.2",
     "jwt-simple": "^0.2.0",
     "method-override": "^1.0.0",
     "moment": "^2.9.0",
     "morgan": "^1.0.0",
-    "thinky": "^1.16.2"
+    "thinky": "^1.16.2",
+    "validator": "^3.33.0"
   },
   "devDependencies": {
     "chalk": "^0.5.1",
