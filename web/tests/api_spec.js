@@ -10,8 +10,6 @@
 var frisby = require('frisby'),
     jwt = require('jwt-simple');
 
-
-
 /**
  * Assign each endpoint a variable name
  */
@@ -20,7 +18,9 @@ var signUpURL = 'http://localhost:3000/api/signup',
     loginURL  = 'http://localhost:3000/api/login',
     userURL   = 'http://localhost:3000/api/user',
     peopleURL = 'http://localhost:3000/api/people',
-    notesURL  = 'http://localhost:3000/api/notes';
+    notesURL  = 'http://localhost:3000/api/notes',
+    username  = 'test@test.org',
+    password  = 'password';
 
 
 
@@ -32,8 +32,8 @@ var signUpURL = 'http://localhost:3000/api/signup',
 
 frisby.create('Signup as a new user')
     .post(signUpURL, {
-        username: 'Test1234',
-        password: 'Test1234'
+        username: username,
+        password: password
     },
     {
         json: true
@@ -53,8 +53,8 @@ frisby.create('Signup as a new user')
 
         frisby.create('Login as newly created user')
         .post(loginURL, {
-            username: 'Test1234',
-            password: 'Test1234'
+            username: username,
+            password: password
         },
         {
             json: true
@@ -86,7 +86,6 @@ frisby.create('Signup as a new user')
                 title: 'testnote',
                 subtitle: 'testsubtitle',
                 content: 'testcontent',
-                author: 'Test1234',
                 folder: 'test'
             }, {
                 json: true
@@ -97,7 +96,7 @@ frisby.create('Signup as a new user')
                 title: String,
                 subtitle: String,
                 content: String,
-                author: String,
+                username: String,
                 folder: String,
                 dateCreated: String,
                 dateUpdated: String,
@@ -118,7 +117,7 @@ frisby.create('Signup as a new user')
 
         frisby.create('Delete user')
             .delete(userURL + '?accessToken=' + token, {
-                username: 'Test1234',
+                username: username,
             }, {
                 json: true
             })

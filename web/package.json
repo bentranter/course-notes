@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "jasmine-node test/"
+    "test": "jasmine-node tests/"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
