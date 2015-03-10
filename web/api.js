@@ -253,8 +253,7 @@ exports.updateNote = function (req, res) {
     if (req.body.folder) {
       note.folder = req.body.folder;
     }
-
-    // Can't modify date created, but you have to update it somehow?
+    note.dateCreated = note.dateCreated;
     note.dateUpdated = r.now();
     note.timesReviewed = parseInt(note.timesReviewed) + 1;
 
