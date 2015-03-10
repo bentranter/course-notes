@@ -11,7 +11,8 @@ var express = require('express'),
   methodOverride = require('method-override'),
   morgan = require('morgan'),
   routes = require('./routes'),
-  api = require('./routes/api'),
+  api = require('./api'),
+  auth = require('./util/auth'),
   http = require('http'),
   path = require('path'),
   c = require('chalk'),
@@ -78,17 +79,17 @@ app.post('/api/login', api.login);
 app.post('/api/signup', api.signUp);
 
 // Secure endpoints
-app.get('/api/user', api.authorizeToken, api.getUserList);
-app.delete('/api/user', api.authorizeToken, api.deleteUser);
+app.get('/api/user', auth.authorizeToken, api.getUserList);
+app.delete('/api/user', auth.authorizeToken, api.deleteUser);
 
 // Notes -- this is the real stuff. The server won't actually
 // accept a username from you, it'll grab it instead from your
 // token.
-app.get('/api/notes', api.authorizeToken, api.listNotes);
-app.get('/api/notes/:id', api.authorizeToken, api.getNote);
-app.delete('/api/notes/:id', api.authorizeToken, api.deleteNote);
-app.put('/api/notes/:id', api.authorizeToken, api.updateNote);
-app.post('/api/notes', api.authorizeToken, api.addNote);
+app.get('/api/notes', auth.authorizeToken, api.listNotes);
+app.get('/api/notes/:id', auth.authorizeToken, api.getNote);
+app.delete('/api/notes/:id', auth.authorizeToken, api.deleteNote);
+app.put('/api/notes/:id', auth.authorizeToken, api.updateNote);
+app.post('/api/notes', auth.authorizeToken, api.addNote);
 
 // Redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
@@ -109,4 +110,3 @@ http.createServer(app)
  */
 liveServer.start(3001, 'backbone-test', false);
 liveServer.start(3002, 'www', false);
-
