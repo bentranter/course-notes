@@ -7,7 +7,6 @@
 var express = require('express'),
   bodyParser = require('body-parser'),
   compress = require('compression'),
-  jwt = require('jwt-simple'),
   errorHandler = require('express-error-handler'),
   methodOverride = require('method-override'),
   morgan = require('morgan'),
@@ -16,14 +15,7 @@ var express = require('express'),
   http = require('http'),
   path = require('path'),
   c = require('chalk'),
-  liveServer = require('live-server'),
-  thinky = require('thinky')({
-    host: process.env.RDB_HOST || 'localhost',
-    port: parseInt(process.env.RDB_PORT || 28015),
-    db:   process.env.RDB_DB || 'StudyFast'
-  });
-
-var r = thinky.r;
+  liveServer = require('live-server');
 var app = module.exports = express();
 
 

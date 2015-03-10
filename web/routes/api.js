@@ -13,7 +13,7 @@ var bcrypt = require('bcrypt-nodejs'),
     thinky = require('thinky')({
     host: process.env.RDB_HOST || 'localhost',
     port: parseInt(process.env.RDB_PORT || 28015),
-    db:   process.env.RDB_DB || 'StudyFast'
+    db:   process.env.RDB_DB || 'StudyPiggy'
 });
 
 var r = thinky.r;
@@ -25,7 +25,6 @@ var type = thinky.type;
  */
 
 var User = thinky.createModel('User', {
-    id: String,
     username: type.string().validator(validator.isEmail),
     password: String,
     date: { _type: Date, default: r.now() }
@@ -35,33 +34,26 @@ var User = thinky.createModel('User', {
     pk: 'username'
 });
 
-// Never return a password, even if it's requested
+// @TODO: Never return a password, even if it's requested
 User.define('getView', function() {
     return this.without('password');
 });
 
-var Notes = thinky.createModel('Notes', {
+var Note = thinky.createModel('Note', {
     id: String,
     title: String,
     subtitle: String,
     content: String,
-    author: String,
+    username: String,
     folder: String,
     dateCreated: { _type: Date, default: r.now() },
     dateUpdated: { _type: Date, default: r.now() },
     timesReviewed: Number
 });
 
-// Ensure indices. Used when ordering results.
+// Ensure indices for ordering
+Note.ensureIndex('dateCreated');
 User.ensureIndex('date');
-Notes.ensureIndex('folder');
-Notes.ensureIndex('title'); // @TODO: Sorts notes alphabetically?
-
-// Specify relations: a note has one author that we will keep in the field `author`.
-Notes.belongsTo(User, 'user', 'username', 'userId');
-User.hasMany(Notes, 'notes', 'userId', 'username');
-
-
 
 /**
  * API Endpoints.
@@ -206,7 +198,6 @@ exports.authorizeToken = function(req, res, next) {
 
 // Create endpoint /api/users for POST -- USE x-www-url-formencoded
 exports.signUp = function(req, res) {
-
     // Create new instance of 'User' model
     var user = new User({
         username: req.body.username,
@@ -215,9 +206,13 @@ exports.signUp = function(req, res) {
 
     // Save the person and check for errors kind-of. It'll also call `save`'s `pre` hook
     user.save(function(err, doc) {
+
         if (err) {
+            res.status(403).json({
+                error: 'Username already taken. Choose a different username.'
+            });
             console.log(c.red('Error: ') + err);
-            res.send(err);
+
         } else {
             // Create a token that expires 7 days from now
             var expires = moment().add(7, 'days').valueOf();
@@ -283,21 +278,9 @@ exports.listNotes = function (req, res) {
 
     var username = decoded.iss;
 
-    Notes.orderBy({ index: r.desc('title') }).run().then(function(notes) {
+    Note.filter({ username: username }).run().then(function(notes) {
         res.json(notes);
     });
-
-    User.get(username).getJoin({notes: true}).run().then(function(notes) {
-        res.json({
-            notes: notes
-        });
-    }).error(res);
-
-    // Notes.orderBy({index: r.desc('folder')}).getJoin({author: true}).run().then(function(notes) {
-    //     res.json({
-    //         notes: notes
-    //     });
-    // }).error(res);
 };
 
 
@@ -316,17 +299,17 @@ exports.addNote = function (req, res) {
     var token = (req.body && req.body.accessToken) || (req.query && req.query.accessToken) || req.headers['x-access-token'];
     var decoded = jwt.decode(token, 'mysecret');
 
-    // Create new instance of 'People' model
-    var note = new Notes({
+    // Create new instance of 'Notes' model
+    var note = new Note({
         title: req.body.title,
         subtitle: req.body.subtitle,
         content: req.body.content,
-        author: decoded.iss,
+        username: decoded.iss,
         folder: req.body.folder,
         dateCreated: r.now(),
         dateUpdated: r.now(),
         timesReviewed: 0 // Initialize at 0
-        });
+    });
 
     // Save the person and check for errors kind-of
     note.save(function(err, note) {
@@ -353,7 +336,7 @@ exports.addNote = function (req, res) {
 
 exports.getNote = function (req, res) {
 
-    Notes.get(req.params.id).run().then(function(note) {
+    Note.get(req.params.id).run().then(function(note) {
         res.json(note);
     });
 };
@@ -370,7 +353,7 @@ exports.getNote = function (req, res) {
 
 exports.deleteNote = function (req, res) {
 
-    Notes.get(req.params.id).delete().run().then(function(result) {
+    Note.get(req.params.id).delete().run().then(function(result) {
         res.json({
             // Something is broken in RethinkDBDash - this is
             // a hotfix for it
@@ -392,7 +375,7 @@ exports.deleteNote = function (req, res) {
 exports.updateNote = function (req, res) {
 
     // NOTE TO DUMB SELF: Use `x-www-url-formencoded` for put req's you idiot
-    Notes.get(req.params.id).run().then(function(note) {
+    Note.get(req.params.id).run().then(function(note) {
 
         // Get the JSON web token
         var token = (req.body && req.body.accessToken) || (req.query && req.query.accessToken) || req.headers['x-access-token'];
@@ -407,8 +390,8 @@ exports.updateNote = function (req, res) {
         if (req.body.content) {
             note.content = req.body.content;
         }
-        // Always get author from token on every request
-        note.author = decoded.iss;
+        // Always get username from token on every request
+        note.username = decoded.iss;
         if (req.body.folder) {
             note.folder = req.body.folder;
         }

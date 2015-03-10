@@ -12,25 +12,29 @@
   var formInfo = {
     invalid: document.getElementById('invalidFormData'),
     success: document.getElementById('signUpSuccessful'),
-    close: document.getElementById('close')
+    usernameTaken: document.getElementById('usernameTaken'),
+    close: document.getElementsByClassName('close')
   };
   var emailRe = /(.+)@(.+){2,}\.(.+){2,}/;
 
-  // Event listener for dismissing alerts
-  formInfo.close.addEventListener('click', function() {
-    formInfo.invalid.classList.add('hide');
-  });
+  // Event listeners for dismissing alerts
+  for (var i = 0; i < formInfo.close.length; i++) {
+    formInfo.close[i].addEventListener('click', function() {
+      formInfo.invalid.classList.add('hide');
+      formInfo.usernameTaken.classList.add('hide');
+      formInfo.success.classList.add('hide');
+    });
+  }
 
   // Global to decide of we can submit the form and send the request or not.
   var formIsValid = false;
 
 
 
-  // Handle form submission
+  // Handle form submission AKA the signup gauntlet
   form.submit.addEventListener('click', function(e) {
-
     // Check to see if the hidden field was filled in
-    if (form.name.value === null) {
+    if (!form.name.value) {
       console.log('Not a bot signup.');
     }
 
@@ -40,6 +44,11 @@
     } else {
       formIsValid = false;
       console.error('Invalid email');
+    }
+
+    if (!form.password.value) {
+      console.log('Please enter a password');
+      formIsValid = false;
     }
 
     // Check if passwords match
@@ -62,9 +71,11 @@
       req.then(function(data) {
         console.log(JSON.stringify(data) + ' succeeded.');
         formInfo.invalid.classList.add('hide');
+        formInfo.usernameTaken.classList.add('hide');
         formInfo.success.classList.remove('hide');
       }, function(err) {
-        console.log(JSON.stringify(err) + ' failed.');
+        console.log(err.responseText + ' failed.');
+        formInfo.usernameTaken.classList.remove('hide');
       }); // if Promise is set
 
     } else {
