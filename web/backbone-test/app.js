@@ -5,7 +5,6 @@ var ESCAPE_KEY = 27;
 
 // Kick things off inside a DOMContentLoaded listener
 document.addEventListener('DOMContentLoaded', function() {
-
   'use strict';
 
   // Make a new app view to essentially 'start' the app
