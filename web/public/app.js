@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
   new app.AppView();
 
   // Initialize your things
-  new app.NoteView({
-    collection: app.notes
-  });
   new app.UserView({
     collection: app.users
+  });
+  new app.NoteView({
+    collection: app.notes
   });
 }, false);

@@ -5,9 +5,9 @@ var app = app || {};
   'use strict';
 
   app.NoteView = Backbone.View.extend({
-    el: '#main',
+    el: '#notesList',
 
-    template: microtemplate(document.querySelector('#item-template').innerHTML),
+    template: microtemplate(document.querySelector('#notesListTemplate').innerHTML),
     
     events: {
       'click #saveButton': 'saveNote'
@@ -23,14 +23,19 @@ var app = app || {};
         }, function() {
           console.log('Fetch success');
         });
-        this.listenTo(this.collection, 'reset', this.render);
+        this.listenTo(this.collection, 'sync', this.render);
       } else {
         console.log('End of initialize func');
       }
    },
 
     render: function() {
-      console.log('Need to figure out templating.');
+      console.log('Rendering: \n');
+      console.log(this.el);
+      var self = this;
+      this.collection.forEach(function(model) {
+        self.el.innerHTML += self.template(model.attributes);
+      });
     },
 
     saveNote: function() {

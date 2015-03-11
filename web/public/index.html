@@ -63,13 +63,21 @@
         <input id='logoutButton' type='button' class='button full-width bg-white mt1 bg-blk' value='Log Out' />
       </div>
 
+      <script id='notesListTemplate' type='text/template'>
+        <li>
+          <a href='<%= id %>' class='small m0 p1 block gray1 gray0-h '>Test <%= title %></a>
+        </li>
+      </script>
+
+      <ul id='notesList' class='list-reset m0'></ul>
+
       <a href='' class='h5 blk2 p1 block'>History</a>
       <ul class='list-reset m0'>
         <li>
           <a href='' class='h5 m0 px2 py1 block gray1 gray0-h '>First Note View</a>
         </li>
         <li>
-          <a href='' class='h5 m0 px2 py1 block  gray1 gray0-h'>Second Note View</a>
+          <a href='' class='h5 m0 px2 py1 block gray1 gray0-h'>Second Note View</a>
         </li>
         <li>
           <a href='' class='h5 blue bg-blue-h lg1-h p1 block'>Biology</a>
@@ -97,6 +105,9 @@
     </main>
 
   <!-- Scripts -->  
+<!--   <script src='jquery.js'></script>
+  <script src='underscore.js'></script>
+  <script src='backbone.js'></script> -->
   <script src='exoskeleton.js'></script>
   <script src='models/user.js'></script>
   <script src='models/note.js'></script>
