@@ -108,5 +108,5 @@ http.createServer(app)
 /**
  * Start live-server at 3001 and launch your browser
  */
-liveServer.start(3001, 'backbone-test', false);
-liveServer.start(3002, 'www', false);
+liveServer.start(4000, 'backbone-test', false);
+liveServer.start(4001, 'www', false);

@@ -369,86 +369,108 @@ utils.undelegate = function(view, eventName, selector, callback) {
 //   var callback = function(error, data) {console.log('Done.', error, data);};
 //   ajax({url: 'url', type: 'PATCH', data: 'data'}, callback);
 utils.ajax = (function() {
-  var xmlRe = /^(?:application|text)\/xml/;
-  var jsonRe = /^application\/json/;
+    var ajax = (function() {
+      var xmlRe = /^(?:application|text)\/xml/;
+      var jsonRe = /^application\/json/;
 
-  var getData = function(accepts, xhr) {
-    if (accepts == null) accepts = xhr.getResponseHeader('content-type');
-    if (xmlRe.test(accepts)) {
-      return xhr.responseXML;
-    } else if (jsonRe.test(accepts)) {
-      return JSON.parse(xhr.responseText);
-    } else {
-      return xhr.responseText;
-    }
-  };
-
-  var isValid = function(xhr) {
-    return (xhr.status >= 200 && xhr.status < 300) ||
-      (xhr.status === 304) ||
-      (xhr.status === 0 && window.location.protocol === 'file:')
-  };
-
-  var end = function(xhr, options, deferred) {
-    return function() {
-      if (xhr.readyState !== 4) return;
-
-      var status = xhr.status;
-      var data = getData(options.headers && options.headers.Accept, xhr);
-
-      // Check for validity.
-      if (isValid(xhr)) {
-        if (options.success) options.success(data);
-        if (deferred) deferred.resolve(data);
-      } else {
-        var error = new Error('Server responded with a status of ' + status);
-        if (options.error) options.error(xhr, status, error);
-        if (deferred) deferred.reject(xhr);
-      }
-    }
-  };
-
-  return function(options) {
-    if (options == null) throw new Error('You must provide options');
-    if (options.type == null) options.type = 'GET';
-
-    var xhr = new XMLHttpRequest();
-    var deferred = Backbone.Deferred && Backbone.Deferred();
-
-    if (options.contentType) {
-      if (options.headers == null) options.headers = {};
-      options.headers['Content-Type'] = options.contentType;
-    }
-
-    // Stringify GET query params.
-    if (options.type === 'GET' && typeof options.data === 'object') {
-      var query = '';
-      var stringifyKeyValuePair = function(key, value) {
-        return value == null ? '' :
-          '&' + encodeURIComponent(key) +
-          '=' + encodeURIComponent(value);
+      var getData = function(accepts, xhr) {
+        if (accepts == null) accepts = xhr.getResponseHeader('content-type');
+        if (xmlRe.test(accepts)) {
+          return xhr.responseXML;
+        } else if (jsonRe.test(accepts) && xhr.responseText !== '') {
+          return JSON.parse(xhr.responseText);
+        } else {
+          return xhr.responseText;
+        }
       };
-      for (var key in options.data) {
-        query += stringifyKeyValuePair(key, options.data[key]);
-      }
 
-      if (query) {
-        var sep = (options.url.indexOf('?') === -1) ? '?' : '&';
-        options.url += sep + query.substring(1);
-      }
-    }
+      var isValid = function(xhr) {
+        return (xhr.status >= 200 && xhr.status < 300) ||
+          (xhr.status === 304) ||
+          (xhr.status === 0 && window.location.protocol === 'file:')
+      };
 
-    if (options.credentials) options.withCredentials = true;
-    xhr.addEventListener('readystatechange', end(xhr, options, deferred));
-    xhr.open(options.type, options.url, true);
-    if (options.headers) for (var key in options.headers) {
-      xhr.setRequestHeader(key, options.headers[key]);
-    }
-    if (options.beforeSend) options.beforeSend(xhr);
-    xhr.send(options.data);
+      var end = function(xhr, options, resolve, reject) {
+        return function() {
+          if (xhr.readyState !== 4) return;
 
-    return deferred ? deferred.promise : undefined;
-  };
+          var status = xhr.status;
+          var data = getData(options.headers && options.headers.Accept, xhr);
+
+          // Check for validity.
+          if (isValid(xhr)) {
+            if (options.success) options.success(data);
+            if (resolve) resolve(data);
+          } else {
+            var error = new Error('Server responded with a status of ' + status);
+            if (options.error) options.error(xhr, status, error);
+            if (reject) reject(xhr);
+          }
+        }
+      };
+
+      return function(options) {
+        if (options == null) throw new Error('You must provide options');
+        if (options.type == null) options.type = 'GET';
+
+        var resolve, reject, xhr = new XMLHttpRequest();
+        var PromiseFn = ajax.Promise || (typeof Promise !== 'undefined' && Promise);
+        var promise = PromiseFn && new PromiseFn(function(res, rej) {
+          resolve = res;
+          reject = rej;
+        });
+
+        if (options.contentType) {
+          if (options.headers == null) options.headers = {};
+          options.headers['Content-Type'] = options.contentType;
+        }
+
+        // Stringify GET query params.
+        if (options.type === 'GET' && typeof options.data === 'object') {
+          var query = '';
+          var stringifyKeyValuePair = function(key, value) {
+            return value == null ? '' :
+              '&' + encodeURIComponent(key) +
+              '=' + encodeURIComponent(value);
+          };
+          for (var key in options.data) {
+            query += stringifyKeyValuePair(key, options.data[key]);
+          }
+
+          if (query) {
+            var sep = (options.url.indexOf('?') === -1) ? '?' : '&';
+            options.url += sep + query.substring(1);
+          }
+        }
+
+        xhr.addEventListener('readystatechange', end(xhr, options, resolve, reject));
+        xhr.open(options.type, options.url, true);
+
+        var allTypes = "*/".concat("*");
+        var xhrAccepts = {
+          "*": allTypes,
+          text: "text/plain",
+          html: "text/html",
+          xml: "application/xml, text/xml",
+          json: "application/json, text/javascript"
+        };
+        xhr.setRequestHeader(
+          "Accept",
+          options.dataType && xhrAccepts[options.dataType] ?
+            xhrAccepts[options.dataType] + (options.dataType !== "*" ? ", " + allTypes + "; q=0.01" : "" ) :
+            xhrAccepts["*"]
+        );
+
+        if (options.headers) for (var key in options.headers) {
+          xhr.setRequestHeader(key, options.headers[key]);
+        }
+        if (options.beforeSend) options.beforeSend(xhr);
+        xhr.send(options.data);
+
+        return promise;
+      };
+    })();
+  return ajax;
 })();
 // Backbone.Events
 // ---------------

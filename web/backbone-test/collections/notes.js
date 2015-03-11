@@ -12,8 +12,8 @@ var app = app || {};
 
     // Save notes under the `'StudyPiggy'` namespace
     // in localstorage
-    localStorage: new Backbone.Localstorage('StudyPiggy'),
-
-
+    localStorage: new Backbone.LocalStorage('StudyPiggy')
   });
+
+  app.notes = new Notes();
 })();
