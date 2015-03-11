@@ -1,4 +1,4 @@
-// Namespaces gloabl
+// Namespaces global
 var app = app || {};
 
 (function () {
