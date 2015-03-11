@@ -10,7 +10,6 @@ var express = require('express'),
   errorHandler = require('express-error-handler'),
   methodOverride = require('method-override'),
   morgan = require('morgan'),
-  routes = require('./routes'),
   api = require('./api'),
   auth = require('./util/auth'),
   http = require('http'),
@@ -28,13 +27,11 @@ var app = module.exports = express();
 // All environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
 app.use(compress());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Enable CORS
 app.use(function(req, res, next) {
@@ -60,16 +57,6 @@ if (env === 'production') {
 
 
 /**
- * Routes - Partials
- */
-
-// Serve index and view partials
-app.get('/', routes.index);
-app.get('/partials/:name', routes.partials);
-
-
-
-/**
  * Routes - API
  */
 
@@ -91,9 +78,6 @@ app.delete('/api/notes/:id', auth.authorizeToken, api.deleteNote);
 app.put('/api/notes/:id', auth.authorizeToken, api.updateNote);
 app.post('/api/notes', auth.authorizeToken, api.addNote);
 
-// Redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
-
 
 
 /**
@@ -108,5 +92,5 @@ http.createServer(app)
 /**
  * Start live-server at 3001 and launch your browser
  */
-liveServer.start(4000, 'backbone-test', false);
+liveServer.start(4000, 'public', false);
 liveServer.start(4001, 'www', false);
