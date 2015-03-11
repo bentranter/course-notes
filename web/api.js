@@ -127,10 +127,13 @@ exports.getUserList = function(req, res) {
 
 exports.deleteUser = function(req, res) {
   // Get the username from the token
-  var user = token.decode(req).iss;
+  var user = token.decode(req);
+
+  // Immediately expire the token
+  user.expires = moment(); // @TODO: respond with the updated token
 
   // @TODO: Delete all notes belonging to that user?
-  User.get(user).delete().run().then(function(result) {
+  User.get(user.iss).delete().run().then(function(result) {
     res.json({
       result: util.inspect(result)
     });
