@@ -9,13 +9,21 @@ var app = app || {};
     el: '#account',
 
     events: {
-      'click #loginButton': 'login'
+      'click #loginButton' : 'login',
+      'click #logoutButton': 'logout'
     },
 
+    // Does so much
     initialize: function() {
       console.log('userview.js: Initialized new Backbone view for a user.');
+
       if (window.localStorage.getItem('token')) {
         console.log('User is already signed in.');
+      } else {
+        // Open the account bar - change this to a route in the future
+        console.log('userview.js: Opened account dropdown.');
+        var account = document.getElementById('account');
+        account.classList.remove('hide');
       }
     },
 
@@ -27,7 +35,7 @@ var app = app || {};
       // attempting to sign in
       var req = Backbone.ajax({
         contentType: 'application/x-www-form-urlencoded',
-        url: app.users.url,
+        url: this.collection.url,
         type: 'POST',
         data: 'username=' + document.getElementById('username').value +
               '&password=' + document.getElementById('password').value
@@ -41,6 +49,12 @@ var app = app || {};
       }, function(err) {
         console.log(err.responseText + ' failed.');
       }); // if Promise is set
+    },
+
+    // Logging out just deletes your token
+    logout: function(e) {
+      e.preventDefault();
+      window.localStorage.setItem('token', '');
     }
   });
 })();

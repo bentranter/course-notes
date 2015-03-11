@@ -8,11 +8,7 @@ var app = app || {};
     // Provide reference this collection's model
     model: app.Note,
 
-    url: 'http://localhost:3000/api/notes',
-
-    // Save notes under the `'StudyPiggy'` namespace
-    // in localstorage
-    localStorage: new Backbone.LocalStorage('StudyPiggyNotes')
+    url: 'http://localhost:3000/api/notes'
   });
 
   app.notes = new Notes();

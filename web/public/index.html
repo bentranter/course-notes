@@ -60,6 +60,7 @@
         <input id='username' type='text' class='fieldset-reset bl full-width' placeholder='Username' />
         <input id='password' type='password' class='fieldset-reset bl full-width m0' placeholder='Password' />
         <input id='loginButton' type='button' class='button full-width bg-blue mt1 white' value='Log In' />
+        <input id='logoutButton' type='button' class='button full-width bg-white mt1 bg-blk' value='Log Out' />
       </div>
 
       <a href='' class='h5 blk2 p1 block'>History</a>
@@ -79,6 +80,10 @@
     <!-- Writing Area -->
     <main class='z1 absolute overflow-y-auto top-bar-offset bottom-0 left-0 sidebar-offset right-0 px2 py2' id='main'>
 
+    <div id='item'></div>
+    <script id='item-template' type='text/template'>
+      <%= title %>
+    </script>
       <!-- Search Bar -->
       <input id='search' class='hide block bsl mx-auto m0 mr2 fieldset-reset rounded' type='text' placeholder='Search...' />
 

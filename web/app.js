@@ -86,7 +86,7 @@ app.post('/api/notes', auth.authorizeToken, api.addNote);
 
 http.createServer(app)
   .listen(app.get('port'), function () {
-    console.log('\nExpress server listening on port ' + c.green(app.get('port')));
+    console.log('\nAPI listening on ' + c.green(app.get('port')));
   });
 
 /**

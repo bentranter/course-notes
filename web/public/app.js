@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Make a new app view to essentially 'start' the app
   new app.AppView();
-  new app.NoteView();
-  new app.UserView();
+
+  // Initialize your things
+  new app.NoteView({
+    collection: app.notes
+  });
+  new app.UserView({
+    collection: app.users
+  });
 }, false);

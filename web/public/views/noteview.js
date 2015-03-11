@@ -6,6 +6,8 @@ var app = app || {};
 
   app.NoteView = Backbone.View.extend({
     el: '#main',
+
+    template: microtemplate(document.querySelector('#item-template').innerHTML),
     
     events: {
       'click #saveButton': 'saveNote'
@@ -13,6 +15,22 @@ var app = app || {};
 
     initialize: function() {
       console.log('noteview.js: Initialized new Backbone view for a note.');
+      if (window.localStorage.getItem('token')) {
+        this.collection.fetch({
+          headers: {
+            'x-access-token': window.localStorage.getItem('token')
+          }
+        }, function() {
+          console.log('Fetch success');
+        });
+        this.listenTo(this.collection, 'reset', this.render);
+      } else {
+        console.log('End of initialize func');
+      }
+   },
+
+    render: function() {
+      console.log('Need to figure out templating.');
     },
 
     saveNote: function() {

@@ -8,11 +8,7 @@ var app = app || {};
     // Provide reference this collection's model
     model: app.User,
 
-    url: 'http://localhost:3000/api/login',
-
-    // Save notes under the `'StudyPiggy'` namespace
-    // in localstorage
-    localStorage: new Backbone.LocalStorage('StudyPiggyUsers')
+    url: 'http://localhost:3000/api/login'
   });
 
   app.users = new Users();
