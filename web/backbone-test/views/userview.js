@@ -14,6 +14,9 @@ var app = app || {};
 
     initialize: function() {
       console.log('userview.js: Initialized new Backbone view for a user.');
+      if (window.localStorage.getItem('token')) {
+        console.log('User is already signed in.');
+      }
     },
 
 
@@ -24,12 +27,17 @@ var app = app || {};
       // attempting to sign in
       var req = Backbone.ajax({
         contentType: 'application/x-www-form-urlencoded',
-        url: 'http://localhost:3000/api/login',
+        url: app.users.url,
         type: 'POST',
-        data: 'username=' + document.getElementById('username').value + '&password=' + document.getElementById('password').value
+        data: 'username=' + document.getElementById('username').value +
+              '&password=' + document.getElementById('password').value
       });
+      // Save the token in localStorage
       req.then(function(data) {
-        console.log(JSON.stringify(data) + ' succeeded.');
+        console.log('Succeeded.');
+        //
+        window.localStorage.setItem('token', data.token);
+        console.log(window.localStorage.getItem('token'));
       }, function(err) {
         console.log(err.responseText + ' failed.');
       }); // if Promise is set

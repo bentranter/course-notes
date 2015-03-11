@@ -675,7 +675,7 @@ button,
  */
 
 .container {
-  max-width: 40em;
+  max-width: 60em;
   margin-left: auto;
   margin-right: auto;
 }
@@ -836,7 +836,7 @@ hr {
 }
 
 .blue {
-  color: #6a9fb5;
+  color: #03A9F4;
 }
 
 .purple {
@@ -914,7 +914,7 @@ hr {
 }
 
 .bg-blue {
-  background-color: #6a9fb5;
+  background-color: #03A9F4;
 }
 
 .bg-purple {
@@ -986,7 +986,7 @@ hr {
 }
 
 .blue-h:hover {
-  color: #6a9fb5;
+  color: #03A9F4;
 }
 
 .purple-h:hover {
@@ -1058,7 +1058,7 @@ hr {
 }
 
 .bg-blue-h:hover {
-  background-color: #6a9fb5;
+  background-color: #03A9F4;
 }
 
 .bg-purple-h:hover {
@@ -1121,7 +1121,7 @@ hr {
 
 @media (min-width: 40em) {
   .top-bar-offset {
-    top: 42px;
+    top: 45px;
   }
 }
 

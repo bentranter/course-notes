@@ -9,5 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Make a new app view to essentially 'start' the app
   new app.AppView();
+  new app.NoteView();
   new app.UserView();
 }, false);

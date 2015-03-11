@@ -4,16 +4,16 @@ var app = app || {};
 (function() {
   'use strict';
 
-  var Notes = Backbone.Collection.extend({
+  var Users = Backbone.Collection.extend({
     // Provide reference this collection's model
-    model: app.Note,
+    model: app.User,
 
-    url: 'http://localhost:3000/api/notes',
+    url: 'http://localhost:3000/api/login',
 
     // Save notes under the `'StudyPiggy'` namespace
     // in localstorage
-    localStorage: new Backbone.LocalStorage('StudyPiggyNotes')
+    localStorage: new Backbone.LocalStorage('StudyPiggyUsers')
   });
 
-  app.notes = new Notes();
+  app.users = new Users();
 })();
