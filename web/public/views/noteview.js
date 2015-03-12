@@ -7,7 +7,7 @@ var app = app || {};
   app.NoteView = Backbone.View.extend({
     el: '#notesList',
 
-    template: microtemplate(document.querySelector('#notesListTemplate').innerHTML),
+    template: _.template($('#notesListTemplate').html()),
     
     events: {
       'click #saveButton': 'saveNote'
@@ -20,8 +20,8 @@ var app = app || {};
           headers: {
             'x-access-token': window.localStorage.getItem('token')
           }
-        }, function() {
-          console.log('Fetch success');
+        }).complete(function() {
+          console.log('Got notes successfully');
         });
         this.listenTo(this.collection, 'sync', this.render);
       } else {
@@ -30,12 +30,14 @@ var app = app || {};
    },
 
     render: function() {
-      console.log('Rendering: \n');
-      console.log(this.el);
-      var self = this;
-      this.collection.forEach(function(model) {
-        self.el.innerHTML += self.template(model.attributes);
-      });
+      this.collection.each(function(model) {
+        var tmpl = this.template(model.toJSON());
+        this.$el.append(tmpl);
+      }, this);
+    },
+
+    save: function() {
+      this.model.save();
     },
 
     saveNote: function() {

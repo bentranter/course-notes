@@ -6,18 +6,9 @@ var app = app || {};
 
   // Routes
   var Router = Backbone.Router.extend({
-    // routes: {
-    //   '*filter': 'setFilter'
-    // },
-
-    // setFilter: function (param) {
-    //   // Set the current filter to be used
-    //   app.TodoFilter = param || '';
-
-    //   // Trigger a collection filter event, causing hiding/unhiding
-    //   // of view items
-    //     app.todos.trigger('filter');
-    // }
+    routes: {
+      '': 'home'
+    }
   });
 
   app.router = new Router();

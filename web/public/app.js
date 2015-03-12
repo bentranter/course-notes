@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   new app.AppView();
 
   // Initialize your things
-  new app.UserView({
+  new app.AccountView({
     collection: app.users
   });
   new app.NoteView({

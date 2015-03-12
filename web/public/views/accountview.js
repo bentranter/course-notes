@@ -4,7 +4,7 @@ var app = app || {};
 (function() {
   'use strict';
 
-  app.UserView = Backbone.View.extend({
+  app.AccountView = Backbone.View.extend({
     // I guess el is required
     el: '#account',
 
@@ -21,7 +21,7 @@ var app = app || {};
         console.log('User is already signed in.');
       } else {
         // Open the account bar - change this to a route in the future
-        console.log('userview.js: Opened account dropdown.');
+        console.log('userview.js: Opened account dropdown on page load.');
         var account = document.getElementById('account');
         account.classList.remove('hide');
       }
@@ -30,7 +30,6 @@ var app = app || {};
 
     login: function(e) {
       e.preventDefault();
-
       // @TODO: Hide any errors we may have received while
       // attempting to sign in
       var req = Backbone.ajax({
