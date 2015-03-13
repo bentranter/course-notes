@@ -17,25 +17,18 @@
 
     <!-- Top Bar -->
     <div class='z2 absolute top-0 left-0 right-0 bbl py1'>
-      <a href='#!' id='accountToggle' class='blk2 sidebar-width left center bold m0'>Account 
+      <a href='#account/login' id='accountToggle' class='blk2 sidebar-width left center bold m0'>Account 
         <svg height='16px' width='16px' viewBox='0 0 32 32' style='fill:currentcolor'><path d='M4 8 H28 L16 26 z '></path></svg>
       </a>
-
       <span class='sm-show-i'>
         <a href='#!' class='ml2 small caps lg0 blk2-h bold'>Note 1</a>
         <a href='#!' class='ml2 small caps lg0 blk2-h bold'>Note 2</a>
         <a href='#!' class='ml2 small caps lg0 blk2-h bold'>Note 3</a>
         <a href='#!' class='ml2 small caps lg0 blk2-h bold'>Note 4</a>
       </span>
-
-      <!-- <a href='#!' id='saveButton' class='right lg0 blk2-h mr2'>
-        <svg width='22px' height='22px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M16 0 C6 0 2 4 2 14 L2 22 L6 24 L6 30 L26 30 L26 24 L30 22 L30 14 C30 4 26 0 16 0 M9 12 A4.5 4.5 0 0 1 9 21 A4.5 4.5 0 0 1 9 12 M23 12 A4.5 4.5 0 0 1 23 21 A4.5 4.5 0 0 1 23 12 "></path></svg>
-      </a> -->
-
       <a href='#!' id='sidebarToggle' class='right lg0 blk2-h mr2'>
         <svg width='22px' height='22px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M3 8 A3 3 0 0 0 9 8 A3 3 0 0 0 3 8 M12 6 L28 6 L28 10 L12 10z M3 16 A3 3 0 0 0 9 16 A3 3 0 0 0 3 16 M12 14 L28 14 L28 18 L12 18z M3 24 A3 3 0 0 0 9 24 A3 3 0 0 0 3 24 M12 22 L28 22 L28 26 L12 26z "></path></svg>
       </a>
-
       <a href='#!' id='searchToggle' class='px2 right m0 lg0 blk2-h'>
         <svg height='22px' width='22px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M12 0 A12 12 0 0 0 0 12 A12 12 0 0 0 12 24 A12 12 0 0 0 18.5 22.25 L28 32 L32 28 L22.25 18.5 A12 12 0 0 0 24 12 A12 12 0 0 0 12 0 M12 4 A8 8 0 0 1 12 20 A8 8 0 0 1 12 4  "></path></svg>
       </a>
@@ -48,15 +41,10 @@
       <a href='#!' class='px1 py1 small caps lg0 blk2-h bold'>Note 2</a>
       <a href='#!' class='px1 py1 small caps lg0 blk2-h bold'>Note 3</a>
       <a href='#!' class='px1 py1 small caps lg0 blk2-h bold'>Note 4</a>
-      <a href='#!' class='px1 py1 small caps lg0 blk2-h bold'>Note 1</a>
-      <a href='#!' class='px1 py1 small caps lg0 blk2-h bold'>Note 2</a>
-      <a href='#!' class='px1 py1 small caps lg0 blk2-h bold'>Note 3</a>
-      <a href='#!' class='px1 py1 small caps lg0 blk2-h bold'>Note 4</a>
     </span>
 
-    <!-- Sidebar -->
+    <!-- Notes List View -->
     <aside class='z1 animate absolute top-bar-offset left-0 right-0 bottom-0 overflow-y-auto sidebar-width bg-lg1 brl' id='sidebar'>
-
       <div id='account' class='hide e0e0e0 px1 py1 bbl'>
         <h4 class='center light m0 mb1'>Sign In</h4>
         <input id='username' type='text' class='fieldset-reset bl full-width' placeholder='Username' />
@@ -64,46 +52,30 @@
         <input id='loginButton' type='button' class='button full-width bg-blue mt1 white' value='Log In' />
         <input id='logoutButton' type='button' class='button full-width bg-white mt1 bg-blk' value='Log Out' />
       </div>
-
       <script id='notesListTemplate' type='text/template'>
         <li>
-          <a href='<%= id %>' class='small m0 p1 block gray1 gray0-h '>Test <%= title %></a>
+          <a href='#notes/<%= id %>' class='small m0 p1 block gray1 gray0-h '><%= title %></a>
         </li>
       </script>
-
       <ul id='notesList' class='list-reset m0'></ul>
-
-      <a href='' class='h5 blk2 p1 block'>History</a>
-      <ul class='list-reset m0'>
-        <li>
-          <a href='' class='h5 m0 px2 py1 block gray1 gray0-h '>First Note View</a>
-        </li>
-        <li>
-          <a href='' class='h5 m0 px2 py1 block gray1 gray0-h'>Second Note View</a>
-        </li>
-        <li>
-          <a href='' class='h5 blue bg-blue-h lg1-h p1 block'>Biology</a>
-        </li>
-      </ul>
     </aside>
 
-    <!-- Writing Area -->
+    <!-- Note Content Template -->
     <main class='z1 absolute overflow-y-auto top-bar-offset bottom-0 left-0 sidebar-offset right-0 px2 py2' id='main'>
-
-    <div id='item'></div>
-    <script id='item-template' type='text/template'>
-      <%= title %>
-    </script>
-      <!-- Search Bar -->
-      <input id='search' class='hide block bsl mx-auto m0 mr2 fieldset-reset rounded' type='text' placeholder='Search...' />
-
-      <div class='container'>
-        <h2 contentEditable='true' id='noteTitle' data-ph='Title'></h2>
-        <p contentEditable='true' id='noteBody' data-ph='Start writing...'></p>
-
-        <button id='saveButton' class='button absolute right-0 bottom-0 mb2 mr2 bg-blue white'>SAVE</button>
-      </div>
-      
+      <div id='item'></div>
+      <script id='item-template' type='text/template'>
+        <%= title %>
+      </script>
+        <!-- Search Bar -->
+        <input id='search' class='hide block bsl mx-auto m0 mr2 fieldset-reset rounded' type='text' placeholder='Search...' />
+        <div class='container'>
+          <div id='noteContent'></div>
+          <script id='noteContentTemplate' type='text/template'>
+            <h2 contentEditable='true' id='noteTitle' data-ph='Title'></h2>
+            <p contentEditable='true' id='noteBody' data-ph='Start writing...'></p>
+            <button id='saveButton' class='button absolute right-0 bottom-0 mb2 mr2 bg-blue white'>SAVE</button>
+          </script>
+        </div>
     </main>
 
   <!-- Scripts -->  

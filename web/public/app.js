@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
   new app.AccountView({
     collection: app.users
   });
+  new app.ListView({
+    collection: app.notes
+  });
   new app.NoteView({
     collection: app.notes
   });

@@ -5,44 +5,38 @@ var app = app || {};
   'use strict';
 
   app.NoteView = Backbone.View.extend({
-    el: '#notesList',
+    el: '#noteContent',
 
-    template: _.template($('#notesListTemplate').html()),
+    template: _.template($('#noteContentTemplate').html()),
     
     events: {
-      'click #saveButton': 'saveNote'
+      'click #saveButton': 'save'
     },
 
     initialize: function() {
       console.log('noteview.js: Initialized new Backbone view for a note.');
       if (window.localStorage.getItem('token')) {
-        this.collection.fetch({
-          headers: {
-            'x-access-token': window.localStorage.getItem('token')
-          }
-        }).complete(function() {
-          console.log('Got notes successfully');
-        });
-        this.listenTo(this.collection, 'sync', this.render);
+        this.render();
       } else {
         console.log('End of initialize func');
       }
    },
 
     render: function() {
-      this.collection.each(function(model) {
-        var tmpl = this.template(model.toJSON());
-        this.$el.append(tmpl);
-      }, this);
+      var newNote = new Backbone.Model({
+        title: '',
+        content: '',
+        folder: '',
+        subtitle: ''
+      });
+      this.$el.html(this.template(newNote));
+      // Render only does one element at a time, taken from the URL params?
+      // var noteContentTemplate = this.template(model.toJSON());
+      // this.$el.append(noteContentTemplate);
     },
 
     save: function() {
-      this.model.save();
-    },
-
-    saveNote: function() {
-      console.log('Called save note');
-
+      console.log('Clicked save');
       // @TODO: Hide any errors we may have received
       var req = Backbone.ajax({
         headers: {
@@ -62,6 +56,6 @@ var app = app || {};
       }, function(err) {
         console.log(err.responseText + ' failed.');
       }); // if Promise is set
-    }
+    },
   });
 })();

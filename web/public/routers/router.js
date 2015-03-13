@@ -7,10 +7,14 @@ var app = app || {};
   // Routes
   var Router = Backbone.Router.extend({
     routes: {
-      '': 'home'
+      '': 'home',
+      'notes/:id': 'getNote'
     }
   });
 
   app.router = new Router();
+  app.router.on('route:getNote', function(id) {
+    console.log('Opening note, ' + id);
+  });
   Backbone.history.start();
 })();
