@@ -4,7 +4,7 @@ var app = app || {};
 (function () {
   'use strict';
 
-  // Routes
+  // Routes: used for matching views to a model or collection
   var Router = Backbone.Router.extend({
     routes: {
       '': 'home',
@@ -13,8 +13,19 @@ var app = app || {};
   });
 
   app.router = new Router();
+
   app.router.on('route:getNote', function(id) {
-    console.log('Opening note, ' + id);
+    var model = app.notes.get(id);
+
+    if (!model) {
+      console.log('No model found honey.');
+    }
+
+    // Init a new top level view and pass in your model.
   });
-  Backbone.history.start();
+
+  // Use proper URLs if you want for HTML5 history
+  Backbone.history.start({
+    pushState: true
+  });
 })();

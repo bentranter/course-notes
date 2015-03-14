@@ -3,8 +3,8 @@ var app = app || {};
 var ENTER_KEY = 13;
 var ESCAPE_KEY = 27;
 
-// Kick things off inside a DOMContentLoaded listener
-document.addEventListener('DOMContentLoaded', function() {
+// Kick things off when we're ready
+$(document).ready(function() {
   'use strict';
 
   // Make a new app view to essentially 'start' the app
@@ -20,4 +20,4 @@ document.addEventListener('DOMContentLoaded', function() {
   new app.NoteView({
     collection: app.notes
   });
-}, false);
+});
