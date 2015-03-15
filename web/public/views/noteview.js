@@ -23,16 +23,8 @@ var app = app || {};
    },
 
     render: function() {
-      var newNote = new Backbone.Model({
-        title: '',
-        content: '',
-        folder: '',
-        subtitle: ''
-      });
-      this.$el.html(this.template(newNote));
-      // Render only does one element at a time, taken from the URL params?
-      // var noteContentTemplate = this.template(model.toJSON());
-      // this.$el.append(noteContentTemplate);
+      console.log(this.model);
+      this.$el.html(this.template(this.model.attributes));
     },
 
     save: function() {

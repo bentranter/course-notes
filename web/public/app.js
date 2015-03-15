@@ -17,7 +17,4 @@ $(document).ready(function() {
   new app.ListView({
     collection: app.notes
   });
-  new app.NoteView({
-    collection: app.notes
-  });
 });

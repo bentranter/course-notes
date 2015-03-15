@@ -14,7 +14,7 @@ var app = app || {};
     },
 
     initialize: function() {
-      console.log('listview.js: Initialized new Backbone view for a note.');
+      console.log('listview.js: Initialized new Backbone view for the list of notes.');
       if (window.localStorage.getItem('token')) {
         this.collection.fetch({
           headers: {

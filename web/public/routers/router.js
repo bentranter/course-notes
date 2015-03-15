@@ -8,7 +8,8 @@ var app = app || {};
   var Router = Backbone.Router.extend({
     routes: {
       '': 'home',
-      'notes/:id': 'getNote'
+      'notes/:id': 'getNote',
+      'notes/new': 'newNote'
     }
   });
 
@@ -17,15 +18,23 @@ var app = app || {};
   app.router.on('route:getNote', function(id) {
     var model = app.notes.get(id);
 
+    new app.NoteView({
+      model: model,
+      collection: app.notes
+    });
+
     if (!model) {
       console.log('No model found honey.');
     }
-
-    // Init a new top level view and pass in your model.
   });
 
-  // Use proper URLs if you want for HTML5 history
-  Backbone.history.start({
-    pushState: true
+  app.router.on('route:newNote', function() {
+    new app.NoteView({
+      model: new app.Note(),
+      collection: app.notes
+    });
   });
+
+  // Danger warning: don't use pushState or you'll die!!! (for now)
+  Backbone.history.start();
 })();
