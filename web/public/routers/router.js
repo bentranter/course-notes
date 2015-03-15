@@ -30,7 +30,7 @@ var app = app || {};
 
   app.router.on('route:newNote', function() {
     new app.NoteView({
-      model: new app.Note(),
+      model: new app.Note,
       collection: app.notes
     });
   });

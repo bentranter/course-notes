@@ -10,7 +10,8 @@ var app = app || {};
     template: _.template($('#notesListTemplate').html()),
     
     events: {
-      'click #saveButton': 'saveNote'
+      'click #saveButton': 'saveNote',
+      'click .destroyButton': 'destroy'
     },
 
     initialize: function() {

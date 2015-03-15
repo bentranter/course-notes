@@ -458,6 +458,10 @@ button,
   margin-right: 4rem;
 }
 
+.mr-button-offset {
+  margin-right: 6rem;
+}
+
 .mb4 {
   margin-bottom: 4rem;
 }
