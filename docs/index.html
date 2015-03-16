@@ -6,15 +6,16 @@
     <title>SpeedStudy Docs</title>
     <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
     <link rel='stylesheet' href='main.css'>
   </head>
 
   <body>
 
     <!-- Sidebar -->
-    <aside class='w16 fixed scroll-y h100 bg-lg1' id='sidebar'>
-      <h3 class='h3 m0 px1 py2 center bg-lg0'>Navigation</h3>
-      <ul class='list-reset ml1 mr1'>
+    <aside class='absolute top-0 left-0 bottom-0 overflow-auto bg-offwhite' id='sidebar'>
+      <h3 class='h3 m0 p2 center bg-light-gray'>Navigation</h3>
+      <ul class='list-reset px2'>
 
         <h4 class='h4 center'>Introduction</h4>
         <li><a href='#about'>About</a></li>
@@ -42,11 +43,14 @@
       </ul>
     </aside>
 
-    <div class='ml16' id='main'>
+    <div class='absolute top-0 left-offset bottom-0 right-0 overflow-auto' id='main'>
 
     <!-- Main Header -->
-      <header class='bg-blue'>
-        <h1 class='h1 m0 px3 py3 white center caps'>SpeedStudy Docs</h1>
+      <header class='bg-blue relative'>
+        <button id='toggleSidebar' class='absolute top-0 left-0 bg-white mt1 ml1'>
+          <svg width='22px' height='22px' viewBox='0 0 32 32' style='fill:currentcolor'><path d='M3 8 A3 3 0 0 0 9 8 A3 3 0 0 0 3 8 M12 6 L28 6 L28 10 L12 10z M3 16 A3 3 0 0 0 9 16 A3 3 0 0 0 3 16 M12 14 L28 14 L28 18 L12 18z M3 24 A3 3 0 0 0 9 24 A3 3 0 0 0 3 24 M12 22 L28 22 L28 26 L12 26z '></path></svg>
+        </button>
+        <h3 class='h3 m0 p2 white center'>StudyPiggy Docs</h3>
       </header>
 
       <!-- Main Content -->
@@ -268,24 +272,18 @@
       'use strict';
 
       var toggleSidebar = function() {
-
         var sidebar = document.getElementById('sidebar');
         var main = document.getElementById('main');
 
-        if (sidebar.classList.contains('w16')) {
-          sidebar.classList.remove('w16');
-        } else {
-          sidebar.classList.add('w16');
-        }
-
-        if (main.classList.contains('ml16')) {
-          main.classList.remove('ml16');
-        } else {
-          main.classList.add('ml16');
-        }
+        sidebar.classList.toggle('hide');
+        main.classList.toggle('left-0');
       };
 
       document.getElementById('toggleSidebar').addEventListener('click', toggleSidebar);
+
+      if (window.innerWidth < 799) {
+        toggleSidebar();
+      }
 
     })();
   </script>
