@@ -4,8 +4,7 @@
  * Module dependencies.
  */
 
-var util = require('util'),
-  bcrypt = require('bcrypt-nodejs'),
+var bcrypt = require('bcrypt-nodejs'),
   jwt = require('jwt-simple'),
   moment = require('moment'),
   c = require('chalk'),
@@ -58,7 +57,7 @@ exports.login = function(req, res) {
 
     // @TODO: This is where you need to setup the logic to suggest that new users sign up.
     console.log(c.yellow('Maybe you should create an account?'));
-    res.status(404).json(err);
+    res.status(404).json({message: err});
   });
 };
 
@@ -133,10 +132,14 @@ exports.deleteUser = function(req, res) {
   user.expires = moment(); // @TODO: respond with the updated token
 
   // @TODO: Delete all notes belonging to that user?
-  User.get(user.iss).delete().run().then(function(result) {
-    res.json({
-      result: util.inspect(result)
+  User.get(user.iss).run().then(function(result) {
+    result.delete().then(function(deleted) {
+      res.json(deleted);
+    }).error(function(err) {
+      res.json({message: err});
     });
+  }).error(function(err) {
+    res.json({message: err});
   });
 };
 
@@ -221,12 +224,14 @@ exports.getNote = function(req, res) {
  */
 
 exports.deleteNote = function (req, res) {
-  Note.get(req.params.id).delete().run().then(function(result) {
-    res.json({
-      // Something is broken in RethinkDBDash - this is
-      // a hotfix for it
-      result: util.inspect(result)
+  Note.get(req.params.id).run().then(function(note) {
+    note.delete().then(function(result) {
+      res.json(result);
+    }).error(function(err) {
+      res.json({message: err});
     });
+  }).error(function(err) {
+    res.json({message: err});
   });
 };
 

@@ -24,11 +24,7 @@ var app = app || {};
    },
 
     render: function() {
-      if (this.model.get('id')) {
-        this.$el.html(this.template(this.model.attributes));
-      } else {
-        this.$el.html(this.template(this.model));
-      }
+      this.$el.html(this.template(this.model.attributes));
     },
 
     destroy: function() {
@@ -36,13 +32,24 @@ var app = app || {};
       console.log('Clicked destroy');
       var action = window.confirm('Are you sure you want to delete?');
       if (action === true) {
-        self.model.destroy();
+        self.model.destroy({
+        headers: {
+          'x-access-token': window.localStorage.getItem('token')
+        }
+      }).complete(function() {
+        // Route to the new note view
+        console.log('Delete fired');
+      });
       }
     },
 
     save: function() {
       console.log('Clicked save');
-      this.model.save();
+      this.model.save({},{
+        headers: {
+          'x-access-token': window.localStorage.getItem('token')
+        }
+      });
       // // @TODO: Hide any errors we may have received
       // var req = Backbone.ajax({
       //   headers: {
