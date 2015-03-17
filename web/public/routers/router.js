@@ -25,7 +25,7 @@ var app = app || {};
     });
 
     if (!model) {
-      console.log('No model found honey.');
+      console.log('No model found.');
     }
   });
 
@@ -33,10 +33,14 @@ var app = app || {};
   app.router.on('route:newNote', function() {
     // You have to explicitly add the note to the collection 
     // before you can save it
+    var newNoteModel = new app.Note();
+
     new app.NoteView({
-      model: new app.Note(),
+      model: newNoteModel,
       collection: app.notes
     });
+
+    app.notes.add(newNoteModel);
   });
 
   app.router.on('route:notFound', function() {

@@ -44,31 +44,13 @@ var app = app || {};
     },
 
     save: function() {
-      console.log('Clicked save');
+      this.model.set('title', $('#noteTitle').html());
+      this.model.set('content', $('#noteBody').html());
       this.model.save({},{
         headers: {
           'x-access-token': window.localStorage.getItem('token')
         }
       });
-      // // @TODO: Hide any errors we may have received
-      // var req = Backbone.ajax({
-      //   headers: {
-      //     'x-access-token': window.localStorage.getItem('token')
-      //   },
-      //   contentType: 'application/x-www-form-urlencoded',
-      //   url: app.notes.url,
-      //   type: 'POST',
-      //   data: 'title=' + document.getElementById('noteTitle').innerHTML +
-      //         '&subtitle=' + 'default' +
-      //         '&content=' + document.getElementById('noteBody').innerHTML +
-      //         '&folder=' + 'default'
-      // });
-      // // Save the token in localStorage
-      // req.then(function(data) {
-      //   console.log(JSON.stringify(data) + ' Succeeded.');
-      // }, function(err) {
-      //   console.log(err.responseText + ' failed.');
-      // }); // if Promise is set
-    },
+    }
   });
 })();

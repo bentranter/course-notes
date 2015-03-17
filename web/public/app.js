@@ -7,6 +7,10 @@ var ESCAPE_KEY = 27;
 $(document).ready(function() {
   'use strict';
 
+  app.alert = function(message) {
+    window.alert(message);
+  };
+
   // Make a new app view to essentially 'start' the app
   new app.AppView();
 
