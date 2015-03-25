@@ -93,17 +93,15 @@ To run the tests, `cd` into `/web/test`, and run `$ jasmine-node .`. If every te
 
 ###Roadmap
 
-######General
-- finalize UI design and layouts
-
 ######Server
-- **get notes from signed in user**
-- look into push notification event queue
+- don't send token after signup, only login
+- add endpoint to update count, either patch or put? 
 
 ######Client
-- implement functionality
-- implement Stripe API
 - handle contentEditable stuff
 
 ######Android
 - 
+
+######iOS
+- pretty much everything other than logging in
