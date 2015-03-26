@@ -19,7 +19,7 @@ var app = app || {};
   app.router.on('route:getNote', function(id) {
     var model = app.notes.get(id);
 
-    new app.NoteView({
+    this.view = new app.NoteView({
       model: model,
       collection: app.notes
     });
@@ -29,7 +29,7 @@ var app = app || {};
     }
   });
 
-  // Todo: set URL when this get's initialized
+  // Todo: set URL when this gets initialized
   app.router.on('route:newNote', function() {
     // You have to explicitly add the note to the collection 
     // before you can save it
@@ -44,7 +44,7 @@ var app = app || {};
   });
 
   app.router.on('route:notFound', function() {
-    app.router.navigate('home');
+    app.router.navigate('/', {trigger: true});
   });
 
   // Danger warning: don't use pushState or you'll die!!! (for now)

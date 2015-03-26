@@ -44,9 +44,10 @@ var app = app || {};
     },
 
     save: function() {
-      this.model.set('title', $('#noteTitle').html());
-      this.model.set('content', $('#noteBody').html());
-      this.model.save({},{
+      this.model.save({
+        title: $('#noteTitle').html(),
+        content: $('#noteBody').html()
+      },{
         headers: {
           'x-access-token': window.localStorage.getItem('token')
         }
