@@ -4,6 +4,7 @@
   "description": "Testing React for UI stuff",
   "main": "index.js",
   "scripts": {
+    "start": "jsx jsx/ compiled/ && browserify main.js -o bundle.js && python -m SimpleHTTPServer",
     "test": "echo 'No tests'"
   },
   "keywords": [
@@ -15,5 +16,9 @@
   "dependencies": {
     "react": "^0.13.1",
     "superagent": "^1.1.0"
+  },
+  "devDependencies": {
+    "browserify": "^9.0.3",
+    "react-tools": "^0.13.1"
   }
 }
