@@ -13,6 +13,7 @@
   "author": "Ben Tranter",
   "license": "MIT",
   "dependencies": {
-    "react": "^0.13.1"
+    "react": "^0.13.1",
+    "superagent": "^1.1.0"
   }
 }
