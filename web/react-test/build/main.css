@@ -43,6 +43,10 @@ fieldset {
   border: 1px solid #ccc;
 }
 
+input:focus {
+  outline: 1px solid #03A9F4;
+}
+
 input[type=text],
 input[type=datetime],
 input[type=datetime-local],
@@ -386,12 +390,6 @@ small,
 
 .full-width {
   width: 100%;
-}
-
-.container {
-  max-width: 850px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 
@@ -1196,6 +1194,10 @@ input[type=range] {
   border-left-color: #555;
 }
 
+.shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
+}
+
 .rounded {
   border-radius: 3px;
 }
@@ -1253,7 +1255,7 @@ input[type=range] {
 }
 
 .blue {
-  color: #0074d9;
+  color: #03A9F4;
 }
 
 .navy {
@@ -1332,7 +1334,7 @@ input[type=range] {
 }
 
 .bg-blue {
-  background-color: #0074d9;
+  background-color: #03A9F4;
 }
 
 .bg-navy {
