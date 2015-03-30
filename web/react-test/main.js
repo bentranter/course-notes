@@ -5,6 +5,7 @@
  */
 var React = require('react');
 var request = require('superagent');
+var Router = require('react-router-component');
 
 /**
  * Area man tests request to see if it works
