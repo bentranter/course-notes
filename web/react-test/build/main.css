@@ -60,10 +60,11 @@ input[type=time],
 input[type=url],
 input[type=week] {
   box-sizing: border-box;
-  height: 2.25rem;
+  height: 1.75rem;
   padding: .5rem .5rem;
   vertical-align: middle;
   -webkit-appearance: none;
+  font-size: .75rem;
 }
 
 select {
@@ -646,6 +647,31 @@ small,
 
 .left-0 {
   left: 0;
+}
+
+.z1 { 
+  z-index: 1 
+}
+
+.z2 { 
+  z-index: 2 
+}
+
+.z3 { 
+  z-index: 3 
+}
+
+.z4 { 
+  z-index: 4 
+}
+
+.absolute-center {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  display: table;
 }
 
 
@@ -1243,7 +1269,7 @@ input[type=range] {
 }
 
 .light-gray {
-  color: #ddd;
+  color: #ccc;
 }
 
 .white {
@@ -1379,4 +1405,15 @@ input[type=range] {
 
 .bg-maroon {
   background-color: #85144b;
+}
+
+/**
+ * App Specific
+ */
+.sidebar {
+  width: 360px;
+}
+
+.right-offset {
+  right: 360px;
 }

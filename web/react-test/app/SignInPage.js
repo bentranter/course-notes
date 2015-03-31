@@ -31,15 +31,15 @@ var SignInPage = React.createClass({
   },
   render: function() {
     return (
-      <div className='p2'>
-        <div className='signInPage'>
-          <div className='cntr p2'>
-            <h1 className='h3 center light'>Sign in to StudyPiggy</h1>
-          </div>
-          <div className='cntr p2 bg-silver bl shadow'>
-            <SignInForm onSubmit={this.handleSignIn} />
-          </div>
-        </div>
+      <div className='signInPage ml2 mr2 mt2 btl'>
+        <span className='left'>
+          <h5 className='m0 py2 small-caps btd'>Sign in to StudyPiggy</h5>
+        </span>
+        <span className='right'>
+          <h5 className='m0 py2 small-caps light light-gray'>Forgot password?</h5> 
+        </span>
+        <div className='cf'></div>
+        <SignInForm onSubmit={this.handleSignIn} />
       </div>
     );
   }
