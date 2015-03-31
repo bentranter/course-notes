@@ -13,7 +13,7 @@ var SignInForm = require('./SignInForm.js');
  */
 var SignInPage = React.createClass({
   componentDidMount: function() {
-    console.log('Mounted SignInPage');
+    //
   },
   handleSignIn: function(userInfo) {
     request

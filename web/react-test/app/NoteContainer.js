@@ -10,7 +10,7 @@ var React = require('react');
 var NoteContainer = React.createClass({
   render: function() {
     return(
-      <div className='z1 absolute top-0 left-0 bottom-0 right-offset'>
+      <div className='z1 absolute top-0 left-0 bottom-0 right-offset overflow-auto'>
       </div>
     );
   }

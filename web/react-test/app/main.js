@@ -33,10 +33,32 @@ var App = React.createClass({
 });
 
 /**
+ * Routing test shit
+ */
+var Test = React.createClass({
+  render: function() {
+    console.log('Test passed');
+    return null;
+  }
+});
+
+/**
+ * Routing test shit
+ */
+var Speedread = React.createClass({
+  render: function() {
+    console.log('Speedreading some note');
+    return null;
+  }
+});
+
+/**
  * Define routes
  */
 var routes = (
   <Route name='app' path='/' handler={App}>
+    <Route name='test' path='/test' handler={Test} />
+    <Route name='speedread' path='/speedread' handler={Speedread} />
   </Route>
 );
 

@@ -21,6 +21,12 @@ textarea {
   font-size: 100%;
 }
 
+input:focus,
+textarea:focus,
+select:focus {
+  outline-offset: 0px;
+}
+
 img {
   max-width: 100%;
 }
@@ -935,7 +941,8 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: #333;
 }
 
 pre,
@@ -1416,4 +1423,12 @@ input[type=range] {
 
 .right-offset {
   right: 360px;
+}
+
+.icon {
+  fill:currentColor;
+}
+
+.icon:hover {
+  fill: #333;
 }

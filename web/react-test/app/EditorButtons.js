@@ -10,7 +10,7 @@ var React = require('react');
 var EditorButtons = React.createClass({
   render: function() {
     return (
-      <div className='ml2 mr2 mt2 btl'>
+      <div className='ml2 mr2 mt3 btl'>
         <span className='left'>
           <h5 className='m0 py2 small-caps btd'>Editor</h5>
         </span>
