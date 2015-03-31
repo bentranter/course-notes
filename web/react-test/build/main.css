@@ -1449,3 +1449,19 @@ input[type=range] {
 .w20 {
   width: 20%;
 }
+
+[contentEditable=true]:focus {
+  outline: 0px solid transparent;
+  background: #ffffff;
+}
+
+[contentEditable=true]:hover {
+  cursor: text;
+  background: #fafafc;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+  color: #ccc;
+  font-weight: 300;
+  content: attr(data-ph);
+}
