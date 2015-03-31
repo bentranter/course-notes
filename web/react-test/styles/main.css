@@ -101,6 +101,11 @@ textarea {
   padding: 0;
 }
 
+::selection {
+  background-color: #74ddff;
+  color: #fff;
+}
+
 
 
 /**
@@ -1431,4 +1436,16 @@ input[type=range] {
 
 .icon:hover {
   fill: #333;
+}
+
+.w50 {
+  width: 50%;
+}
+
+.w25 {
+  width: 25%;
+}
+
+.w20 {
+  width: 20%;
 }
