@@ -34,7 +34,7 @@ var SignInForm = React.createClass({
       <form className='signInForm fieldset-reset' onSubmit={this.handleSubmit} action='http://localhost:3000/api/login' method='post'>
         <input className='block full-width' type='email' placeholder='Email' ref='email' />
         <input className='block full-width' type='password' placeholder='Password' ref='password' />
-        <input className='button full-width bg-silver small-caps regular blue center' type='submit' value='Sign In' />
+        <input className='button full-width bg-silver small-caps regular blue black-h center' type='submit' value='Sign In' />
       </form>
     );
   }

@@ -8,6 +8,7 @@
 var React         = require('react');
 var request       = require('superagent');
 var Router        = require('react-router');
+var NoteStore     = require('./NoteStore.js');
 var NoteContainer = require('./NoteContainer.js');
 var Sidebar       = require('./Sidebar.js');
 var SignInForm    = require('./SignInForm.js');
@@ -24,24 +25,42 @@ var RouteHandler  = Router.RouteHandler;
  */
 var App = React.createClass({
   getInitialState: function() {
-    return {data: []};
+    return {
+      notes: NoteStore.getNotes(),
+      loading: true
+    };
   },
-  loadNotesFromServer: function() {
-    // OH MY GOD
-    var self = this;
-    request
-      .get('http://localhost:3000/api/notes')
-      .set('X-Access-Token', window.localStorage.getItem('token'))
-      .end(function(err, res) {
-        if (res.ok) {
-          self.setState({data: res.body});
-        } else {
-          console.log('Error' + res.text);
-        }
-      });
+  // loadNotesFromServer: function() {
+  //   // OH MY GOD
+  //   var self = this;
+  //   request
+  //     .get('http://localhost:3000/api/notes')
+  //     .set('X-Access-Token', window.localStorage.getItem('token'))
+  //     .end(function(err, res) {
+  //       if (res.ok) {
+  //         self.setState({data: res.body});
+  //       } else {
+  //         console.log('Error' + res.text);
+  //       }
+  //     });
+  // },
+  componentWillMount: function() {
+    NoteStore.init();
   },
   componentDidMount: function() {
-    this.loadNotesFromServer();
+    NoteStore.addChangeListener(this.updateNotes);
+  },
+  componentWillUnmount: function() {
+    NoteStore.removeChangeListener(this.updateNotes);
+  },
+  updateNotes: function() {
+    if (!this.isMounted()) {
+      return;
+    }
+    this.setState({
+      notes: NoteStore.getNotes(),
+      loading: false
+    });
   },
   render: function() {
     return (

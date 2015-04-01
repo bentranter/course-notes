@@ -1271,6 +1271,10 @@ input[type=range] {
   color: #333;
 }
 
+.black-h:hover {
+  color: #333;
+}
+
 .gray,
 .mid-gray {
   color: #aaa;
@@ -1293,7 +1297,7 @@ input[type=range] {
 }
 
 .blue {
-  color: #03A9F4;
+  color: #0074d9;
 }
 
 .navy {
@@ -1452,7 +1456,7 @@ input[type=range] {
 
 [contentEditable=true]:focus {
   outline: 0px solid transparent;
-  background: #ffffff;
+  background: #fafafc;
 }
 
 [contentEditable=true]:hover {

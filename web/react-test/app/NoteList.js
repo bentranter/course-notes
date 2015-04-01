@@ -12,11 +12,11 @@ var NoteListItem = require('./NoteListItem.js');
 
 var NoteList = React.createClass({
   render: function() {
-    var noteNodes = this.props.data.map(function(note) {
-      return (
-        <NoteListItem title={note.title} id={note.id} key={note.id} />
-      );
-    });
+    // var noteNodes = this.props.data.map(function(note) {
+    //   return (
+    //     <NoteListItem title={note.title} id={note.id} key={note.id} />
+    //   );
+    // });
     return (
       <div className='ml2 mr2 mt3 mb2 btl'>
         <span className='left'>
@@ -30,7 +30,7 @@ var NoteList = React.createClass({
         </span>
         <div className='cf'></div>
         <ul className='list-reset'>
-          {noteNodes}
+          <NoteListItem title={'Title'} id={'someid'} key={'someid'} />
         </ul>
       </div>
     );
