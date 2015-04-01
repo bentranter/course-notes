@@ -10,52 +10,48 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.UUID;
 
-
+/**
+ * Displays the text from the selected file.
+ */
 public class DisplayDocument extends Activity {
-    public final static String EXTRA_MESSAGE = "com.speedstudy.speedstudy.MESSAGE";
-    public int characterIndex = 0;
     public String message = null;
-    public int charactersPerLine = 10;
-    ArrayList<String> wordsInMessage;
-    TextView text;
+
+    public String cleanMessage;
+    /**
+     * Called automatically when the activity is launched. Sets up the text area to display the
+     * information passed to it from DocumentLoader
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_display_document);
         Intent intent = getIntent();
+
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-       /* text = new TextView(this);
-        text.setTextSize(20);
-        text.setText(message);*/
+        cleanMessage = clean(message);
         TextView text_field = (TextView) findViewById(R.id.fixed_message);
-        text_field.setTextSize(20);
-        text_field.setText(message);
-
-        this.message = message;
-        wordsInMessage = new ArrayList<String>();
-        StringTokenizer tok = new StringTokenizer(message, " ");
-        while(tok.hasMoreElements()){
-            wordsInMessage.add(tok.nextToken());
-        }
-        //startTextCycle();
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-
-
-    public void startSpeedReader(View view){
-        Intent intent = new Intent(this, SpeedReader.class);
-
-
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        text_field.setTextSize(16);
+        text_field.setText(cleanMessage);
 
     }
+
+
+    /**
+     * Handle items on the action bar being clicked.
+     * @param item - automatically passed on action bar item tap
+     * @return boolean
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -70,37 +66,13 @@ public class DisplayDocument extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void startTextCycle(){
+    public String clean(String message){
 
-        new Thread(new Runnable(){
-            String line = "";
-            int wordIndex = 0;
-            public void run() {
+        GlobalApp globals= (GlobalApp)getApplicationContext();
+        String rMessage = message.replace(globals.tagFront,"");
 
-                while (true) {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            line = "";
-                            while(line.length() < charactersPerLine && wordIndex < wordsInMessage.size()){
-                                line = line + wordsInMessage.get(wordIndex)+" ";
-                                wordIndex++;
-                            }
-                            if (wordIndex >= wordsInMessage.size()){
-                                wordIndex = 0;
-                            }
-                            text.setText(line);
-                        }
-                    });
-                    try
-
-                    {
-                        Thread.sleep(200);
-                    } catch (Exception e) {
-
-                    }
-                }
-            }
-        } ).start();
-
+        rMessage = rMessage.replace(globals.tagEnd,"");
+        rMessage = rMessage.replace(globals.ls,System.getProperty("line.separator"));
+        return rMessage;
     }
 }
