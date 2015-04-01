@@ -7,6 +7,7 @@
  */
 var React        = require('react');
 var request      = require('superagent');
+var Link         = require('react-router').Link; 
 var NoteListItem = require('./NoteListItem.js');
 
 var NoteList = React.createClass({
@@ -22,7 +23,9 @@ var NoteList = React.createClass({
           <h5 className='m0 py2 small-caps btd'>Your Notes</h5>
         </span>
         <span className='right'>
-          <h5 className='inline-block m0 mr2 py2 small-caps light blue'>New</h5> 
+          <h5 className='inline-block m0 mr2 py2 small-caps light blue'>
+            <Link to='notes' params={{noteId: 'new'}}>New</Link>
+          </h5> 
           <h5 className='inline-block m0 py2 small-caps light light-gray'>Hide</h5>
         </span>
         <div className='cf'></div>

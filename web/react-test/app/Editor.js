@@ -5,34 +5,23 @@
 /**
  * Module dependencies
  */
-var React = require('react');
+var React   = require('react');
+var request = require('superagent');
 
 var Editor = React.createClass({
-  shouldComponentUpdate: function(nextProps) {
-    return nextProps.html !== this.getDOMNode().innerHTML;
+  contextTypes: {
+    router: React.PropTypes.func
   },
-  componentDidUpdate: function() {
-    if ( this.props.html !== this.getDOMNode().innerHTML ) {
-      this.getDOMNode().innerHTML = this.props.html;
-    }
-  },
-  emitChange: function(evt){
-    var html = this.getDOMNode().innerHTML;
-    if (this.props.onChange && html !== this.lastHtml) {
-      evt.target = { value: html };
-      this.props.onChange(evt);
-    }
-    this.lastHtml = html;
+  handleSave: function() {
+    //
   },
   render: function() {
     return (
-      <div className='react-contenteditable'
-        onInput={this.emitChange} 
-        onBlur={this.emitChange}
-        contentEditable
-        data-ph='Start note taking...'
-        dangerouslySetInnerHTML={{__html: this.props.html}}
-      >
+      <div className='z1 absolute top-0 left-0 bottom-0 right-offset m4 overflow-auto'>
+        <div className='react-contenteditable' contentEditable data-ph='Start note taking...'>
+          {console.log(JSON.stringify(this.context.router.getCurrentParams()))}
+          {this.context.router.getCurrentParams().noteId}
+        </div>
       </div>
     );
   }
