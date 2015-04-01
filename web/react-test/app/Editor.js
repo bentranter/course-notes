@@ -18,9 +18,8 @@ var Editor = React.createClass({
   render: function() {
     return (
       <div className='z1 absolute top-0 left-0 bottom-0 right-offset m4 overflow-auto'>
-        <div className='react-contenteditable' contentEditable data-ph='Start note taking...'>
-          {console.log(JSON.stringify(this.context.router.getCurrentParams()))}
-          {this.context.router.getCurrentParams().noteId}
+        <div className='react-contenteditable' contentEditable data-ph='Start note taking...'
+          dangerouslySetInnerHTML={{__html: this.context.router.getCurrentParams().noteId ? this.context.router.getCurrentParams().noteId : ''}}>
         </div>
       </div>
     );

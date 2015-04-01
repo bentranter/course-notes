@@ -24,7 +24,7 @@ var NoteList = React.createClass({
         </span>
         <span className='right'>
           <h5 className='inline-block m0 mr2 py2 small-caps light blue'>
-            <Link to='notes' params={{noteId: 'new'}}>New</Link>
+            <a href='/#/'>New</a>
           </h5> 
           <h5 className='inline-block m0 py2 small-caps light light-gray'>Hide</h5>
         </span>
