@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#ffffff"
     android:layout_width="match_parent"
+    android:background="#ffffff"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -15,7 +15,7 @@
         android:id="@+id/text_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+
         tools:context="speedstudy.speedstudy.SpeedReader">
         <TextView android:text="Failed to Load"
             android:background="@color/speedreader_background"
@@ -61,6 +61,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
+
             android:background="#FFFFFF"
             android:textColor="@color/primary_color"
             android:text="Start"

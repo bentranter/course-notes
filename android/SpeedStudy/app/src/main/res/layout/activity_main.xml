@@ -1,69 +1,34 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-<LinearLayout
-
-    android:id="@+id/top_buttons"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <EditText android:id="@+id/edit_message"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/edit_message" />
-    <Button
-        android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:id="@+id/file_browser_button_row"
         android:layout_width="wrap_content"
-        android:text="@string/button_send"
-        android:onClick="sendMessage"/>
-</LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:id="@+id/middle_buttons"
-    android:layout_below="@+id/top_buttons">
-    <Button
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:text="Just a Second Button"
-        android:onClick="buttonTwoPress"
-        />
-</LinearLayout>
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/to_local_files_button"
+            android:layout_centerInParent="true"
+            android:layout_height="80dp"
+            android:layout_width="200dp"
+            android:text="Open Local File Browser"
+            android:onClick="openLocalFileBrowser"/>
+    </LinearLayout>
 
     <LinearLayout
+        android:layout_below="@id/file_browser_button_row"
+        android:id="@+id/review_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        android:id="@+id/bottom_buttons"
-        android:layout_below="@+id/middle_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText android:id="@+id/folder_name"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="folder" />
-        <EditText android:id="@+id/file_name"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="file" />
         <Button
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Create"
-            android:onClick="createFile"/>
-        <Button
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Clear"
-            android:onClick="clearMemory"/>
+            android:id="@+id/to_reviews_button"
+            android:layout_centerInParent="true"
+            android:layout_height="80dp"
+            android:layout_width="200dp"
+            android:text="Reviews (0)"
+            android:onClick="openReviews"/>
     </LinearLayout>
+
 
 </RelativeLayout>

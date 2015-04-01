@@ -13,5 +13,11 @@
     <string name="title_activity_speed_reader">SpeedReader</string>
     <string name="title_activity_local_files_browser">LocalFilesBrowser</string>
     <string name="title_activity_display_document">DisplayDocument</string>
+    <string name="title_activity_app_launch">AppLaunch</string>
+    <string name="title_activity_login_screen">LoginScreen</string>
+    <string name="title_activity_document_loader">DocumentLoader</string>
+    <string name="title_activity_card_type_one">CardTypeOne</string>
+    <string name="title_activity_card_type_two">CardTypeTwo</string>
+    <string name="title_activity_main_loader">MainLoader</string>
 
 </resources>
