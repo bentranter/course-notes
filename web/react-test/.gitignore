@@ -1,1 +1,3 @@
 node_modules
+rethinkdb-data
+npm-debug.log

@@ -9,7 +9,7 @@ var app = app || {};
     routes: {
       '/': 'home',
       'notes/:id': 'getNote',
-      'new'     : 'newNote',
+      'new'      : 'newNote',
       '*notFound': 'notFound'
     }
   });
