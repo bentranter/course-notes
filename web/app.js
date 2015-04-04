@@ -90,7 +90,6 @@ http.createServer(app)
   });
 
 /**
- * Start live-server at 3001 and launch your browser
+ * Start live-server at 5681 and launch your browser
  */
-liveServer.start(4000, 'public', false);
-liveServer.start(4001, 'www', false);
+liveServer.start(5681, 'manual-dom', false);
