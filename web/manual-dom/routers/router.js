@@ -7,8 +7,13 @@ var app = app || {};
   // Routes: used for matching views to a model or collection
   var Router = Backbone.Router.extend({
     routes: {
-      '': 'home'
+      '': 'home',
+      '/:id': 'getNote'
     },
+
+    getNote: function() {
+      
+    }
   });
 
   app.Router = new Router();
