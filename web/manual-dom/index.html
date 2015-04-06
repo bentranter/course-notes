@@ -13,9 +13,13 @@
 
   <body id='app'>
 
+    <!-- Text Editor Template -->
+    <script id='noteEditorTemplate' type='text/template'>
+      <div data-ph='Start note taking...' contentEditable='true'><%= content %></div>
+    </script>
+
     <!-- Text Editor Section -->
-    <div class='z1 absolute top-0 left-0 bottom-0 right-offset m4 overflow-auto'>
-      <div data-ph='Start note taking...' contentEditable='true'></div>
+    <div id='noteEditor' class='z1 absolute top-0 left-0 bottom-0 right-offset m4 overflow-auto'>
     </div>
     <!-- /Text Editor Section -->
 
@@ -143,6 +147,7 @@
   <script src='collections/notes.js'></script>
   <script src='views/noteview.js'></script>
   <script src='views/appview.js'></script>
+  <script src='views/noteeditorview.js'></script>
   <script src='routers/router.js'></script>
   <script src='app.js'></script>
   </body>

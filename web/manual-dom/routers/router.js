@@ -18,7 +18,9 @@ var app = app || {};
 
     getNote: function(id) {
       this.note = app.notes.get(id);
-      console.log(this.note);
+      if (app.noteEditorView) app.noteEditorView.close();
+      this.noteEditorView = new app.NoteEditorView({ model: this.note });
+      $('#noteEditor').html(this.noteEditorView.render().el);
     }
   });
 
