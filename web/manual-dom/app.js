@@ -27,7 +27,7 @@ $(document).ready(function() {
 
   // Turn the key... start the ignition baby!!!
   new app.AppView();
-  
+
   // Don't start the router until our posts have loaded
   app.notes.on('sync', _.once(function() {
     Backbone.history.start();

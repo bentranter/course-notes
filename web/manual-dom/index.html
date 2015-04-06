@@ -46,7 +46,7 @@
         </span>
         <span class='right'>
           <h5 class='inline-block m0 mr2 py2 small-caps light blue'>
-            <a href='#!/'>New</a>
+            <a href='#notes/new'>New</a>
           </h5> 
           <h5 class='inline-block m0 py2 small-caps light light-gray'>Hide</h5>
         </span>
@@ -58,10 +58,10 @@
           <!-- Template for a single note -->
           <script id='noteTemplate' type='text/template'>
             <li class='mb2'>
-              <a href='/#!/<%= id %>' class='light-gray ml2'>
+              <a href='#notes/<%= id %>/speedread' class='light-gray ml2'>
                 <svg width='12px' height='12px' viewBox='0 0 32 32' class='icon'><path d='M16 0 A16 16 0 0 0 0 16 A16 16 0 0 0 16 32 A16 16 0 0 0 32 16 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 28 16 A12 12 0 0 1 16 28 A12 12 0 0 1 4 16 A12 12 0 0 1 16 4 M14 6 L14 17.25 L22 22 L24.25 18.5 L18 14.75 L18 6z '></path></svg>
               </a>
-              <a href='/#!/<%= id %>/speedread' class='h5 ml2 light-gray light'><%= title %></a>
+              <a href='#notes/<%= id %>' class='h5 ml2 light-gray light'><%= title %></a>
             </li>
           </script>
           <!-- /Template for a single note -->

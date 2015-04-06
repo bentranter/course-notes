@@ -8,13 +8,20 @@ var app = app || {};
   var Router = Backbone.Router.extend({
     routes: {
       '': 'home',
-      '/:id': 'getNote'
+      'notes/new': 'newNote',
+      'notes/:id': 'getNote'
     },
 
-    getNote: function() {
-      
+    newNote: function() {
+      console.log('Nrwe');
+    },
+
+    getNote: function(id) {
+      this.note = app.notes.get(id);
+      console.log(this.note);
     }
   });
 
-  app.Router = new Router();
+  app.router = new Router();
+
 })();
