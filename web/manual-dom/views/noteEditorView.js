@@ -9,6 +9,8 @@ var app = app || {};
     template: _.template($('#noteEditorTemplate').html()),
 
     events: {
+      'click .save': 'save',
+      'click .delete': 'delete'
     },
 
     initialize: function() {
@@ -22,6 +24,20 @@ var app = app || {};
       var data = this.model.toJSON();
       $(this.el).html(this.template(data));
       return this;
+    },
+
+    delete: function() {
+
+    },
+
+    save: function() {
+      this.model.save({ 
+        title: 'Test',
+        content: $('#noteContent').html(),
+        subtitle: 'Test',
+        folder: 'First'
+      });
+      this.model.trigger('change');
     }
   });
 })();
