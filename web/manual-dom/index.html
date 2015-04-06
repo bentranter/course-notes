@@ -16,8 +16,10 @@
     <!-- Text Editor Template -->
     <script id='noteEditorTemplate' type='text/template'>
       <div id='noteContent' data-ph='Start note taking...' contentEditable='true'><%= content %></div>
-      <button class='save button'>Save</button>
-      <button class='delete button'>Delete</button>
+      <div class='absolute top-0 right-0'>
+        <button class='save button light small-caps bg-white blue'>Save</button>
+        <button class='delete button light small-caps bg-white mid-gray '>Delete</button>
+      </div>
     </script>
 
     <!-- Text Editor Section -->
