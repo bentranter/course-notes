@@ -27,7 +27,8 @@ var app = app || {};
     },
 
     delete: function() {
-
+      app.router.navigate('/notes/new', { trigger: true });
+      this.model.destroy();
     },
 
     save: function() {
