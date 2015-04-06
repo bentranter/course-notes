@@ -27,18 +27,37 @@ var app = app || {};
     },
 
     delete: function() {
-      app.router.navigate('/notes/new', { trigger: true });
-      this.model.destroy();
+      var response = window.confirm('Are you sure lol');
+      if (response === true) {
+        // Roll outta that view! (before we know if the model could even be destroyed)
+        app.router.navigate('/notes/new', { trigger: true });
+        this.model.destroy();
+      }
     },
 
     save: function() {
-      this.model.save({ 
-        title: 'Test',
-        content: $('#noteContent').html(),
-        subtitle: 'Test',
-        folder: 'First'
-      });
-      this.model.trigger('change');
+      if (this.model.isNew()) {
+        app.notes.create({
+          title: 'New note',
+          content: $('#noteContent').html(),
+          subtitle: 'New subtitle',
+          folder: 'Whatever'
+        }, {
+          wait: true,
+          success: function(res) {
+            app.router.navigate('/notes/' + res.id, false);
+          }
+        });
+      } else {
+        this.model.save({ 
+          title: 'Test',
+          content: $('#noteContent').html(),
+          subtitle: 'Test',
+          folder: 'First'
+        });
+        // Backbone is smart enough not to re-render anything unless the server throws an error
+        this.model.trigger('change');
+      }
     }
   });
 })();

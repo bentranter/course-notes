@@ -13,7 +13,9 @@ var app = app || {};
     },
 
     newNote: function() {
-      console.log('Nrwe');
+      if (app.noteEditorView) app.noteEditorView.close();
+      this.noteEditorView = new app.NoteEditorView({ model: new app.Note() });
+      $('#noteEditor').html(this.noteEditorView.render().el);
     },
 
     getNote: function(id) {
