@@ -6,26 +6,78 @@ var app = app || {};
 
   app.LoginView = Backbone.View.extend({
 
-    template: _.template($('#account').html()),
+    el: '#account',
+
+    signedInTemplate: _.template($('#accountSignedIn').html()),
+
+    signedOutTemplate: _.template($('#accountSignedOut').html()),
 
     events: {
+      'click #signin': 'signIn',
+      'click #signout': 'signOut'
     },
 
+    username: window.localStorage.getItem('token') ? window.localStorage.getItem('username') : '',
+
     initialize: function() {
-      this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.model, 'all', this.render);
-      console.log('Hello');
+      this.render();
     },
 
     render: function() {
-      if (window.getItem('token')) {
-        console.log('Signed in');
+      if (!this.username) {
+        $(this.el).html(this.signedOutTemplate());
       } else {
-        console.log('Not signed in');
+        $(this.el).html(this.signedInTemplate({ username: this.username }));
       }
-      // var data = this.model.toJSON();
-      // this.$el.html(this.template(data));
-      // return this;
+    },
+
+    signIn: function(e) {
+      // HAHA I LOVE CALLBACKS
+      e.preventDefault();
+      var self = this;
+      $.ajax({
+        url: 'http://localhost:3000/api/login',
+        type:'POST',
+        data: {
+          username: $('#username').val(),
+          password: $('#password').val()
+        },
+        success: function(res) {
+          var response = res;
+          self.handleSuccess(response, function() {
+            app.notes.fetch({
+              headers: {
+                'X-Access-Token': window.localStorage.getItem('token')
+              },
+              success: function() {
+                self.render();
+              },
+              error: function(err) {
+                console.log(err);
+              }
+            });
+          });
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+    },
+
+    signOut: function() {
+      window.localStorage.setItem('token', '');
+      window.localStorage.setItem('username', '');
+      this.username = '';
+      this.render();
+      // @TODO: DEMO ONLY - In prod don't do this!!!
+      $('#noteList').html('');
+    },
+
+    handleSuccess: function(res, cb) {
+      window.localStorage.setItem('token', res.token);
+      window.localStorage.setItem('username', res.user);
+      this.username = res.user;
+      cb();
     }
   });
 })();

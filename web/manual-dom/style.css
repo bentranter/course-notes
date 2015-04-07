@@ -132,6 +132,7 @@ button,
 
 button:hover,
 .button:hover {
+  color: #333;
   text-decoration: none;
 }
 
@@ -520,6 +521,11 @@ small,
 .py1 {
   padding-top: .5em;
   padding-bottom: .5em;
+}
+
+.px0 {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .px1 {

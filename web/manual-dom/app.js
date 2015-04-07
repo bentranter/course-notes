@@ -14,13 +14,13 @@ $(document).ready(function() {
     },
     statusCode: {
       401: function() {
-        window.alert('Please sign in to continue');
+        console.log('Please sign in');
       },
       403: function() {
-        window.alert('Please sign in to continue');
+        console.log('please provide a valid token');
       },
       500: function() {
-        window.alert('Oh no');
+        console.log('RIP server... it was a good run.');
       }
     }
   });
@@ -28,7 +28,10 @@ $(document).ready(function() {
   // Turn the key... start the ignition baby!!!
   new app.AppView();
 
-  // Don't start the router until our posts have loaded
+  // Shift into first...
+  new app.LoginView();
+
+  // AND PUSH THE GAS!!! (Don't start the router until our posts have loaded)
   app.notes.on('sync', _.once(function() {
     Backbone.history.start();
   }));
