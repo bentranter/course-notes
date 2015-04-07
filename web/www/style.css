@@ -1457,3 +1457,10 @@ input[type=range] {
   display: none;
   color: red;
 }
+
+.decoration {
+  background-image: url('img/decoration.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 10px;
+}
