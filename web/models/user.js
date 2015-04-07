@@ -14,7 +14,7 @@ var r = thinky.r;
 var type = thinky.type;
 
 var User = thinky.createModel('User', {
-  username: type.string().validator(validator.isEmail),
+  username: String,
   password: String,
   date: { 
   _type: Date, default: r.now() }

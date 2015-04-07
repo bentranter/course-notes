@@ -1,48 +1,104 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset='utf-8'>
-  <title>Study Piggy</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-  <link rel='stylesheet' href='style.css'>
-</head>
+  <head>
+    <meta charset='utf-8'>
+    <title>Study Piggy</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' href='style.css'>
+  </head>
 
-<body>
-
-  <div class='container'>
-    <nav class='p2 bbl'>
-      <a href='/' class='lg0 blk2-h bold'>StudyPiggy</a>
-      <ul class='list-reset right'>
-        <li class='inline-block ml2'><a href='' class='lg0 blk2-h'>About</a></li>
-        <li class='inline-block ml2'><a href='sign-up.html' class='button more-rounded'>Sign Up</a></li>
-        <li class='inline-block ml2'><a href='' class='button-outline more-rounded'>Sign In</a></li>
-      </ul>
+  <body>
+    <div class='decoration'></div>
+    <nav class='bbl'>
+      <div class='cntr'>
+        <span class='left'>
+          <h3 class='h3 m0 px1 py3 inline-block coral'>StudyPiggy</h3>
+        </span>
+        <span class='right'>
+          <ul class='list-reset inline-block'>
+            <li class='mt1 px1 py3 inline-block'><a href='#'>About</a></li>
+            <li class='mt1 px1 py3 inline-block'><a href='https://github.com/bentranter/course-notes'>Source</a></li>
+            <li class='mt1 px1 py3 inline-block'><a href='#signup'>Sign Up</a></li>
+            <li class='mt1 px1 py3 inline-block'><a href='http://localhost:5681'>Login</a></li>
+          </ul>
+        </span>
+        <div class='cf'></div>
+      </div>
     </nav>
 
-    <div class='test'>
-      <h2 class='h2 center blk2'>Get straight A's studying for just three minutes a day.</h2>
+    <div class='cntr'>
+      <h1 class='huge center light'>Get straight A's, studying for just three minutes a day.</h1>
+      <h2 class='h2 center big light gray mb3'>Welcome to StudyPiggy.</h2>
+      <img src='img/editor.png' class='bl rounded shadow' />
+    </div>
+  
+    <div class='bg-silver'>
+      <div class='cntr py3 mt4'>
+        <h2 class='big center light'>Speedreading &amp; Spaced Repetition</h2>
+        <h3 class='h1 center light gray mb3'>The keys to efficient learning.</h3>
+        <div class='bg-white px3 py2 bl rounded mb3'>
+          <div class='bbl mb3'>
+            <div class='col col-7'>
+              <h4 class='h2 regular coral'>Don't waste time reading notes</h4>
+              <p>Did you know that on average, you read at 180 words per minute on a screen? That's 40% slower than you'd read a book! StudyPiggy has a speedreader built in that allows you to read at 1000 words per minute, <span class='coral'>even if you've never tried speedreading before</span>.</p>
+            </div>
+            <div class='col col-5'>
+              <img src='img/speedreader.png' class='bl rounded shadow mb3' />
+            </div>
+            <div class='cf'></div>
+          </div>
+          <div class='mb3 bbl'>
+            <div class='col col-5'>
+              <img src='img/sidebar.png' class='bl rounded shadow mb3' />
+            </div>
+            <div class='col col-7 px3'>
+              <h4 class='h2 regular coral'>Don't review more often than necessary</h4>
+              <p>You may have heard of the learning curve, but have you every heard of the <span class='coral'>forgetting curve</span>? StudyPiggy tells you exactly when to review your notes, to compensate for the forgetting curve. Never study more often that you need to, and maintain maximum retnetion.</p>
+              <p>When a note appears green in your sidebar, it's time to review. Just open up the speedreader, blast through your notes, and wait until your next note turns green.</p>
+            </div>
+            <div class='cf'></div>
+          </div>
+          <div class='mb3'>
+            <div class='px3'>
+              <h4 class='h2 regular coral center'>Not sure when you should study?</h4>
+              <p>Don't worry, we'll take of that too! Just <span class='coral'>download our companion app</span>, and we'll take care of everything for you. When you need to review a certain, we'll send you a push notification. Just swipe open your notification, read your note, and you're good to go. <span class='coral'>It takes less time to review a note than it does to send a text.</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class='col col-4 px3 py3'><img src='img/android-home.svg' /></div>
-    <div class='col col-4 px3 py3'><img src='img/android-note.svg' /></div>
-    <div class='col col-4 px3 py3 clearfix'><img src='img/android-speed.svg' /></div>
-
-    <div class='bg-lg1 p2'>
-      <p>Lots of text</p>
+    <div class='cntr py3 mt2'>
+      <h2 class='big center light'><a name='signup'>Sign Up Today</a></h2>
+      <h3 class='h1 center light gray mb3'>Be the best student you can be. It's easy.</h3>
+      <div class='bg-silver px3 py2 bl rounded mb3 shadow'>
+        <form id='signup' class='fieldset-reset'>
+          <input id='email' class='full-width' type='email' placeholder='Email' />
+          <input id='password' class='full-width' type='password' placeholder='Password' />
+          <input id='submit' class='full-width button bg-coral white rounded caps' type='submit' value='Sign Up!' />
+        </form>
+      </div>
+      <div id='success' class='success-message center big'>Congrats! Open the <a href='http://localhost:5681'>app</a> to get started.</div>
+      <div id='error' class='error-message center big'>Uh-oh That email address is already in use. Please try another.</div>
     </div>
-  </div>
 
-  <footer class='full-width bg-gray'>
-    <ul class='container center list-reset m0 p2'>
-      <li class='small px2 inline-block white'>Something</li>
-      <li class='small px2 inline-block white'>Something else</li>
-      <li class='small px2 inline-block white'>Contact</li>
-      <li class='small px2 inline-block white'>Support</li>
-    </ul>
-  </footer>
+    <div class='bg-silver py3'>
+      <div class='cntr center'>
+        <ul class='list-reset mt3'>
+          <li class='inline-block px3'><a href='#'>About</a></li>
+          <li class='inline-block px3'><a href='#'>API</a></li>
+          <li class='inline-block px3'><a href='#'>Terms</a></li>
+          <li class='inline-block px3'><a href='#'>Privacy</a></li>
+          <li class='inline-block px3'><a href='https://github.com/bentranter/course-notes'>Contribute</a></li>
+        </ul>
+        <p class='mid-gray mt3'>StudyPiggy is free, open-source software. Read the <a href='http://docs.studypiggy.com'>docs</a> and view the project on <a href='https://github.com/bentranter/course-notes'>GitHub</a> to get started.</p>
+      </div>
+    </div>
 
+    <script src='main.js'></script>
   </body>
 
-  </html>
+</html>
