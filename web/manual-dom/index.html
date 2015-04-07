@@ -16,7 +16,7 @@
     <!-- Text Editor Template -->
     <script id='noteEditorTemplate' type='text/template'>
       <div class='col col-9'>
-        <div id='noteTitle' class='h3 mb2 bold' data-ph='Start note taking...' contentEditable='true'><%= title %></div>
+        <div id='noteTitle' class='h3 mb2 bold' data-ph='Untitled' contentEditable='true'><%= title %></div>
         <div id='noteFolder' class='mb3 small-caps' data-ph='Enter the folder name' contentEditable='true'><%= folder %></div>
       </div>
       <div class='col col-3'>
@@ -41,14 +41,14 @@
         <div class='bl p2 bg-silver'>
           <div id='reader' class='bg-white reader bl'></div>
           <input id='wpm' type='range' default='500' min='200' max='1000'>
-          <button id='pause' class='button bg-silver blue small-caps'>Pause</button>
-          <button id='restart' class='button bg-silver mid-gray small-caps'>Restart</button>
+          <button id='pause' class='button bg-silver blue small-caps'>Play</button>
+          <button id='finish' class='button bg-silver mid-gray small-caps'>Finish</button>
         </div>
       </div>
     </script>
 
     <!-- Text Editor Section -->
-    <div id='noteEditor' class='z1 absolute top-0 left-0 bottom-0 right-offset m4 overflow-auto'>
+    <div id='noteEditor' class='z1 absolute top-0 left-0 bottom-0 right-offset m4'>
     </div>
     <!-- /Text Editor Section -->
 

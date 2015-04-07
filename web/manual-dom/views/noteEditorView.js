@@ -28,7 +28,7 @@ var app = app || {};
     },
 
     delete: function() {
-      var response = window.confirm('Are you sure lol');
+      var response = window.confirm('Are you sure?');
       if (response === true) {
         // Roll outta that view! (before we know if the model could even be destroyed)
         app.router.navigate('/notes/new', { trigger: true });
@@ -79,14 +79,22 @@ var app = app || {};
     // This is pretty insane, and should probably be
     // in its own file
     speedread: function() {
-      var wpm = parseInt($('#wpm').val());
-      var wordsPerMs = 60000/wpm;
-      var pauseBtn = $('#pause');
-      var restartBtn = $('#restart');
-      var reader = $('#reader');
+      var self = this;
 
-      // Split on any spaces.
-      var text = this.model.get('content').split(/\s+/);
+      // We set up our elements like this to take advantage
+      // of object chaching and stay outta the DOM
+      var pauseBtn = $('#pause');
+      var finishBtn = $('#finish');
+      var reader = $('#reader');
+      var speedControl = $('#wpm');
+
+      var wpm = parseInt(speedControl.val());
+      speedControl.on('change mousemove', function() {
+        wpm = speedControl.val();
+      });
+      var wordsPerMs = 60000/wpm;
+      // Split on any spaces, remove any line breaks present in the note
+      var text = this.model.get('content').replace(/\<br\>/g,' ').split(/\s+/);
 
       // The reader won't stop if the selection starts or ends with spaces
       if (text[0] === '') {
@@ -96,30 +104,23 @@ var app = app || {};
         text = text.slice(0, text.length - 1);
       }
 
-      // Preprocess words
-      var temp = text.slice(0); // copy Array
+      /**
+       * Preprocess words
+       *
+       * Start by copying the array
+       */
+      var temp = text.slice(0);
       var t = 0;
 
       for (var i = 0; i < text.length; i++) {
-        if(text[i].indexOf('.') !== -1){
-            temp[t] = text[i].replace('.', '&#8226;');
-        }
-
         // Double up on long words and words with commas.
         if((text[i].indexOf(',') !== -1 || text[i].indexOf(':') !== -1 || text[i].indexOf('-') !== -1 || text[i].indexOf('(') !== -1|| text[i].length > 8) && text[i].indexOf('.') === -1) {
           temp.splice(t+1, 0, text[i]);
-          temp.splice(t+1, 0, text[i]);
-          t++;
           t++;
         }
-
         // Add an additional space after punctuation.
         if(text[i].indexOf('.') !== -1 || text[i].indexOf('!') !== -1 || text[i].indexOf('?') !== -1 || text[i].indexOf(':') !== -1 || text[i].indexOf(';') !== -1|| text[i].indexOf(')') !== -1) {
           temp.splice(t+1, 0, ' ');
-          temp.splice(t+1, 0, ' ');
-          temp.splice(t+1, 0, ' ');
-          t++;
-          t++;
           t++;
         }
         t++;
@@ -128,7 +129,7 @@ var app = app || {};
       text = temp.slice(0);
 
       var currentWord = 0;
-      var running = true;
+      var running = false;
       var timer = [];
 
       pauseBtn.click(function() {
@@ -156,6 +157,7 @@ var app = app || {};
               if(currentWord >= text.length) {
                   currentWord = 0;
                   stopPlayer();
+                  self.closeSpeedReadingDialog();
               }
           }, wordsPerMs));
       }
@@ -166,11 +168,6 @@ var app = app || {};
           }
           running = false;
       }
-
-      // Delay the speedreading until the modal is open
-      setTimeout(function() {
-        startPlayer();
-      }, 500);
   }
   });
 })();
