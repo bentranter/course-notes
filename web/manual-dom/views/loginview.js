@@ -69,8 +69,10 @@ var app = app || {};
       window.localStorage.setItem('username', '');
       this.username = '';
       this.render();
-      // @TODO: DEMO ONLY - In prod don't do this!!!
-      $('#noteList').html('');
+      // @TODO: (Note to self) After going through so much
+      // trouble to update the DOM manually for insane
+      // perf, you do this... 
+      window.location.reload();
     },
 
     handleSuccess: function(res, cb) {

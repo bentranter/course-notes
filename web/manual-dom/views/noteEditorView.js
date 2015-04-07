@@ -9,8 +9,9 @@ var app = app || {};
     template: _.template($('#noteEditorTemplate').html()),
 
     events: {
-      'click .save': 'save',
-      'click .delete': 'delete'
+      'click #save': 'save',
+      'click #delete': 'delete',
+      'click #speedread': 'speedread'
     },
 
     initialize: function() {
@@ -38,10 +39,10 @@ var app = app || {};
     save: function() {
       if (this.model.isNew()) {
         app.notes.create({
-          title: 'New note',
+          title: $('#noteTitle').html(),
           content: $('#noteContent').html(),
-          subtitle: 'New subtitle',
-          folder: 'Whatever'
+          subtitle: 'Unused',
+          folder: $('#noteFolder').html()
         }, {
           wait: true,
           success: function(res) {
@@ -50,14 +51,28 @@ var app = app || {};
         });
       } else {
         this.model.save({ 
-          title: 'Test',
+          title: $('#noteTitle').html(),
           content: $('#noteContent').html(),
-          subtitle: 'Test',
-          folder: 'First'
+          subtitle: 'Unused',
+          folder: $('#noteFolder').html()
         });
         // Backbone is smart enough not to re-render anything unless the server throws an error
         this.model.trigger('change');
       }
+    },
+
+    speedread: function() {
+      var self = this;
+      $('#overlay').show();
+      $('#dialog').fadeIn(300);
+      $('#overlay').click(function(e) {
+        self.closeSpeedReadingDialog();
+      });
+    },
+
+    closeSpeedReadingDialog: function() {
+      $('#overlay').hide();
+      $('#dialog').fadeOut(300);
     }
   });
 })();

@@ -1349,6 +1349,10 @@ input[type=range] {
 
 /* Background Color */
 
+.bg-transparent {
+  background-color: rgba(0,0,0,0);
+}
+
 .bg-black {
   background-color: #000;
 }
@@ -1475,4 +1479,28 @@ input[type=range] {
 
 .active {
   color: #333;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  opacity: .15;
+  -moz-opacity: .15;
+  z-index: 101;
+  display: none;
+}
+
+.dialog {
+  display: none;
+  position: fixed;
+  padding: 2em;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  z-index: 102;
 }
