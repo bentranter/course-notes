@@ -1484,23 +1484,33 @@ input[type=range] {
 .overlay {
   position: fixed;
   top: 0;
-  right: 0;
+  right: 360px;
   bottom: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
-  background: #000;
-  opacity: .15;
-  -moz-opacity: .15;
+  background: #fff;
   z-index: 101;
   display: none;
 }
 
+/**
+ * How in the world can I truly center this...?
+ */
 .dialog {
   display: none;
   position: fixed;
-  padding: 2em;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
+  top: 2em;
+  left: 25%;
+  background-color: #fff;
   z-index: 102;
+}
+
+/**
+ * THE READER _CANNOT_ RE-RENDER UNDER ANY CONDITION,
+ * SO IF THIS GETS CHANGED, DON'T LET THAT HAPPEN!
+ */
+.reader {
+  height: 3em !important;
+  padding: 1rem;
+  font-size: 1.5em;
+  text-align: center;
 }

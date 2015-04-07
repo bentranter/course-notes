@@ -38,6 +38,12 @@
       <div id='dialog' class='dialog'>
         <h3 class='h3 center light'>Now speedreading:</h3>
         <h1 class='h1 center light'><%= title %></h1>
+        <div class='bl p2 bg-silver'>
+          <div id='reader' class='bg-white reader bl'></div>
+          <input id='wpm' type='range' default='500' min='200' max='1000'>
+          <button id='pause' class='button bg-silver blue small-caps'>Pause</button>
+          <button id='restart' class='button bg-silver mid-gray small-caps'>Restart</button>
+        </div>
       </div>
     </script>
 
