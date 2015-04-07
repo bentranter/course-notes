@@ -23,35 +23,6 @@ var app = app || {};
       var data = this.model.toJSON();
       this.$el.html(this.template(data));
       return this;
-    },
-
-    // editTitle: function(e) {
-    //   if (e.which === ENTER_KEY) {
-    //     var value = e.target.value;
-    //     this.model.save({
-    //       data: { username: this.model.toJSON().username },
-    //       title: value
-    //     });
-    //     this.model.trigger('change');
-    //   }
-    // },
-
-    // editPost: function(e) {
-    //   if (e.which === ENTER_KEY) {
-    //     var value = e.target.value;
-    //     this.model.save({ 
-    //       message: value
-    //     });
-    //     this.model.trigger('change');
-    //   }
-    // },
-
-    // clear: function() {
-    //   this.model.destroy({
-    //     data: {
-    //       username: this.model.toJSON().username
-    //     }
-    //   });
-    // }
+    }
   });
 })();

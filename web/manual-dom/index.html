@@ -47,6 +47,39 @@
       </div>
       <!-- /Sign in Form -->
 
+      <!-- Account: Signed Out -->
+      <script id='accountSignedOut' type='text/template'>
+        <span class='left'>
+          <h5 class='m0 py2 small-caps btd'>Sign in to StudyPiggy</h5>
+        </span>
+        <span class='right'>
+          <h5 class='m0 py2 small-caps light light-gray'>Forgot password?</h5> 
+        </span>
+        <div class='cf'></div>
+        <form class='signInForm fieldset-reset'>
+          <input class='block full-width' type='email' placeholder='Email' />
+          <input class='block full-width' type='password' placeholder='Password' />
+          <input class='button full-width bg-silver small-caps regular blue black-h center' type='submit' value='Sign In' />
+        </form>
+      </script>
+      <!-- /Account: Signed Out -->
+
+      <!-- Account: Signed In -->
+      <script id='accountSignedIn' type='text/template'>
+        <span class='left'>
+          <h5 class='m0 py2 small-caps btd'>Welcome, <%= username %></h5>
+        </span>
+        <span class='right'>
+          <h5 class='m0 py2 small-caps light light-gray'>Sign Out</h5> 
+        </span>
+        <div class='cf'></div>
+      </script>
+      <!-- /Account: Signed in -->
+
+      <!-- Account -->
+      <div id='account' class='signInPage ml2 mr2 mt2 btl'></div>
+      <!-- /Account -->
+
       <!-- Notes -->
       <div class='ml2 mr2 mt3 mb2 btl'>
         <span class='left'>
@@ -149,6 +182,7 @@
   <script src='backbone.js'></script>
   <script src='models/note.js'></script>
   <script src='collections/notes.js'></script>
+  <script src='views/loginview.js'></script>
   <script src='views/noteview.js'></script>
   <script src='views/appview.js'></script>
   <script src='views/noteeditorview.js'></script>

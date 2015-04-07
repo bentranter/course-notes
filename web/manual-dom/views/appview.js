@@ -17,6 +17,7 @@ var app = app || {};
       app.notes.fetch();
 
       this.$list = this.$('#noteList');
+      this.$account = this.$('#account');
 
       this.listenTo(app.notes, 'add', this.addOne);
       this.listenTo(app.notes, 'all', this.render);
@@ -31,11 +32,6 @@ var app = app || {};
         model: note
       });
       this.$list.append(view.render().el);
-    },
-
-    newPost: function(e) {
-      e.preventDefault();
-      // @TODO
     }
   });
 })();
