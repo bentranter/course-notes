@@ -1448,19 +1448,3 @@ input[type=range] {
 /**
  * Page specific
  */
-.success-message {
-  display: none;
-  color: green;
-}
-
-.error-message {
-  display: none;
-  color: red;
-}
-
-.decoration {
-  background-image: url('img/decoration.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  height: 10px;
-}
