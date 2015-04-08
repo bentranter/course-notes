@@ -964,6 +964,15 @@ a:hover {
   color: #aeaeae;
 }
 
+.link {
+  color: #f6809e;
+}
+
+.link:hover {
+  color: #f6809e;
+  text-decoration: underline;
+}
+
 pre,
 code {
   background-color: #ddd;
@@ -1246,16 +1255,12 @@ input[type=range] {
   border-left-color: #555;
 }
 
-.shadow {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
-}
-
 .rounded {
   border-radius: 3px;
 }
 
 .shadow {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 4px 0 rgba(128, 128, 128, 0.20);
 }
 
 .circle {

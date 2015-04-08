@@ -14,7 +14,6 @@
 
     <!-- Sidebar -->
     <aside class='absolute top-0 left-0 bottom-0 overflow-auto bg-silver brl' id='sidebar'>
-      <h3 class='h3 m0 p2 center bg-light-gray'>Navigation</h3>
       <ul class='list-reset px2'>
 
         <h4 class='h4 center'>Introduction</h4>
@@ -43,36 +42,23 @@
       </ul>
     </aside>
 
-    <div class='absolute top-0 left-offset bottom-0 right-0 overflow-auto' id='main'>
+    <div class='absolute top-0 left-offset bottom-0 right-0 overflow-auto' id='main'> 
 
-    <!-- Main Header -->
-      <header class='relative bbl'>
-        <button id='toggleSidebar' class='fixed top-0 left-0 mt3 bg-white gray'>
-          <svg width='16px' height='16px' viewBox='0 0 32 32' style='fill:currentcolor'><path d='M3 8 A3 3 0 0 0 9 8 A3 3 0 0 0 3 8 M12 6 L28 6 L28 10 L12 10z M3 16 A3 3 0 0 0 9 16 A3 3 0 0 0 3 16 M12 14 L28 14 L28 18 L12 18z M3 24 A3 3 0 0 0 9 24 A3 3 0 0 0 3 24 M12 22 L28 22 L28 26 L12 26z '></path></svg>
-        </button>
-        <div class='cntr'>
-          <span class='left'>
-            <h3 class='h3 m0 px1 py3 inline-block coral'>StudyPiggy</h3>
-          </span>
-          <span class='right'>
-            <ul class='list-reset inline-block'>
-              <li class='mt1 px1 py3 inline-block'>Project Documentation</li>
-            </ul>
-          </span>
-          <div class='cf'></div>
-        </div>
-      </header>
+      <!-- Nav Toggle -->
+      <button id='toggleSidebar' class='fixed top-0 left-0 bg-silver gray mt1'>
+        <svg width='16px' height='16px' viewBox='0 0 32 32' style='fill:currentcolor'><path d='M3 8 A3 3 0 0 0 9 8 A3 3 0 0 0 3 8 M12 6 L28 6 L28 10 L12 10z M3 16 A3 3 0 0 0 9 16 A3 3 0 0 0 3 16 M12 14 L28 14 L28 18 L12 18z M3 24 A3 3 0 0 0 9 24 A3 3 0 0 0 3 24 M12 22 L28 22 L28 26 L12 26z '></path></svg>
+      </button>       
 
       <!-- Main Content -->
       <main class='bg-white'>
-        <div class='container px2'>
+        <div class='cntr px2'>
 
-          <h1 class='huge center light'>Get straight A's, studying for just three minutes a day.</h1>
-          <h2 class='h2 center big light gray mb3'>Welcome to StudyPiggy.</h2>
+          <h1 class='huge center light'>StudyPiggy</h1>
+          <h2 class='h2 center big light mid-gray mb3'>Project Documentation</h2>
 
-          <p class='m0 mt2 px2 py2 center bg-lg1'>All the code for this project is available at <a href='https://github.com/bentranter/course-notes'>github.com/bentranter/course-notes</a></p>
+          <p class='m0 mt3 px2 py2 center bl rounded shadow'>All the code for this project is available at <a class='link' href='https://github.com/bentranter/course-notes'>github.com/bentranter/course-notes</a></p>
 
-          <h2 class='h2 caps'>Introduction</h2>
+          <h2 class='h2 big light gray mb2'>Introduction</h2>
           <h3 class='h3'><a name='about'>About</a></h3>
           <p>SpeedStudy can be summed up as, <span class='italic'>"the way to get straight A's studying for three minutes a day"</span>. SpeedStudy aims to enable students to be able to spend around three minutes/day studying, while retaining around 95% of the content in their notes. SpeedStudy combines two modern approaches to speeding up learning: <span class='bold'>speed reading and spaced repetition</span>. We'll see more about how these approaches can help students learn and study much faster shortly.</p>
           <p>From a technical perspective, SpeedStudy aims to be an extremely lean service. That means, blazingly fast load times, as-small-as-possible codebase, modular design pattterns, simple architecture, and small data footprint. Since we're essentially a service that stores text via a REST API, we can create an architecture that is extremely efficient, both in terms of cost and bandwidth.</p>

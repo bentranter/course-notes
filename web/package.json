@@ -1,7 +1,7 @@
 {
   "name": "course-notes",
   "author": "Ben Tranter",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "private": true,
   "main": "app.js",
   "scripts": {
