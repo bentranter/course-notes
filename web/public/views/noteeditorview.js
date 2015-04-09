@@ -11,7 +11,9 @@ var app = app || {};
     events: {
       'click #save': 'save',
       'click #delete': 'delete',
-      'click #speedread': 'openSpeedReadingDialog'
+      'click #speedread': 'openSpeedReadingDialog',
+      // Keyboard shortcut for save
+      'keydown': 'handleSaveShortcut'
     },
 
     initialize: function() {
@@ -62,6 +64,15 @@ var app = app || {};
         this.model.trigger('change');
         this.alert('#alertSaved');
       }
+    },
+
+    handleSaveShortcut: function(e) {
+      if((e.ctrlKey || e.metaKey) && e.which === 83) {
+        e.preventDefault();
+        this.save();
+        return false;
+      }
+      return true;
     },
 
     openSpeedReadingDialog: function() {
