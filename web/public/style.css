@@ -50,10 +50,6 @@ fieldset {
   border: 1px solid #ccc;
 }
 
-input:focus {
-  outline: 1px solid #03A9F4;
-}
-
 input[type=text],
 input[type=datetime],
 input[type=datetime-local],
