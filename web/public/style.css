@@ -1501,6 +1501,20 @@ input[type=range] {
   max-width: 400px;
 }
 
+.alert {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 360px;
+  padding: .5em 1em;
+  margin-top: .5em;
+  margin-right: 4em;
+  min-width: 144px;
+  background-color: #323232;
+  color: #fff;
+  z-index: 102;
+}
+
 /**
  * THE READER _CANNOT_ RE-RENDER UNDER ANY CONDITION,
  * SO IF THIS GETS CHANGED, DON'T LET THAT HAPPEN!

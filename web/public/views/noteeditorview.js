@@ -33,6 +33,7 @@ var app = app || {};
         // Roll outta that view! (before we know if the model could even be destroyed)
         app.router.navigate('/notes/new', { trigger: true });
         this.model.destroy();
+        this.alert('#alertDeleted');
       }
     },
 
@@ -49,6 +50,7 @@ var app = app || {};
             app.router.navigate('/notes/' + res.id, false);
           }
         });
+        this.alert('#alertSaved');
       } else {
         this.model.save({ 
           title: $('#noteTitle').html(),
@@ -58,6 +60,7 @@ var app = app || {};
         });
         // Backbone is smart enough not to re-render anything unless the server throws an error
         this.model.trigger('change');
+        this.alert('#alertSaved');
       }
     },
 
@@ -168,6 +171,13 @@ var app = app || {};
           }
           running = false;
       }
-  }
+    },
+
+    alert: function(el) {
+      // Basically just a popup message. Unfortuately,
+      // it gets ripped out from the DOM afer the
+      // request fires
+      $(el).show().delay(3000).fadeOut();
+    }
   });
 })();

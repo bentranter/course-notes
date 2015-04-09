@@ -14,11 +14,19 @@
 
   <body id='app'>
 
+    <!-- Put any alerts here since this part of the DOM
+         will never get re-rendered, since this is
+         outside of any template. It's also better for
+         accessibility this way.
+    -->
+    <div id='alertSaved' class='alert' role='alert'>Saved</div>
+    <div id='alertDeleted' class='alert' role='alert'>Deleted</div>
+
     <!-- Text Editor Template -->
     <script id='noteEditorTemplate' type='text/template'>
       <div class='col col-9'>
-        <div id='noteTitle' class='h3 mb2 bold' data-ph='Untitled' contentEditable='true' tabIndex='1' role='textbox'><%= title %></div>
-        <div id='noteFolder' class='mb3 small-caps' data-ph='Enter the folder name' contentEditable='true' tabIndex='1' role='textbox'><%= folder %></div>
+        <div id='noteTitle' class='h3 mb2 bold' data-ph='Untitled' contentEditable='true' spellcheck='true' tabIndex='1' role='textbox'><%= title %></div>
+        <div id='noteFolder' class='mb3 small-caps' data-ph='Enter the folder name' contentEditable='true' spellcheck='true' tabIndex='1' role='textbox'><%= folder %></div>
       </div>
       <div class='col col-3'>
         <div class='right block'>
@@ -34,7 +42,8 @@
         </div>
       </div>
       <div class='cf'></div>
-      <div id='noteContent' data-ph='Start note taking...' contentEditable='true' tabIndex='1' role='textbox'><%= content %></div>
+      <div id='noteContent' data-ph='Start note taking...' contentEditable='true' spellcheck='true' tabIndex='1' role='textbox'><%= content %></div>
+
       <div id='overlay' class='overlay'></div>
       <div id='dialog' class='dialog'>
         <h3 class='h3 center light'>Now speedreading:</h3>
@@ -46,6 +55,7 @@
           <button id='finish' class='button bg-silver mid-gray small-caps' aria-label='Close the speedreader for this document'>Finish</button>
         </div>
       </div>
+
     </script>
 
     <!-- Text Editor Section -->
