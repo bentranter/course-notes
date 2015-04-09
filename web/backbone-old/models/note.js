@@ -7,7 +7,7 @@ var app = app || {};
   app.Note = Backbone.Model.extend({
     defaults: {
       title: '',
-      subtitle: 'unused',
+      subtitle: '',
       content: '',
       folder: ''
     }

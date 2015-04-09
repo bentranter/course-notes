@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- <html manifest='appcache.manifest'> -->
 <html>
 
   <head>
@@ -12,90 +11,168 @@
     <link rel='stylesheet' href='style.css'>
   </head>
 
-  <!-- AppView can access everything within the body div right now -->
-  <body class='full-viewport' id='app'>
+  <body id='app'>
 
-    <!-- Top Bar -->
-    <div class='z2 absolute top-0 left-0 right-0 bbl py1'>
-      <a href='#account/login' id='accountToggle' class='blk2 sidebar-width left center bold m0'>Account 
-        <svg height='16px' width='16px' viewBox='0 0 32 32' style='fill:currentcolor'><path d='M4 8 H28 L16 26 z '></path></svg>
-      </a>
-      <span class='sm-show-i'>
-        <a href='#!' class='ml2 small caps lg0 blk2-h bold'>Note 1</a>
-        <a href='#!' class='ml2 small caps lg0 blk2-h bold'>Note 2</a>
-        <a href='#!' class='ml2 small caps lg0 blk2-h bold'>Note 3</a>
-        <a href='#!' class='ml2 small caps lg0 blk2-h bold'>Note 4</a>
-      </span>
-      <a href='#!' id='sidebarToggle' class='right lg0 blk2-h mr2'>
-        <svg width='22px' height='22px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M3 8 A3 3 0 0 0 9 8 A3 3 0 0 0 3 8 M12 6 L28 6 L28 10 L12 10z M3 16 A3 3 0 0 0 9 16 A3 3 0 0 0 3 16 M12 14 L28 14 L28 18 L12 18z M3 24 A3 3 0 0 0 9 24 A3 3 0 0 0 3 24 M12 22 L28 22 L28 26 L12 26z "></path></svg>
-      </a>
-      <a href='#!' id='searchToggle' class='px2 right m0 lg0 blk2-h'>
-        <svg height='22px' width='22px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M12 0 A12 12 0 0 0 0 12 A12 12 0 0 0 12 24 A12 12 0 0 0 18.5 22.25 L28 32 L32 28 L22.25 18.5 A12 12 0 0 0 24 12 A12 12 0 0 0 12 0 M12 4 A8 8 0 0 1 12 20 A8 8 0 0 1 12 4  "></path></svg>
-      </a>
+    <!-- Text Editor Template -->
+    <script id='noteEditorTemplate' type='text/template'>
+      <div class='col col-9'>
+        <div id='noteTitle' class='h3 mb2 bold' data-ph='Untitled' contentEditable='true' tabIndex='0'><%= title %></div>
+        <div id='noteFolder' class='mb3 small-caps' data-ph='Enter the folder name' contentEditable='true' tabIndex='0'><%= folder %></div>
+      </div>
+      <div class='col col-3'>
+        <div class='right block'>
+          <button id='save' class='bg-transparent mid-gray'>
+            <svg width='16px' height='16px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M2 18 L30 2 L14 30 L14 18z "></path></svg>
+          </button>
+          <button id='delete' class='bg-transparent mid-gray'>
+            <svg width='16px' height='16px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 L10 4 L12 2 L20 2 L22 4 L28 4 L29 8 L3 8 z M5 10 L27 10 L26 30 L6 30 z  "></path></svg>
+          </button>
+          <button id='speedread' class='bg-transparent mid-gray'>
+            <svg width='16px' height='16px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M16 0 A16 16 0 0 0 0 16 A16 16 0 0 0 16 32 A16 16 0 0 0 32 16 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 28 16 A12 12 0 0 1 16 28 A12 12 0 0 1 4 16 A12 12 0 0 1 16 4 M14 6 L14 17.25 L22 22 L24.25 18.5 L18 14.75 L18 6z "></path></svg>
+          </button>
+        </div>
+      </div>
+      <div class='cf'></div>
+      <div id='noteContent' data-ph='Start note taking...' contentEditable='true' tabIndex='0'><%= content %></div>
+      <div id='overlay' class='overlay'></div>
+      <div id='dialog' class='dialog'>
+        <h3 class='h3 center light'>Now speedreading:</h3>
+        <h1 class='h1 center light'><%= title %></h1>
+        <div class='bl p2 bg-silver'>
+          <div id='reader' class='bg-white reader bl'></div>
+          <input id='wpm' type='range' default='500' min='200' max='1000'>
+          <button id='pause' class='button bg-silver blue small-caps'>Play</button>
+          <button id='finish' class='button bg-silver mid-gray small-caps'>Finish</button>
+        </div>
+      </div>
+    </script>
+
+    <!-- Text Editor Section -->
+    <div id='noteEditor' class='z1 absolute top-0 left-0 bottom-0 right-offset m4'>
+    </div>
+    <!-- /Text Editor Section -->
+
+    <!-- Sidebar -->
+    <div class='z1 absolute sidebar top-0 bottom-0 right-0 overflow-auto bg-silver bll'>
+
+      <!-- Account: Signed Out -->
+      <script id='accountSignedOut' type='text/template'>
+        <span class='left'>
+          <h5 class='m0 py2 small-caps btd'>Sign in to StudyPiggy</h5>
+        </span>
+        <span class='right'>
+          <h5 class='m0 py2 small-caps light light-gray'>Forgot password?</h5> 
+        </span>
+        <div class='cf'></div>
+        <form class='signInForm fieldset-reset'>
+          <input id='username' class='block full-width' type='email' placeholder='Email' />
+          <input id='password' class='block full-width' type='password' placeholder='Password' />
+          <input id='signin' class='button full-width bg-silver small-caps regular blue black-h center' type='submit' value='Sign In' />
+        </form>
+      </script>
+      <!-- /Account: Signed Out -->
+
+      <!-- Account: Signed In -->
+      <script id='accountSignedIn' type='text/template'>
+        <span class='left'>
+          <h5 class='m0 py2 small-caps btd'>Welcome, <%= username %></h5>
+        </span>
+        <span class='right'>
+          <button id='signout' class='h5 bg-silver m0 px0 py2 small-caps light light-gray'>Sign Out</button> 
+        </span>
+        <div class='cf'></div>
+      </script>
+      <!-- /Account: Signed in -->
+
+      <!-- Account -->
+      <div id='account' class='signInPage ml2 mr2 mt2 btl'></div>
+      <!-- /Account -->
+
+      <!-- Notes -->
+      <div class='ml2 mr2 mt3 mb2 btl'>
+        <span class='left'>
+          <h5 class='m0 py2 small-caps btd'>Your Notes</h5>
+        </span>
+        <span class='right'>
+          <h5 class='inline-block m0 py2 small-caps light blue'>
+            <a href='#notes/new'>New</a>
+          </h5>
+        </span>
+        <div class='cf'></div>
+
+        <!-- Notes List -->
+        <ul id='noteList' class='list-reset'>
+
+          <!-- Template for a single note -->
+          <script id='noteTemplate' type='text/template'>
+            <li class='mb2'>
+              <a href='#notes/<%= id %>' class='h5 ml2 light-gray light'><%= title %></a>
+            </li>
+          </script>
+          <!-- /Template for a single note -->
+
+        </ul>
+        <!-- /Notes List -->
+
+      </div>
+      <!-- /Notes -->
+
+      <!-- Editor Buttons -->
+        <div class='ml2 mr2 mt3 btl'>
+          <span class='left'>
+            <h5 class='m0 py2 small-caps btd'>Editor</h5>
+          </span>
+          <div class='cf'></div>
+          <button class='bg-silver bold w20'>
+            <svg width="16px" height='16px' viewBox="0 0 32 32">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g font-size="32" font-family="Playfair Display" fill="#333333" font-weight="bold">
+                        <text>
+                            <tspan x="6" y="27">B</tspan>
+                        </text>
+                    </g>
+                </g>
+            </svg>
+          </button>
+          <button class='bg-silver italic w20'>
+            <svg width="16px" height='16px' viewBox="0 0 32 32">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g font-size="32" font-family="Playfair Display" fill="#333333" font-weight="normal">
+                        <text>
+                            <tspan x="6" y="27">I</tspan>
+                        </text>
+                    </g>
+                </g>
+            </svg>
+          </button>
+          <button class='bg-silver regular w20'>
+              <svg width="16px" height="16px" viewBox="0 0 32 32" >
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g font-family="Roboto" fill="#333333" font-weight="normal">
+                          <text font-size="32">
+                              <tspan x="2" y="27">T</tspan>
+                          </text>
+                          <text font-size="20">
+                              <tspan x="16" y="27">T</tspan>
+                          </text>
+                      </g>
+                  </g>
+              </svg>
+          </button>
+        </div>
+      <!-- /Editor Buttons -->
 
     </div>
+    <!-- /Sidebar -->
 
-    <!-- Mobile-only navigation -->
-    <span class='z4 absolute top-0 left-0 right-0 mobile-top-bar-offset bbl sm-hide nowrap overflow-scroll-x'>
-      <a href='#!' class='px1 py1 small caps lg0 blk2-h bold'>Note 1</a>
-      <a href='#!' class='px1 py1 small caps lg0 blk2-h bold'>Note 2</a>
-      <a href='#!' class='px1 py1 small caps lg0 blk2-h bold'>Note 3</a>
-      <a href='#!' class='px1 py1 small caps lg0 blk2-h bold'>Note 4</a>
-    </span>
-
-    <!-- Notes List View -->
-    <aside class='z1 animate absolute top-bar-offset left-0 right-0 bottom-0 overflow-y-auto sidebar-width bg-lg1 brl' id='sidebar'>
-      <div id='account' class='hide e0e0e0 px1 py1 bbl'>
-        <h4 class='center light m0 mb1'>Sign In</h4>
-        <input id='username' type='text' class='fieldset-reset bl full-width' placeholder='Username' />
-        <input id='password' type='password' class='fieldset-reset bl full-width m0' placeholder='Password' />
-        <input id='loginButton' type='button' class='button full-width bg-blue mt1 white' value='Log In' />
-        <input id='logoutButton' type='button' class='button full-width bg-white mt1 bg-blk' value='Log Out' />
-      </div>
-      <script id='notesListTemplate' type='text/template'>
-        <li>
-          <a href='#notes/<%= id %>' class='small m0 p1 block gray1 gray0-h'><%= title %></a>
-        </li>
-      </script>
-      <ul class='list-reset m0'>
-        <li class='small m0 p1 block gray1 gray0-h'><a href='#new'>New</a></li>
-      </ul>
-      <ul id='notesList' class='list-reset m0'></ul>
-    </aside>
-
-    <!-- Note Content Template -->
-    <main class='z1 absolute overflow-y-auto top-bar-offset bottom-0 left-0 sidebar-offset right-0 px2 py2' id='main'>
-      <div id='item'></div>
-      <script id='item-template' type='text/template'>
-        <%= title %>
-      </script>
-        <!-- Search Bar -->
-        <input id='search' class='hide block bsl mx-auto m0 mr2 fieldset-reset rounded' type='text' placeholder='Search...' />
-        <div class='container'>
-          <input class='range-light' type='range' id='range' value='50'/>
-          <div id='noteContent'></div>
-          <script id='noteContentTemplate' type='text/template'>
-            <h2 contentEditable='true' id='noteTitle' data-ph='Title'><%= title %></h2>
-            <p contentEditable='true' id='noteBody' data-ph='Start writing...'><%= content %></p>
-            <button id='destroyButton' class='button absolute right-0 bottom-0 mb2 mr-button-offset'>Destroy</button>
-            <button id='saveButton' class='button absolute right-0 bottom-0 mb2 mr2 bg-blue white'>SAVE</button>
-          </script>
-        </div>
-    </main>
-
-  <!-- Scripts -->  
-  <script src='jquery.js'></script>
-  <script src='underscore.js'></script>
+  <!-- Scripts -->
   <script src='backbone.js'></script>
-  <script src='models/user.js'></script>
   <script src='models/note.js'></script>
-  <script src='collections/users.js'></script>
   <script src='collections/notes.js'></script>
-  <script src='views/accountview.js'></script>
-  <script src='views/listview.js'></script>
-  <script src='views/tabview.js'></script>
+  <script src='views/loginview.js'></script>
   <script src='views/noteview.js'></script>
   <script src='views/appview.js'></script>
+  <script src='views/noteeditorview.js'></script>
   <script src='routers/router.js'></script>
   <script src='app.js'></script>
   </body>

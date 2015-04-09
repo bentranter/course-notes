@@ -93,4 +93,4 @@ http.createServer(app)
  * Start live-server at 5681 and launch your browser
  */
  liveServer.start(5680, 'www', false);
-liveServer.start(5681, 'manual-dom', true);
+liveServer.start(5681, 'public', true);

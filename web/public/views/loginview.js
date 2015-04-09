@@ -42,6 +42,7 @@ var app = app || {};
           username: $('#username').val(),
           password: $('#password').val()
         },
+        // You need to re-run $.ajaxSetup in here! Don't just fetch with a token
         success: function(res) {
           var response = res;
           self.handleSuccess(response, function() {

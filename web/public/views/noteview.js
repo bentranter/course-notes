@@ -1,57 +1,28 @@
-// Global namespace
+// Namespaces: Global Backbone, Underscore, jQuery, ENTER_KEY
 var app = app || {};
 
 (function() {
   'use strict';
 
   app.NoteView = Backbone.View.extend({
-    el: '#noteContent',
+    tagName: 'li',
 
-    template: _.template($('#noteContentTemplate').html()),
-    
+    template: _.template($('#noteTemplate').html()),
+
     events: {
-      'click #saveButton'    : 'save',
-      'click #destroyButton' : 'destroy'
     },
 
     initialize: function() {
-      console.log('noteview.js: Initialized new Backbone view for a note.');
-      if (window.localStorage.getItem('token')) {
-        this.render();
-      } else {
-        console.log('End of initialize func');
-      }
-   },
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'destroy', this.remove);
+    },
 
     render: function() {
-      this.$el.html(this.template(this.model.attributes));
-    },
-
-    destroy: function() {
-      var self = this;
-      console.log('Clicked destroy');
-      var action = window.confirm('Are you sure you want to delete?');
-      if (action === true) {
-        self.model.destroy({
-        headers: {
-          'x-access-token': window.localStorage.getItem('token')
-        }
-      }).complete(function() {
-        // Route to the new note view
-        console.log('Delete fired');
-      });
-      }
-    },
-
-    save: function() {
-      this.model.save({
-        title: $('#noteTitle').html(),
-        content: $('#noteBody').html()
-      },{
-        headers: {
-          'x-access-token': window.localStorage.getItem('token')
-        }
-      });
+      // Somewhere in here I think I can leverage object
+      // caching to speed up renders, but idk for sure
+      var data = this.model.toJSON();
+      this.$el.html(this.template(data));
+      return this;
     }
   });
 })();

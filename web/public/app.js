@@ -7,18 +7,32 @@ var ESCAPE_KEY = 27;
 $(document).ready(function() {
   'use strict';
 
-  app.alert = function(message) {
-    window.alert(message);
-  };
+  // Send the token with every request
+  $.ajaxSetup({
+    headers: {
+      'X-Access-Token': window.localStorage.getItem('token')
+    },
+    statusCode: {
+      401: function() {
+        console.log('Please sign in');
+      },
+      403: function() {
+        console.log('please provide a valid token');
+      },
+      500: function() {
+        console.log('RIP server... it was a good run.');
+      }
+    }
+  });
 
-  // Make a new app view to essentially 'start' the app
+  // Turn the key... start the ignition baby!!!
   new app.AppView();
 
-  // Initialize your things
-  new app.AccountView({
-    collection: app.users
-  });
-  new app.ListView({
-    collection: app.notes
-  });
+  // Shift into first...
+  new app.LoginView();
+
+  // AND PUSH THE GAS!!! (Don't start the router until our posts have loaded)
+  app.notes.on('sync', _.once(function() {
+    Backbone.history.start();
+  }));
 });
