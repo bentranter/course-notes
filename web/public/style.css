@@ -138,7 +138,7 @@ button:hover,
 
 button:focus,
 .button:focus {
-  outline: none;
+  outline: default;
 }
 
 ::-moz-focus-inner {
@@ -1514,4 +1514,11 @@ input[type=range] {
   padding: 1rem;
   font-size: 1.5em;
   text-align: center;
+}
+
+/**
+ * A11Y HAXXX - Outline all focus-able elements with a tab index
+ */
+[tabIndex="0"]:focus {
+  outline: default;
 }

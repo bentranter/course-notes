@@ -16,33 +16,33 @@
     <!-- Text Editor Template -->
     <script id='noteEditorTemplate' type='text/template'>
       <div class='col col-9'>
-        <div id='noteTitle' class='h3 mb2 bold' data-ph='Untitled' contentEditable='true' tabIndex='0'><%= title %></div>
-        <div id='noteFolder' class='mb3 small-caps' data-ph='Enter the folder name' contentEditable='true' tabIndex='0'><%= folder %></div>
+        <div id='noteTitle' class='h3 mb2 bold' data-ph='Untitled' contentEditable='true' tabIndex='1' role='textbox'><%= title %></div>
+        <div id='noteFolder' class='mb3 small-caps' data-ph='Enter the folder name' contentEditable='true' tabIndex='1' role='textbox'><%= folder %></div>
       </div>
       <div class='col col-3'>
         <div class='right block'>
-          <button id='save' class='bg-transparent mid-gray'>
+          <button id='save' class='bg-transparent mid-gray' aria-label='Save this document'>
             <svg width='16px' height='16px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M2 18 L30 2 L14 30 L14 18z "></path></svg>
           </button>
-          <button id='delete' class='bg-transparent mid-gray'>
+          <button id='delete' class='bg-transparent mid-gray' aria-label='Delete this document'>
             <svg width='16px' height='16px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 L10 4 L12 2 L20 2 L22 4 L28 4 L29 8 L3 8 z M5 10 L27 10 L26 30 L6 30 z  "></path></svg>
           </button>
-          <button id='speedread' class='bg-transparent mid-gray'>
+          <button id='speedread' class='bg-transparent mid-gray' aria-label='Open the speedreader for this document'>
             <svg width='16px' height='16px' viewBox="0 0 32 32" style="fill:currentcolor"><path d="M16 0 A16 16 0 0 0 0 16 A16 16 0 0 0 16 32 A16 16 0 0 0 32 16 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 28 16 A12 12 0 0 1 16 28 A12 12 0 0 1 4 16 A12 12 0 0 1 16 4 M14 6 L14 17.25 L22 22 L24.25 18.5 L18 14.75 L18 6z "></path></svg>
           </button>
         </div>
       </div>
       <div class='cf'></div>
-      <div id='noteContent' data-ph='Start note taking...' contentEditable='true' tabIndex='0'><%= content %></div>
+      <div id='noteContent' data-ph='Start note taking...' contentEditable='true' tabIndex='1' role='textbox'><%= content %></div>
       <div id='overlay' class='overlay'></div>
       <div id='dialog' class='dialog'>
         <h3 class='h3 center light'>Now speedreading:</h3>
         <h1 class='h1 center light'><%= title %></h1>
         <div class='bl p2 bg-silver'>
           <div id='reader' class='bg-white reader bl'></div>
-          <input id='wpm' type='range' default='500' min='200' max='1000'>
-          <button id='pause' class='button bg-silver blue small-caps'>Play</button>
-          <button id='finish' class='button bg-silver mid-gray small-caps'>Finish</button>
+          <input id='wpm' type='range' default='500' min='200' max='1000' aria-label='Set how fast you wish to speedread this document, in words per minute'>
+          <button id='pause' class='button bg-silver blue small-caps' aria-label='Begin speedreading'>Play</button>
+          <button id='finish' class='button bg-silver mid-gray small-caps' aria-label='Close the speedreader for this document'>Finish</button>
         </div>
       </div>
     </script>
@@ -64,8 +64,8 @@
           <h5 class='m0 py2 small-caps light light-gray'>Forgot password?</h5> 
         </span>
         <div class='cf'></div>
-        <form class='signInForm fieldset-reset'>
-          <input id='username' class='block full-width' type='email' placeholder='Email' />
+        <form class='signInForm fieldset-reset' role='Login'>
+          <input id='username' class='block full-width' type='email' placeholder='Email' aria-label='Save this document'/>
           <input id='password' class='block full-width' type='password' placeholder='Password' />
           <input id='signin' class='button full-width bg-silver small-caps regular blue black-h center' type='submit' value='Sign In' />
         </form>
