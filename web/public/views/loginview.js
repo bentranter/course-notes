@@ -42,14 +42,26 @@ var app = app || {};
           username: $('#username').val(),
           password: $('#password').val()
         },
-        // You need to re-run $.ajaxSetup in here! Don't just fetch with a token
         success: function(res) {
-          var response = res;
-          self.handleSuccess(response, function() {
-            app.notes.fetch({
+          // Re-run ajaxSetup when someone signs in
+          self.handleSuccess(res, function() {
+            $.ajaxSetup({
               headers: {
                 'X-Access-Token': window.localStorage.getItem('token')
               },
+              statusCode: {
+                401: function() {
+                  console.log('Please sign in');
+                },
+                403: function() {
+                  console.log('please provide a valid token');
+                },
+                500: function() {
+                  console.log('RIP server... it was a good run.');
+                }
+              }
+            });
+            app.notes.fetch({
               success: function() {
                 self.render();
               },
