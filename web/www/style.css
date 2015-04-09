@@ -135,13 +135,9 @@ button,
 
 button:hover,
 .button:hover {
-  color: #333;
+  color: #fff;
   text-decoration: none;
-}
-
-button:focus,
-.button:focus {
-  outline: none;
+  box-shadow:;
 }
 
 ::-moz-focus-inner {
@@ -1254,8 +1250,8 @@ input[type=range] {
   border-radius: 3px;
 }
 
-.shadow {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+.heavy-shadow:hover {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.20);
 }
 
 .circle {
@@ -1448,3 +1444,15 @@ input[type=range] {
 /**
  * Page specific
  */
+
+.success-message {
+  display: none; 
+  background-color: #3d9970;
+  color: #fff;
+}
+
+.error-message {
+  display: none; 
+  background-color: #ff4136;
+  color: #fff;
+}

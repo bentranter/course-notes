@@ -32,7 +32,7 @@
     <div class='cntr'>
       <h1 class='huge center light'>Get straight A's, studying for just three minutes a day.</h1>
       <h2 class='h2 center big light gray mb3'>Welcome to StudyPiggy.</h2>
-      <img src='img/editor.png' class='bl rounded shadow' />
+      <img src='img/editor.png' class='bl rounded shadow' alt='The StudyPiggy text editor interface' />
     </div>
   
     <div class='bg-silver'>
@@ -46,13 +46,13 @@
               <p>Did you know that on average, you read at 180 words per minute on a screen? That's 40% slower than you'd read a book! StudyPiggy has a speedreader built in that allows you to read at 1000 words per minute, <span class='coral'>even if you've never tried speedreading before</span>.</p>
             </div>
             <div class='col col-5'>
-              <img src='img/speedreader.png' class='bl rounded shadow mb3' />
+              <img src='img/speedreader.png' class='bl rounded shadow mb3' alt='App speedreading interface'  />
             </div>
             <div class='cf'></div>
           </div>
           <div class='mb3 bbl'>
             <div class='col col-5'>
-              <img src='img/sidebar.png' class='bl rounded shadow mb3' />
+              <img src='img/sidebar.png' class='bl rounded shadow mb3' alt='App sidebar' />
             </div>
             <div class='col col-7 px3'>
               <h4 class='h2 regular coral'>Don't review more often than necessary</h4>
@@ -76,13 +76,13 @@
       <h3 class='h1 center light gray mb3'>Be the best student you can be. It's easy.</h3>
       <div class='bg-silver px3 py2 bl rounded mb3 shadow'>
         <form id='signup' class='fieldset-reset'>
-          <input id='email' class='full-width' type='email' placeholder='Email' />
-          <input id='password' class='full-width' type='password' placeholder='Password' />
-          <input id='submit' class='full-width button bg-coral white rounded caps' type='submit' value='Sign Up!' />
+          <input id='email' class='full-width' type='email' placeholder='Email' aria-label='Email' />
+          <input id='password' class='full-width' type='password' placeholder='Password' aria-label='Password' />
+          <input id='submit' class='full-width button bg-coral white caps heavy-shadow' type='submit' value='Sign Up!' />
         </form>
       </div>
-      <div id='success' class='success-message center big'>Congrats! Open the <a href='http://localhost:5681'>app</a> to get started.</div>
-      <div id='error' class='error-message center big'>Uh-oh That email address is already in use. Please try another.</div>
+      <div id='success' class='success-message center big' role='alert'>Congrats! Open the <a href='http://localhost:5681'>app</a> to get started.</div>
+      <div id='error' class='error-message center big' role='alert'>Uh-oh That email address is already in use. Please try another.</div>
     </div>
 
     <div class='bg-silver py3'>
