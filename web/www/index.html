@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html>
 
+<!-- The greatest StudyPiggy ever played... Was convincing the world
+     their load time didn't exist. 
+
+     Here we are in the signup page. The signup page is at same the 
+     domain as the StudyPiggy backbone app. That means that all of
+     the JavaScript and CSS that powers that app can be loaded here,
+     and the cached so when we finally hit the app, we don't need to
+     download any new JavaScript or CSS, and our templates can render
+     immediately.
+
+     The other thing we can do is sign the user in right away, since
+     we can access their token in the response from signing up, and
+     put it localStorage. These are botht tricks I learned from
+     Henrik Joreteg's book 'Human JavaScript' (humanjavascript.com).
+
+     To take this one step further in the future, StudyPiggy might
+     begin using the AppCache.
+-->
+
   <head>
     <meta charset='utf-8'>
     <title>Study Piggy</title>
