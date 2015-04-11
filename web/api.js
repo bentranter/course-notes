@@ -244,6 +244,16 @@ exports.deleteNote = function (req, res) {
  */
 
 exports.updateNote = function (req, res) {
+
+  // var decoded = token.decode(req);
+  // Note.get(req.params.id).update({
+  //   username: decoded.iss
+  // }).run().then(function(note) {
+  //   res.json(note);
+  // }).error(function(err) {
+  //   res.send(err);
+  // });
+
   Note.get(req.params.id).run().then(function(note) {
     var decoded = token.decode(req);
 
