@@ -224,14 +224,15 @@ exports.getNote = function(req, res) {
  */
 
 exports.deleteNote = function (req, res) {
-  Note.get(req.params.id).run().then(function(note) {
-    note.delete().then(function(result) {
-      res.json(result);
-    }).error(function(err) {
-      res.json({message: err});
-    });
+
+  // ADD A CHECK THAT SOMEONE OWNS THE DOC THEY'RE DELETING
+  Note.get(req.params.id).delete().execute().then(function(result) {
+    res.json(result);
   }).error(function(err) {
-    res.json({message: err});
+    res.json({
+      message: 'Error when trying to delete note',
+      err: err
+    });
   });
 };
 
@@ -245,43 +246,22 @@ exports.deleteNote = function (req, res) {
 
 exports.updateNote = function (req, res) {
 
-  // var decoded = token.decode(req);
-  // Note.get(req.params.id).update({
-  //   username: decoded.iss
-  // }).run().then(function(note) {
-  //   res.json(note);
-  // }).error(function(err) {
-  //   res.send(err);
-  // });
+  // Get the token
+  var decoded = token.decode(req);
 
-  Note.get(req.params.id).run().then(function(note) {
-    var decoded = token.decode(req);
-
-    if (req.body.title) {
-      note.title = req.body.title;
-    }
-    if (req.body.subtitle) {
-      note.subtitle = req.body.subtitle;
-    }
-    if (req.body.content) {
-      note.content = req.body.content;
-    }
-    // Always get username from token on every request
-    note.username = decoded.iss;
-    if (req.body.folder) {
-      note.folder = req.body.folder;
-    }
-    note.dateCreated = note.dateCreated;
-    note.dateUpdated = r.now();
-    note.timesReviewed = parseInt(note.timesReviewed) + 1;
-
-    // Save the person and check for errors kind-of
-    note.save(function(err, doc) {
-      if (err) {
-        res.send(err); 
-      } else {
-        res.json(doc); 
-      }
+  // Get and update the note, all in one trip
+  Note.get(req.params.id).update({
+    title: req.body.title,
+    content: req.body.content,
+    folder: req.body.folder,
+    username: decoded.iss,
+    dateUpdated: r.now()
+  }).run().then(function(note) {
+    res.json(note);
+  }).error(function(err) {
+    res.json({
+      message: 'Unable to update note',
+      error: err
     });
   });
 };
