@@ -6,8 +6,9 @@
 
 var thinky = require(__dirname + '/../util/thinky.js');
 
-// Keep reference to RethinkDB's driver
+// Keep reference to RethinkDB's driver(s)
 var r = thinky.r;
+var type = thinky.type;
 
 // Create model for notes
 var Note = thinky.createModel('Note', {
@@ -17,8 +18,8 @@ var Note = thinky.createModel('Note', {
   content: String,
   username: String,
   folder: String,
-  dateCreated: { _type: Date, default: r.now() },
-  dateUpdated: { _type: Date, default: r.now() },
+  dateCreated: type.date().default(r.now()),
+  dateUpdated: type.date().default(r.now()),
   timesReviewed: Number
 });
 
