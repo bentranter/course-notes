@@ -262,6 +262,75 @@
           <h3 class='h3'><a name='codeweb'>Web and iOS</a></h3>
           <p>The web client and iOS client don't have enough code written yet that isn't spaghetti code to warrant documenting it at this stage, but documentation will be added as code is written and refactored.</p>
 
+          <h3 class='h3'><a name='usecase'>Use Cases &ndash; Android</a></h3>
+          <p>The user starts with the option to login or to stay logged out. If the user chooses to login they will be able to sync their documents with those saved on the server, as well as log out whenever wanted. They will never be automatically logged out. If they choose to stay logged out, they can login at any time.</p>
+          <p>Users can choose to delete all documents saved on the device.</p>
+          <p>The user can select the "Reviews" tab which will allow them to do their overdue reviews.<p>
+          <p>When doing reviews, the user is shown the front of the card and is given a reveal button, when the reveal button is pressed, the back side of the card is show, and they are given buttons indicating how well they knew the answer. One selecting a button, a new card is shown.</p>
+          <p>The user is shown a file browser and is able to browse for and select a document. There is colored circle shown on each folder and document indicating if the folder contains a document that needs to be reviewed, or if the document itself needs to be reviewed. The color ranges from red to green.</p>
+          <p>Once a document is selected, the user is shown the text in the document, and given the option to browse the document in the speed reader or to do the flip cards for the document.</p>
+          <p>On the speed reader, the user is shown ~10 characters at a time which scroll through the words in the text. The user can adjust the speed, and press a button to pause and resume the speed reader.</p>
+          <p>If the flip cards are selected, the user will be able to review all the flip cards for the selected document.</p>
+
+          <h3 class='h3'><a name='contributions'>Contributions</a></h3>
+          <h5 class='h5'>The app has two parts: the clients, and the server. We basically split it into two roles: the JavaScript stuff, and the Android stuff. Nathan did the Android stuff, Ben did the JavaScript stuff.</h5>
+          <h4>Creating the Android App</h4>
+          <ul class='list-reset'>
+            <li>Connecting to the server created by Ben to retrieve a login token and retrieve all the documents for the user.</li>
+            <li>Show prompts when the device is Logging in or Syncing with the server, as well as display an error prompt if any error occurs.</li>
+            <li>Compare the documents retrieved from the server to those saved locally, and update the files that need to be updated.</li>
+            <li>Browse through the files being updated to create flip cards out of the information in the document.</li>
+            <li>Set up a system to store information for each document and card such as times reviewed, when the next review should be done, current SRS level of the documents and cards.</li>
+            <li>Create a file browsing system, and allow it to display a colored circle indicating how much a review of the folder or file is needed.</li>
+            <li>Create a system to have the mobile device scan how many reviews are needed and send a notification to the device, even when the application is closed.</li>
+            <li>Have the menu's correctly display for if the user is logged in or logged out, and give the user the ability to login, logout, update, check for reviews and clear memory all from the menu.</li>
+            <li>Create a system to allow the user to do reviews of the flipcards that needed to be reviewed, and correctly save the new level, new review time, etc about the cards and time the user leaves the review page.</li>
+            <li>Set up a way to use tabs to select what activity is displayed, while being able to update the holding activity or displayed activity.</li>
+            <li>Create a simple activity to display the text from the document.</li>
+            <li>Create a speed reader that will split the document up into words, and display a few words at a time, scrolling through them quickly at an adjustable speed. The speed reader will also pause shortly at the location of any new lines in the document.</li>
+            <li>Create a way for the user to review cards without it having an effect on the SRS system.</li>
+            <li>Creating the XML layout for all of the activities.</li>
+          </ul>
+
+          <h3 class='h3'>OOP Description V2 (gotta merge this)</h3>
+          <p>The Singleton GlobalApp is accessible by every activity within the application, and holds information that needs to be passed between multiple activities as well as function and values used by different activities.</p>
+          <p>The application first launches the activity AppLaunch. If this is the first time it is run, it will start a notification updating system that will send notifications to the device every hour indicating how many reviews there are to be completed. AppLaunch will determine if a login is required, and move the application to the correct screen accordingly. If no login is needeed, the MainActivity activity will be loaded.</p>
+          <p>Every hour, StartNotification will be started which will count the number of reviews that need to done, and send a notification to the device displaying this information.</p>
+          <p>The LoginScreen activity lets the user input their username and password, and then starts the MainActivity, telling it to get a token from the server.</p>
+          <p>The MainActivity makes calls to Login and Update. These methods will either do their job with no notification, or prompt an error if one occurs. When the user selects an action that could cause the menu to be updated, the activity will wait for a global variable to change that indicates if a change in the menu should occur. When the user selects Login the application launches the LoginScreen activity. If Logout is selected, the application will delete the stored username, password, token and tokenExpiration and launch the LoginScreen activity.</p>
+          <p>MainActivity has 2 tabs, which switch between displaying LocalFilesBrowser and CardTypeTwo.</p>
+          <p>CardTypeTwo simply displays flip cards from the cards that need to be reviewed, allowing the user to answer if they knew the correct response or not. Once all of the cards are answered correctly, the app shows that the review is completed.</p>
+          <p>The LocalFileBrowser starts with the user viewing the root directory, and when the user selects a folder, the selected Folder is set to that folder, and the user is show all the folders and documents in the folders leading up to the selected folder. Each item in the list also has a color associated to it that ranges from green to red. This color represents the color of the document within the folder that most needs to be reviewed. When a document is selected, this will launch the DocumentLoader, passing it the document that needs to be loaded. LocalFileBrowser makes use of CustomListAdapter which is what allows the colored circles to be show on each list element.</p>
+          <p>DocumentLoader is a container activity that will display either the DisplayDocument activity, the SpeedReader activity or the CardTypeOne activity. The displayed activity is changed by changing the tab.</p>
+          <p>DisplayDocument simply displays the entire document as text.</p>
+          <p>SpeedReader is the speed reading application where the text is quickly scrolled through, with an adjustable speed.</p>
+          <p>CardTypeOne is similar to CardTypeTwo but instead of going through all the reviews, it will go through all the cards contained in the currently selected document.</p>
+
+          <h3 class='h3'>Functionality Shown in Demo</h3>
+          <ul>
+            <li>Application automatically loads to either the login screen, or the main activity depending on if login information has been saved.</li>
+            <li>'Continue without Login' on the login page will bring the application to the main activity correctly.</li>
+            <li>'Login' on the login page will launch main activity telling it to login using the entered information.</li>
+            <li>The Correct menu loads on Main Activity, and correctly changes after login and logout.</li>
+            <li>Selecing 'Login' menu in main activity correctly brings up the login activity.</li>
+            <li>Selecing 'Logout' menu in main activity correctly brings up the login activity.</li>
+            <li>Selecting 'Clear Memory' deletes all the files from the device, and they no longer appear in the file browser.</li>
+            <li>Selecting 'Check For Reviews' updates the list of reviews to do, and we see the count of reviews change on the review tab title.</li>
+            <li>After 'Login' has been selected on the login activity, the application will attempt to login to the server with the credentials the user entered, then saving the token, token expiration date and login credentials locally if successful.</li>
+            <li>Selecing 'Update' from the menu attempts to retrieve user information from the server using the stored token, then compare against locally stored files and update required files. Will prompt if an error occurs.</li>
+            <li>Logging out and then logging in as another user allows files from both users to be browsed, but only files from the currently logged in user will be updated.</li>
+            <li>The file browser is correctly displayed along with the color for each folder and file. Reviewing an item and then reloading the file browser will set the color of the reviewed document to green, showing that it does not need to be reviewed right away.</li>
+            <li>Can easily switch between the Review tab and the File Browser tab.</li>
+            <li>Doing reviews on the review tab updates the indicator showing the renaming number of tabs to do.</li>
+            <li>Correctly Answering a review increases the time until it needs to be completed again.</li>
+            <li>Selecting a document in the file browser will open the document in the document loader.</li>
+            <li>In the document loader, tabs can be selected to either just show the document as text, open the speed reader and open the card viewer.</li>
+            <li>When the document is shown as text, it is cleaned so that extra tags such as new line tags are not shown.</li>
+            <li>In the speed reader, the text is properly separated into words and only a few words are displayed at a time. The pause and resume button works, and the slider bar to adjust speed works. The document correctly pauses the speed reader at places where there would be a new line in the document.</li>
+            <li>When the flip card tab is selected the user can review the cards associated with the selected document, but this will not update their level or the current review list.</li>
+            <li>Show that adding documents or editing documents on the server will be synced correctly on the device the next time that it syncs with the server.</li>
+          </ul>
+
         </div>
       </main>
     </div>
