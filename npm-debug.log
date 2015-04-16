@@ -1,19 +1,18 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'start' ]
 2 info using npm@2.0.2
 3 info using node@v0.10.28
 4 verbose config Skipping project config: /Users/Ben/.npmrc. (matches userconfig)
-5 error install Couldn't read dependencies
-6 verbose stack Error: ENOENT, open '/Users/Ben/package.json'
-7 verbose cwd /Users/Ben/course-notes
-8 error Darwin 14.0.0
-9 error argv "node" "/usr/local/bin/npm" "install"
-10 error node v0.10.28
-11 error npm  v2.0.2
-12 error path /Users/Ben/package.json
-13 error code ENOPACKAGEJSON
-14 error errno 34
-15 error package.json ENOENT, open '/Users/Ben/package.json'
-15 error package.json This is most likely not a problem with npm itself.
-15 error package.json npm can't find a package.json file in your current directory.
+5 verbose stack Error: ENOENT, open '/Users/Ben/package.json'
+6 verbose cwd /Users/Ben/course-notes
+7 error Darwin 14.0.0
+8 error argv "node" "/usr/local/bin/npm" "start"
+9 error node v0.10.28
+10 error npm  v2.0.2
+11 error path /Users/Ben/package.json
+12 error code ENOENT
+13 error errno 34
+14 error ENOENT, open '/Users/Ben/package.json'
+15 error If you need help, you may report this error at:
+15 error     <http://github.com/npm/npm/issues>
 16 verbose exit [ 34, true ]

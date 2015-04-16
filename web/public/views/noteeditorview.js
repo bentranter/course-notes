@@ -96,7 +96,7 @@ var app = app || {};
       var self = this;
 
       // We set up our elements like this to take advantage
-      // of object chaching and stay outta the DOM
+      // of object caching and stay outta the DOM
       var pauseBtn = $('#pause');
       var finishBtn = $('#finish');
       var reader = $('#reader');
@@ -150,6 +150,9 @@ var app = app || {};
         pausePlay();
       });
 
+      /**
+       * This needs to read from the stupid slider properly.
+       */
       function pausePlay() {
         if (running) {
           stopPlayer();
@@ -158,8 +161,12 @@ var app = app || {};
         }
       }
 
+      /**
+       * Where the magic happens. This is the main running loop
+       * of the speedreader.
+       */
       function updateValues(i) {
-          reader.html(text[i]);
+          reader.html(pivot(text[i]));
           currentWord = i;
       }
 
@@ -182,12 +189,47 @@ var app = app || {};
           }
           running = false;
       }
+
+      /**
+       * Figure out the ideal pivot position.
+       */
+      function pivot(word) {
+        var len = word.length;
+
+        // Initialize bestLetter to 1
+        var bestLetter = 1;
+
+        switch (len) {
+          case 1:
+            bestLetter = 1; // first
+            break;
+          case 2:
+          case 3:
+          case 4:
+          case 5:
+            bestLetter = 2; // second
+            break;
+          case 6:
+          case 7:
+          case 8:
+          case 9:
+            bestLetter = 3; // third
+            break;
+          case 10:
+          case 11:
+          case 12:
+          case 13:
+            bestLetter = 4; // fourth
+            break;
+          default:
+            bestLetter = 4; // fifth
+        }
+
+        console.log(bestLetter);
+      }
     },
 
     alert: function(el) {
-      // Basically just a popup message. Unfortuately,
-      // it gets ripped out from the DOM afer the
-      // request fires
       $(el).show().delay(3000).fadeOut();
     }
   });

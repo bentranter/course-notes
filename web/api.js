@@ -265,3 +265,33 @@ exports.updateNote = function (req, res) {
     });
   });
 };
+
+/**
+ * Update the times-read count and apply a reasonable
+ * date for the next time to read.
+ *
+ * @param {Object} the request sent to our server
+ * @param {Object} the response sent back to the client
+ * @api public
+ */
+ 
+exports.updateTimesRead = function(req, res) {
+  // Get the token
+  var decoded = token.decode(req);
+
+  // Get and update the note, all in one trip
+  Note.get(req.params.id).update({
+    title: req.body.title,
+    content: req.body.content,
+    folder: req.body.folder,
+    username: decoded.iss,
+    dateUpdated: r.now()
+  }).run().then(function(note) {
+    res.json(note);
+  }).error(function(err) {
+    res.json({
+      message: 'Unable to update note',
+      error: err
+    });
+  });
+};
