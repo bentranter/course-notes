@@ -30,7 +30,7 @@ var app = app || {};
     },
 
     delete: function() {
-      var response = window.confirm('Are you sure?');
+      var response = window.confirm('Are you sure you want to delete this note?');
       if (response === true) {
         // Roll outta that view! (before we know if the model could even be destroyed)
         app.router.navigate('/notes/new', { trigger: true });
@@ -90,143 +90,8 @@ var app = app || {};
       $('#dialog').fadeOut(300);
     },
 
-    // This is pretty insane, and should probably be
-    // in its own file
     speedread: function() {
-      var self = this;
-
-      // We set up our elements like this to take advantage
-      // of object caching and stay outta the DOM
-      var pauseBtn = $('#pause');
-      var finishBtn = $('#finish');
-      var reader = $('#reader');
-      var speedControl = $('#wpm');
-
-      var wpm = parseInt(speedControl.val());
-      speedControl.on('change mousemove', function() {
-        wpm = speedControl.val();
-      });
-      var wordsPerMs = 60000/wpm;
-      // Split on any spaces, remove any line breaks present in the note
-      var text = this.model.get('content').replace(/\<br\>/g,' ').split(/\s+/);
-
-      // The reader won't stop if the selection starts or ends with spaces
-      if (text[0] === '') {
-        text = text.slice(1, text.length);
-      }
-      if (text[text.length - 1] === '') {
-        text = text.slice(0, text.length - 1);
-      }
-
-      /**
-       * Preprocess words
-       *
-       * Start by copying the array
-       */
-      var temp = text.slice(0);
-      var t = 0;
-
-      for (var i = 0; i < text.length; i++) {
-        // Double up on long words and words with commas.
-        if((text[i].indexOf(',') !== -1 || text[i].indexOf(':') !== -1 || text[i].indexOf('-') !== -1 || text[i].indexOf('(') !== -1|| text[i].length > 8) && text[i].indexOf('.') === -1) {
-          temp.splice(t+1, 0, text[i]);
-          t++;
-        }
-        // Add an additional space after punctuation.
-        if(text[i].indexOf('.') !== -1 || text[i].indexOf('!') !== -1 || text[i].indexOf('?') !== -1 || text[i].indexOf(':') !== -1 || text[i].indexOf(';') !== -1|| text[i].indexOf(')') !== -1) {
-          temp.splice(t+1, 0, ' ');
-          t++;
-        }
-        t++;
-      }
-
-      text = temp.slice(0);
-
-      var currentWord = 0;
-      var running = false;
-      var timer = [];
-
-      pauseBtn.click(function() {
-        pausePlay();
-      });
-
-      /**
-       * This needs to read from the stupid slider properly.
-       */
-      function pausePlay() {
-        if (running) {
-          stopPlayer();
-        } else {
-          startPlayer();
-        }
-      }
-
-      /**
-       * Where the magic happens. This is the main running loop
-       * of the speedreader.
-       */
-      function updateValues(i) {
-          reader.html(pivot(text[i]));
-          currentWord = i;
-      }
-
-      function startPlayer() {
-          running = true;
-          timer.push(setInterval(function() {
-              updateValues(currentWord);
-              currentWord++;
-              if(currentWord >= text.length) {
-                  currentWord = 0;
-                  stopPlayer();
-                  self.closeSpeedReadingDialog();
-              }
-          }, wordsPerMs));
-      }
-
-      function stopPlayer() {
-          for(var i = 0; i < timer.length; i++) {
-              clearTimeout(timer[i]);
-          }
-          running = false;
-      }
-
-      /**
-       * Figure out the ideal pivot position.
-       */
-      function pivot(word) {
-        var len = word.length;
-
-        // Initialize bestLetter to 1
-        var bestLetter = 1;
-
-        switch (len) {
-          case 1:
-            bestLetter = 1; // first
-            break;
-          case 2:
-          case 3:
-          case 4:
-          case 5:
-            bestLetter = 2; // second
-            break;
-          case 6:
-          case 7:
-          case 8:
-          case 9:
-            bestLetter = 3; // third
-            break;
-          case 10:
-          case 11:
-          case 12:
-          case 13:
-            bestLetter = 4; // fourth
-            break;
-          default:
-            bestLetter = 4; // fifth
-        }
-
-        console.log(bestLetter);
-      }
+      app.speedRead('pause', 'finish', 'reader', 'wpm', 'noteContent');
     },
 
     alert: function(el) {
