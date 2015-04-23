@@ -1,4 +1,21 @@
 var searchData=
 [
-  ['tokenlogin',['tokenLogin',['../classspeedstudy_1_1speedstudy_1_1_app_launch.html#a5cf79b00650b2759d6b48ffc51271011',1,'speedstudy::speedstudy::AppLaunch']]]
+  ['set',['set',['../classspeedstudy_1_1speedstudy_1_1_error.html#a75c143abcfbd884ec235045a478d6821',1,'speedstudy::speedstudy::Error']]],
+  ['setname',['setName',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#a9d460a20c095961ac9313fe8da41e323',1,'speedstudy::speedstudy::GlobalApp']]],
+  ['setpass',['setPass',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#a5edd7b0de6b1f4e70df837a125182247',1,'speedstudy::speedstudy::GlobalApp']]],
+  ['setreviews',['setReviews',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#ae3c22a9e084d498bdc2d503498bbd76b',1,'speedstudy::speedstudy::GlobalApp']]],
+  ['showanswerbuttons',['showAnswerButtons',['../classspeedstudy_1_1speedstudy_1_1_card_type_one.html#af0c48d13245440c2cd06faf117a0a27a',1,'speedstudy.speedstudy.CardTypeOne.showAnswerButtons()'],['../classspeedstudy_1_1speedstudy_1_1_card_type_two.html#a55cd4bdcc4d82e50fb0c9fc9a37d2625',1,'speedstudy.speedstudy.CardTypeTwo.showAnswerButtons()']]],
+  ['shownobutton',['showNoButton',['../classspeedstudy_1_1speedstudy_1_1_card_type_one.html#aeac66632e878bdfb33ea7ce458b3b9b7',1,'speedstudy.speedstudy.CardTypeOne.showNoButton()'],['../classspeedstudy_1_1speedstudy_1_1_card_type_two.html#a6dbf56b4303e17230af0812328db70f4',1,'speedstudy.speedstudy.CardTypeTwo.showNoButton()']]],
+  ['showrandomcard',['showRandomCard',['../classspeedstudy_1_1speedstudy_1_1_card_type_one.html#a5e7c609d632b545205c194e46e5aec3f',1,'speedstudy.speedstudy.CardTypeOne.showRandomCard()'],['../classspeedstudy_1_1speedstudy_1_1_card_type_two.html#a2a9526ae44bb867d45554f817f700407',1,'speedstudy.speedstudy.CardTypeTwo.showRandomCard()']]],
+  ['showrevealbutton',['showRevealButton',['../classspeedstudy_1_1speedstudy_1_1_card_type_one.html#a0bb9509c14efd455756f788c822f9256',1,'speedstudy.speedstudy.CardTypeOne.showRevealButton()'],['../classspeedstudy_1_1speedstudy_1_1_card_type_two.html#a247a0fb93501cb122e7ea4d9b135fa0b',1,'speedstudy.speedstudy.CardTypeTwo.showRevealButton()']]],
+  ['skiplogin',['skipLogin',['../classspeedstudy_1_1speedstudy_1_1_login_screen.html#a5ef19d418f352f1c23cdf37ba6bd5ddb',1,'speedstudy::speedstudy::LoginScreen']]],
+  ['slowdown',['slowDown',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html#a4337fd7e983bbf627da2238a1293348b',1,'speedstudy::speedstudy::SpeedReader']]],
+  ['sortfilelist',['sortFileList',['../classspeedstudy_1_1speedstudy_1_1_local_files_browser.html#a5507384f138f1c55240a40a19dd8a972',1,'speedstudy::speedstudy::LocalFilesBrowser']]],
+  ['speedreader',['SpeedReader',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html',1,'speedstudy::speedstudy']]],
+  ['speedup',['speedUp',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html#a5c50a063425c3a933314a71b96f14409',1,'speedstudy::speedstudy::SpeedReader']]],
+  ['startnotification',['StartNotification',['../classspeedstudy_1_1speedstudy_1_1_start_notification.html',1,'speedstudy::speedstudy']]],
+  ['startpauseorresume',['StartPauseOrResume',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html#a218b0671d4b1c148c7e439b5cee7dd1e',1,'speedstudy::speedstudy::SpeedReader']]],
+  ['starttextcycle',['startTextCycle',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html#a0a9ab213a56a42f7880cddca1bdab288',1,'speedstudy::speedstudy::SpeedReader']]],
+  ['stopwait',['stopWait',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#aace62c8662dc3012efb95308777faebd',1,'speedstudy::speedstudy::GlobalApp']]],
+  ['swap',['swap',['../classspeedstudy_1_1speedstudy_1_1_local_files_browser.html#abbbb38c28aa772858a98829c5f310dbb',1,'speedstudy::speedstudy::LocalFilesBrowser']]]
 ];

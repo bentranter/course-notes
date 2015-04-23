@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['modifyfilelistjson',['modifyFileListJson',['../classspeedstudy_1_1speedstudy_1_1_updater.html#a705de23bef73f3497ac5c4076afc4177',1,'speedstudy::speedstudy::Updater']]],
-  ['movebar',['moveBar',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html#a380e69bef2804b74fe045e6fd3cc200f',1,'speedstudy::speedstudy::SpeedReader']]]
+  ['hard',['hard',['../classspeedstudy_1_1speedstudy_1_1_card_type_two.html#af5f0f4d2468ade247ea33d8eaf10fb71',1,'speedstudy::speedstudy::CardTypeTwo']]],
+  ['higherpriority',['higherPriority',['../classspeedstudy_1_1speedstudy_1_1_local_files_browser.html#ad54b56759ef6d59aa1e899659f512981',1,'speedstudy::speedstudy::LocalFilesBrowser']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['updater',['Updater',['../classspeedstudy_1_1speedstudy_1_1_updater.html',1,'speedstudy::speedstudy']]]
+  ['speedreader',['SpeedReader',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html',1,'speedstudy::speedstudy']]],
+  ['startnotification',['StartNotification',['../classspeedstudy_1_1speedstudy_1_1_start_notification.html',1,'speedstudy::speedstudy']]]
 ];

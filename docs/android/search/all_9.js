@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['needfreshlogin',['needFreshLogin',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#ac29568392ef7e97456e0ca3461f68be0',1,'speedstudy::speedstudy::GlobalApp']]],
-  ['newerfile',['newerFile',['../classspeedstudy_1_1speedstudy_1_1_updater.html#aa3e3e50c0a57a4dc8add2bf5f38ce0b4',1,'speedstudy::speedstudy::Updater']]],
-  ['notfreshlogin',['notFreshLogin',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#a976f71d143ea9699a8e0d9de234d9d2f',1,'speedstudy::speedstudy::GlobalApp']]],
-  ['notupdatemenu',['notUpdateMenu',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#a7366367488f0ce2273cc7fd562f9682f',1,'speedstudy::speedstudy::GlobalApp']]]
+  ['mainactivity',['MainActivity',['../classspeedstudy_1_1speedstudy_1_1_main_activity.html',1,'speedstudy::speedstudy']]],
+  ['mainloader',['MainLoader',['../classspeedstudy_1_1speedstudy_1_1_main_loader.html',1,'speedstudy::speedstudy']]],
+  ['modifyfilelistjson',['modifyFileListJson',['../classspeedstudy_1_1speedstudy_1_1_updater.html#a705de23bef73f3497ac5c4076afc4177',1,'speedstudy::speedstudy::Updater']]],
+  ['movebar',['moveBar',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html#a380e69bef2804b74fe045e6fd3cc200f',1,'speedstudy::speedstudy::SpeedReader']]]
 ];

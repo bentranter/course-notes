@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['get',['get',['../classspeedstudy_1_1speedstudy_1_1_error.html#a4d564ccb75dc9944753507de5ab863d8',1,'speedstudy::speedstudy::Error']]],
-  ['getname',['getName',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#a91d5721c8aa48530a7bb37abfdac52f9',1,'speedstudy::speedstudy::GlobalApp']]],
-  ['getpass',['getPass',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#a0bfe4c50f99c9c27ac49bfb7be820549',1,'speedstudy::speedstudy::GlobalApp']]],
-  ['gettoken',['getToken',['../classspeedstudy_1_1speedstudy_1_1_login.html#a7df8ec59b8fede49a8eff5aca3abb868',1,'speedstudy::speedstudy::Login']]],
-  ['getupdatemenu',['getUpdateMenu',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#a40903bf2784d1675dabc27ac667632dc',1,'speedstudy::speedstudy::GlobalApp']]],
-  ['getwait',['getWait',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#aba6407853234f49e8a9d0bcce3b4a5c0',1,'speedstudy::speedstudy::GlobalApp']]]
+  ['delete',['delete',['../classspeedstudy_1_1speedstudy_1_1_main_activity.html#aecd361201e4a1b335fca5a393393b9d8',1,'speedstudy::speedstudy::MainActivity']]],
+  ['doinbackground',['doInBackground',['../classspeedstudy_1_1speedstudy_1_1_login.html#a15ebf97d48c2b464c662577f20f3bc25',1,'speedstudy.speedstudy.Login.doInBackground()'],['../classspeedstudy_1_1speedstudy_1_1_updater.html#a0f5775bd3862449471f68fecb33ec474',1,'speedstudy.speedstudy.Updater.doInBackground()']]],
+  ['dowait',['doWait',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#a9edf42271209c11bc1d2962af757be89',1,'speedstudy::speedstudy::GlobalApp']]]
 ];

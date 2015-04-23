@@ -1,15 +1,10 @@
 var searchData=
 [
-  ['set',['set',['../classspeedstudy_1_1speedstudy_1_1_error.html#a75c143abcfbd884ec235045a478d6821',1,'speedstudy::speedstudy::Error']]],
-  ['setname',['setName',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#a9d460a20c095961ac9313fe8da41e323',1,'speedstudy::speedstudy::GlobalApp']]],
-  ['setpass',['setPass',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#a5edd7b0de6b1f4e70df837a125182247',1,'speedstudy::speedstudy::GlobalApp']]],
-  ['skiplogin',['skipLogin',['../classspeedstudy_1_1speedstudy_1_1_login_screen.html#a5ef19d418f352f1c23cdf37ba6bd5ddb',1,'speedstudy::speedstudy::LoginScreen']]],
-  ['slowdown',['slowDown',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html#a4337fd7e983bbf627da2238a1293348b',1,'speedstudy::speedstudy::SpeedReader']]],
-  ['sortfilelist',['sortFileList',['../classspeedstudy_1_1speedstudy_1_1_local_files_browser.html#a5507384f138f1c55240a40a19dd8a972',1,'speedstudy::speedstudy::LocalFilesBrowser']]],
-  ['speedreader',['SpeedReader',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html',1,'speedstudy::speedstudy']]],
-  ['speedup',['speedUp',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html#a5c50a063425c3a933314a71b96f14409',1,'speedstudy::speedstudy::SpeedReader']]],
-  ['startpauseorresume',['StartPauseOrResume',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html#a218b0671d4b1c148c7e439b5cee7dd1e',1,'speedstudy::speedstudy::SpeedReader']]],
-  ['starttextcycle',['startTextCycle',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html#a0a9ab213a56a42f7880cddca1bdab288',1,'speedstudy::speedstudy::SpeedReader']]],
-  ['stopwait',['stopWait',['../classspeedstudy_1_1speedstudy_1_1_global_app.html#aace62c8662dc3012efb95308777faebd',1,'speedstudy::speedstudy::GlobalApp']]],
-  ['swap',['swap',['../classspeedstudy_1_1speedstudy_1_1_local_files_browser.html#abbbb38c28aa772858a98829c5f310dbb',1,'speedstudy::speedstudy::LocalFilesBrowser']]]
+  ['readcards',['readCards',['../classspeedstudy_1_1speedstudy_1_1_card_type_one.html#a349df13e8a25fed5f449e9668c12d373',1,'speedstudy.speedstudy.CardTypeOne.readCards()'],['../classspeedstudy_1_1speedstudy_1_1_local_files_browser.html#a8ee282b66620ea3fe74b14c2184bf7e0',1,'speedstudy.speedstudy.LocalFilesBrowser.readCards()'],['../classspeedstudy_1_1speedstudy_1_1_main_activity.html#afa6f935519f0df88a3f6e6c28c91e6da',1,'speedstudy.speedstudy.MainActivity.readCards()']]],
+  ['readuserfiles',['readUserFiles',['../classspeedstudy_1_1speedstudy_1_1_updater.html#aacf9d671a6be47fa04c76cc4bd967b56',1,'speedstudy::speedstudy::Updater']]],
+  ['removefilewithhash',['removeFileWithHash',['../classspeedstudy_1_1speedstudy_1_1_updater.html#adfd5c4a42d7fd7e365baf47ddcc0779b',1,'speedstudy::speedstudy::Updater']]],
+  ['removestaringslash',['removeStaringSlash',['../classspeedstudy_1_1speedstudy_1_1_document_loader.html#a5a7493453f9e943575b2f3566f842267',1,'speedstudy::speedstudy::DocumentLoader']]],
+  ['resetmemory',['resetMemory',['../classspeedstudy_1_1speedstudy_1_1_local_files_browser.html#a5956778b5b846674bb643ea7e4ca5882',1,'speedstudy::speedstudy::LocalFilesBrowser']]],
+  ['reveal',['reveal',['../classspeedstudy_1_1speedstudy_1_1_card_type_one.html#adce03a147d2a508075858096be0deef3',1,'speedstudy.speedstudy.CardTypeOne.reveal()'],['../classspeedstudy_1_1speedstudy_1_1_card_type_two.html#a802a146b9f1f8b310a69de15f8b73584',1,'speedstudy.speedstudy.CardTypeTwo.reveal()']]],
+  ['run',['run',['../classspeedstudy_1_1speedstudy_1_1_updater.html#aed94d07dddf5374b892260b25e80847b',1,'speedstudy::speedstudy::Updater']]]
 ];

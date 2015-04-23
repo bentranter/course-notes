@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['clearmemory',['clearMemory',['../classspeedstudy_1_1speedstudy_1_1_main_activity.html#a70ca25785a1efddd4cd6213953a507e8',1,'speedstudy::speedstudy::MainActivity']]]
+  ['addspaces',['addSpaces',['../classspeedstudy_1_1speedstudy_1_1_speed_reader.html#a75ae38098f1e32f38f74e716f4bd39da',1,'speedstudy::speedstudy::SpeedReader']]]
 ];

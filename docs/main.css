@@ -955,22 +955,26 @@ body {
 }
 
 a {
-  color: #525252;
+  color: #f6809e;
   text-decoration: none;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #525252;
+}
+
+#sidebar  a {
+  color: #525252;
 }
 
 a:hover {
   text-decoration: none;
   color: #aeaeae;
-}
-
-.link {
-  color: #f6809e;
-}
-
-.link:hover {
-  color: #f6809e;
-  text-decoration: underline;
 }
 
 pre,
