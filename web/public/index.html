@@ -21,6 +21,7 @@
     -->
     <div id='alertSaved' class='alert' role='alert'>Saved</div>
     <div id='alertDeleted' class='alert' role='alert'>Deleted</div>
+    <div id='alertErrorSelectOption' class='alert' role='alert'><span class='red'>Error:</span> Please select an option</div>
 
     <!-- Text Editor Template -->
     <script id='noteEditorTemplate' type='text/template'>
@@ -53,6 +54,14 @@
           <input id='wpm' type='range' default='500' min='200' max='1000' aria-label='Set how fast you wish to speedread this document, in words per minute'>
           <button id='pause' class='button bg-silver blue small-caps' aria-label='Begin speedreading'>Play</button>
           <button id='finish' class='button bg-silver mid-gray small-caps' aria-label='Close the speedreader for this document'>Finish</button>
+          <div id='grade'>
+            <p class='m0 mt1 center'>How well did you remember this note?</p>
+            <div class='block px1'>
+              <input type='radio' name='grade' value='Easy'> Good
+              <input type='radio' name='grade' value='Medium'> Med
+              <input type='radio' name='grade' value='Hard'> Bad
+            </div>
+          </div>
         </div>
       </div>
 

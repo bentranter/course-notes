@@ -12,6 +12,7 @@ var app = app || {};
       'click #save': 'save',
       'click #delete': 'delete',
       'click #speedread': 'openSpeedReadingDialog',
+      'click #finish': 'nextReview',
       // Keyboard shortcut for save
       'keydown': 'handleSaveShortcut'
     },
@@ -96,6 +97,24 @@ var app = app || {};
 
     alert: function(el) {
       $(el).show().delay(3000).fadeOut();
+    },
+
+    toggleFinish: function() {
+
+    },
+
+    nextReview: function() {
+      var nextReview = this.model.get('nextReview');
+      var timesReviewed = this.model.get('timesReviewed');
+      var grade = $('[name="grade"]:checked').val();
+
+      if (!grade) {
+        this.alert('#alertErrorSelectOption');
+        console.log('wut');
+      } else {
+        console.log(nextReview, timesReviewed, grade);
+        this.closeSpeedReadingDialog();
+      }
     }
   });
 })();

@@ -181,7 +181,7 @@ exports.addNote = function (req, res) {
     username: decoded.iss,
     folder: req.body.folder,
     dateCreated: r.now(),
-    nextReview: r.now().add(86400),
+    nextReview: r.now().add(86400), // Adds 24 hours by default
     timesReviewed: 0 // Initialize at 0
   });
 
@@ -233,7 +233,13 @@ exports.deleteNote = function (req, res) {
 };
 
 /**
- * Update an existing note by id
+ * Update an existing note by id. If the time of next review has been
+ * updated, then update that too.
+ * Originally, I was going to calculate this on the server, but it's
+ * impossible to optimisticaly update the model on the client if you 
+ * don't know the date of next review until the server responds. You 
+ * could calculate it in both places, but that's pointless, so we do 
+ * it on the client in the speedreader view for an individual note.
  *
  * @param {Object} the request sent to our server
  * @param {Object} the response sent back to the client
@@ -242,36 +248,6 @@ exports.deleteNote = function (req, res) {
 
 exports.updateNote = function (req, res) {
 
-  // Get the token
-  var decoded = token.decode(req);
-
-  // Get and update the note, all in one trip
-  Note.get(req.params.id).update({
-    title: req.body.title,
-    content: req.body.content,
-    folder: req.body.folder,
-    username: decoded.iss,
-    dateUpdated: r.now()
-  }).run().then(function(note) {
-    res.json(note);
-  }).error(function(err) {
-    res.json({
-      message: 'Unable to update note',
-      error: err
-    });
-  });
-};
-
-/**
- * Update the times-read count and apply a reasonable
- * date for the next time to read.
- *
- * @param {Object} the request sent to our server
- * @param {Object} the response sent back to the client
- * @api public
- */
- 
-exports.updateTimesRead = function(req, res) {
   // Get the token
   var decoded = token.decode(req);
 
