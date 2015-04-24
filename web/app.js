@@ -62,6 +62,8 @@ if (env === 'production') {
 
 // Nonsecure endpoints. You can sign up or login
 // at these.
+app.get('/api', api.showEndpoints);
+
 app.post('/api/login', api.login);
 app.post('/api/signup', api.signUp);
 

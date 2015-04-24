@@ -39,12 +39,11 @@
         <li><a href='#server'>Server</a></li>
         <li><a href='#client'>Web Client</a></li>
         <li><a href='#android'>Android Client</a></li>
-        <li><a href='#ios'>iOS Client</a></li>
 
         <h4 class='h4 center'>Code</h4>
         <li><a href='#codeandroid'>Android</a></li>
         <li><a href='#codeserver'>Server</a></li>
-        <li><a href='#codeweb'>Web and iOS</a></li>
+        <li><a href='#codeweb'>Web</a></li>
 
         <h4 class='h4 center'>Contributions</h4>
         <li><a href='#contributionsnathan'>By Nathan</a></li>
@@ -224,13 +223,13 @@
 
           <h2 class='h2 big light'>Design</h2>
           <h3 class='h3'><a name='server'>Server</a></h3>
-          <p>The server has an extremely simple design. Essentially, it is two files: one with some startup code for the server that handles the database connection, which port to serve on, the API endpoint names, and whether to enable development mode or production mode, and the other handles the server's application logic.</p>
-          <p>The application consists of the model schemas, the authentication middleware, and the request/response handling for the API endpoints. There are two schemas: one for the <span class='italic'>user</span> and one for the <span class='italic'>notes</span>.</p>
-          <p>The primary key for the user is the username. The primary key for the notes is the id. A user has a one-to-many relationship with the notes (relations in a NoSQL database? Weird, I know, but it speeds up our queries massively).</p>
-          <p>The authentication middleware is two functions.</p>The first is one that executes before the
+          <p>The server has an extremely simple design. It is a collection of data models, a config file, utility functions (for handling authentication), API functions, and a main file that defines API endpoints and handles the server startup logic.</p>
+          <p>The overall server application consists of the model schemas, the authentication middleware, and the request/response handling for the API endpoints. There are two schemas: one for the <span class='italic'>user</span> and one for the <span class='italic'>notes</span>.</p>
+          <p>The primary key for the user is the username. The primary key for the notes is the id. A user's notes is returned by RethinkDB's filter function, which filters notes by the user's email.</p>
+          <p>The authentication middleware is two functions. One generates a token, and the other verifies it. Tokens are signed by the server, and contain the user's email, to make sure the a user can only access they notes tht they own.</p>
 
           <h3 class='h3'><a name='client'>Web Client</a></h3>
-          <p>Our web client is currently under development and is at best, a huge mess. We use an MVC approach, and complete documentation will be added once more progress is made on the web client.</p>
+          <p>The web client is a single-page application, rendered entirely in JavaScript. It is essentially a way to use the REST API to create, read, update, and destroy notes. It also provides a speedreader that allows users to quickly read their notes. Most of the info regarding the web client has already been covered in the use case section, so we'll skip to the android client design section :)</p>
 
           <h3 class='h3'><a name='android'>Android Client</a></h3>
           <p>Each Activity (screen / task of the application) is defined as a class. When something on the screen is tapped, such as a button or dragging a bar, a method in the class will be called.</p>
@@ -314,12 +313,44 @@
           <p><code>deleteNote(request, response);</code></p>
           <p>Deletes a note. Returns a success message as an object. API: public, HTTP: DELETE.</p>
 
-          <h3 class='h3'><a name='codeweb'>Web and iOS</a></h3>
-          <p>The web client and iOS client don't have enough code written yet that isn't spaghetti code to warrant documenting it at this stage, but documentation will be added as code is written and refactored.</p>
+          <h3 class='h3'><a name='codeweb'>Web</a></h3>
+          <h3 class='h3'><code>backbone.js</code></h3>
+          <p>A compressed and minified file containing backbone.js and it's dependencies. This is the framework used on the front end.</p>
 
-          <h3 class='h3'><a name='contributions'>Contributions</a></h3>
-          <h5 class='h5'>The app has two parts: the clients, and the server. We basically split it into two roles: the JavaScript stuff, and the Android stuff. Nathan did the Android stuff, Ben did the JavaScript stuff.</h5>
-          <h4>Creating the Android App</h4>
+          <h3 class='h3'><code>app.js</code></h3>
+          <p>Simply starts the app, by initializing the app's first view.</p>
+
+          <h3 class='h3'><code>speedread.js</code></h3>
+          <p>This is our speedreading module.</p>
+          <p><code>speedRead(startBtn, stopBtn, reader, speedCtrl, content)</code></p>
+          <p>This initializes the speed reader, by getting a reference to the necessary DOM elements and setting up event listeners.</p>
+          <p><code>updateValues()</code></p>
+          <p>This is what runs the speedreader. It goes through the array of words and displays them to the user one after another at the speed specified in the speed control slider.</p>
+
+          <h3 class='h3'><code>routers/router.js</code></h3>
+          <p>This handles the HTML5 History API calls as defined by Backbone. We have two routes:</p>
+          <p><code>newNote()</code></p>
+          <p>Allows the user to create a new note, and maps to studypiggy.com/#newNote.</p>
+          <p><code>getNote(id)</code></p>
+          <p>Allows the user to view and modify existing notes. Maps to studypiggy.com/#note/:id</p>
+
+          <h3 class='h3'><code>models/note.js and collections/note.js</code></h3>
+          <p>These two files are extremely simple. They just define our data models as represented on the server, and tell our AJAX calls which URL to use.</p>
+
+          <h3 class='h3'><code>views</code></h3>
+          <p>We have four views:</p>
+          <p><code>appview.js</code></p>
+          <p>Defines the main view of the app. Basically static HTML, but contains event listeners for global events (like saving, etc).</p>
+          <p><code>loginview.js</code></p>
+          <p>Handles logging in and out of the app.</p>
+          <p><code>noteview.js</code></p>
+          <p>The view for a single note.</p>
+          <p><code>noteeditorview.js</code></p>
+          <p>By far the most complicated part of the app, this view contains all the functionality for the note editor. Handles saving, updating, deleting, speedreading, launching dialogs, displaying alerts, and keyboard shortcuts.</p>
+
+
+          <h3 class='h2 big light'><a name='contributions'>Contributions</a></h3>
+          <h3 class='h3'><a name='contributionsnathan'>By Nathan</a></h3>
           <ul class='list-reset'>
             <li>Connecting to the server created by Ben to retrieve a login token and retrieve all the documents for the user.</li>
             <li>Show prompts when the device is Logging in or Syncing with the server, as well as display an error prompt if any error occurs.</li>
@@ -336,6 +367,8 @@
             <li>Create a way for the user to review cards without it having an effect on the SRS system.</li>
             <li>Creating the XML layout for all of the activities.</li>
           </ul>
+          <h3 class='h3'><a name='contributionsben'>By Ben</a></h3>
+          <p>Ben's contributions can be seen more easily on <a href='https://github.com/bentranter/course-notes/graphs/contributors'>GitHub</a>. Ben made 168 commits, with 459,385 characters inserted and 392,647 characters deleted over the course of the project.</p>
 
         </div>
       </main>

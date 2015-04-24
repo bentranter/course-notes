@@ -17,6 +17,23 @@ var bcrypt = require('bcrypt-nodejs'),
 var r = thinky.r;
 
 /**
+ * Show the available endpoints
+ * @param {Object} the request sent to our server
+ * @param {Object} the response sent back to the client.
+ * Includes a valid JSON web token
+ * @api public
+ */
+
+exports.showEndpoints = function(req, res) {
+  res.json({
+    'login_url': 'https://api/studypiggy.com/login',
+    'signup_url': 'https://api/studypiggy.com/api/signup',
+    'delete_account_url': 'https://api.studypiggy.com/user',
+    'notes_url': 'https://api.studypiggy.com/notes{/id}'
+  });
+};
+
+/**
  * Login to StudyPiggy. Finds the username, and compares
  * passwords to indicate a successful signin attempt.
  *

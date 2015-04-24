@@ -1,0 +1,21 @@
+2015-04-23T21:31:40.256531000 0.705384s notice: Recursively removing directory /Users/Ben/course-notes/web/rethinkdb_data/tmp
+2015-04-23T21:31:40.258342000 0.707200s notice: Initializing directory /Users/Ben/course-notes/web/rethinkdb_data
+2015-04-23T21:31:40.258494000 0.707345s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/Users/Ben/course-notes/web/rethinkdb_data' did not already exist or is empty.)
+2015-04-23T21:31:40.258537000 0.707388s notice: Running rethinkdb 2.0.0-1 (CLANG 6.1.0 (clang-602.0.49))...
+2015-04-23T21:31:40.265510000 0.714362s notice: Running on Darwin 14.0.0 x86_64
+2015-04-23T21:31:40.265573000 0.714424s notice: Loading data from directory /Users/Ben/course-notes/web/rethinkdb_data
+2015-04-23T21:31:43.016285000 3.465310s info: Automatically using cache size of 100 MB
+2015-04-23T21:31:43.016301000 3.465325s warn: Cache size does not leave much memory for server and query overhead (available memory: 588 MB).
+2015-04-23T21:31:43.016309000 3.465334s warn: Cache size is very low and may impact performance.
+2015-04-23T21:31:43.017161000 3.466186s notice: Listening for intracluster connections on port 29015
+2015-04-23T21:31:43.018182000 3.467207s notice: Listening for client driver connections on port 28015
+2015-04-23T21:31:43.018316000 3.467340s notice: Listening for administrative HTTP connections on port 8080
+2015-04-23T21:31:43.018318000 3.467342s notice: Listening on addresses: 127.0.0.1, ::1
+2015-04-23T21:31:43.018323000 3.467347s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-04-23T21:31:43.018330000 3.467354s notice: Server ready, "Ben_Tranters_MacBook_Pro_local_uml" 659511f6-1026-4358-bc0e-4b9aa16669cc
+2015-04-23T21:31:43.018425000 3.467449s notice: Server got SIGINT from pid 21312, uid 501; shutting down...
+2015-04-23T21:31:43.097436000 3.546461s warn: Problem when checking for new versions of RethinkDB: HTTP request to update.rethinkdb.com failed.
+2015-04-23T21:31:43.365494000 3.814519s notice: Shutting down client connections...
+2015-04-23T21:31:43.365614000 3.814638s notice: All client connections closed.
+2015-04-23T21:31:43.365622000 3.814647s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-04-23T21:31:43.366105000 3.815130s notice: Storage engine shut down.
