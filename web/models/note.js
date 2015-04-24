@@ -14,7 +14,6 @@ var type = thinky.type;
 var Note = thinky.createModel('Note', {
   id: type.string(),
   title: type.string(),
-  subtitle: type.string(),
   content: type.string(),
   username: type.string(),
   folder: type.string(),

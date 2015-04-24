@@ -6,7 +6,6 @@
  
 var bcrypt = require('bcrypt-nodejs');
 var c = require('chalk');
-var validator = require('validator');
 var thinky = require(__dirname + '/../util/thinky.js');
 
 // Keep reference to RethinkDB's driver
@@ -22,7 +21,7 @@ var User = thinky.createModel('User', {
   pk: 'username'
 });
 
-// Ensure indices for ordering
+// Ensure index for ordering
 User.ensureIndex('date');
 
 // @TODO: Never return a password, even if it's requested

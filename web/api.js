@@ -119,21 +119,6 @@ exports.signUp = function(req, res) {
 };
 
 /**
- * Get a list of users.
- *
- * @param {Object} the request to our server
- * @param {Object} the response back to the client
- * @api public
- */
-
-exports.getUserList = function(req, res) {
-  // Order the users by date
-  User.orderBy({ index: r.desc('date') }).run().then(function(user) {
-    res.json(user);
-  });
-};
-
-/**
  * Delete a user's account.
  *
  * @param {Object} the request sent to our server
