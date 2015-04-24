@@ -113,7 +113,18 @@ var app = app || {};
         console.log('wut');
       } else {
         console.log(nextReview, timesReviewed, grade);
-        this.closeSpeedReadingDialog();
+        
+        // Do this at the end fam
+        // this.model.save({ 
+        //   title: $('#noteTitle').html(),
+        //   content: $('#noteContent').html(),
+        //   subtitle: 'Unused',
+        //   folder: $('#noteFolder').html()
+        // }); 
+        // Change model so sidebar colour changes after speedread
+        // this.model.trigger('change');
+        // this.alert('#alertSaved');
+        // this.closeSpeedReadingDialog();
       }
     }
   });
