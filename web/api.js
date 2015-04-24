@@ -130,18 +130,13 @@ exports.deleteUser = function(req, res) {
   // Get the username from the token
   var user = token.decode(req);
 
-  // Immediately expire the token
-  user.expires = moment(); // @TODO: respond with the updated token
-
-  // @TODO: Delete all notes belonging to that user?
-  User.get(user.iss).run().then(function(result) {
-    result.delete().then(function(deleted) {
-      res.json(deleted);
-    }).error(function(err) {
-      res.json({message: err});
-    });
+  User.get(user.iss).delete().execute().then(function(result) {
+    res.json(result);
   }).error(function(err) {
-    res.json({message: err});
+    res.json({
+      message: 'Error when trying to delete user',
+      err: err
+    });
   });
 };
 
