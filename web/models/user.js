@@ -14,8 +14,8 @@ var r = thinky.r;
 var type = thinky.type;
 
 var User = thinky.createModel('User', {
-  username: String,
-  password: String,
+  username: type.string(),
+  password: type.string(),
   date: type.date().default(r.now())
   }, {
   // Make the username the primary key

@@ -19,7 +19,7 @@
     "method-override": "^1.0.0",
     "moment": "^2.9.0",
     "morgan": "^1.0.0",
-    "thinky": "^2.0.0",
+    "thinky": "^2.0.2",
     "validator": "^3.33.0"
   },
   "devDependencies": {

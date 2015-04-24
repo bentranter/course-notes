@@ -12,15 +12,15 @@ var type = thinky.type;
 
 // Create model for notes
 var Note = thinky.createModel('Note', {
-  id: String,
-  title: String,
-  subtitle: String,
-  content: String,
-  username: String,
-  folder: String,
+  id: type.string(),
+  title: type.string(),
+  subtitle: type.string(),
+  content: type.string(),
+  username: type.string(),
+  folder: type.string(),
   dateCreated: type.date().default(r.now()),
-  dateUpdated: type.date().default(r.now()),
-  timesReviewed: Number
+  nextReview: type.date(),
+  timesReviewed: type.number()
 });
 
 // Ensure indices for ordering
