@@ -68,7 +68,6 @@ app.post('/api/login', api.login);
 app.post('/api/signup', api.signUp);
 
 // Secure endpoints
-app.get('/api/user', auth.authorizeToken, api.getUserList);
 app.delete('/api/user', auth.authorizeToken, api.deleteUser);
 
 // Notes -- this is the real stuff. The server won't actually

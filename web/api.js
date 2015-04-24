@@ -177,12 +177,11 @@ exports.addNote = function (req, res) {
   // Create new instance of 'Notes' model
   var note = new Note({
     title: req.body.title,
-    subtitle: req.body.subtitle,
     content: req.body.content,
     username: decoded.iss,
     folder: req.body.folder,
     dateCreated: r.now(),
-    dateUpdated: r.now(),
+    nextReview: r.now().add(86400),
     timesReviewed: 0 // Initialize at 0
   });
 
