@@ -1,1 +1,1 @@
-MIT &copyright; 2015
+MIT &copy; 2015
