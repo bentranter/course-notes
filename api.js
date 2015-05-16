@@ -233,13 +233,7 @@ exports.deleteNote = function (req, res) {
 };
 
 /**
- * Update an existing note by id. If the time of next review has been
- * updated, then update that too.
- * Originally, I was going to calculate this on the server, but it's
- * impossible to optimisticaly update the model on the client if you 
- * don't know the date of next review until the server responds. You 
- * could calculate it in both places, but that's pointless, so we do 
- * it on the client in the speedreader view for an individual note.
+ * Update an existing note by id.
  *
  * @param {Object} the request sent to our server
  * @param {Object} the response sent back to the client
@@ -263,6 +257,31 @@ exports.updateNote = function (req, res) {
   }).error(function(err) {
     res.json({
       message: 'Unable to update note',
+      error: err
+    });
+  });
+};
+
+/**
+ * Increase the time of the next review of a note.
+ *
+ * @param {Object} the request sent to our server
+ * @param {Object} the response sent back to the client
+ * @api public
+ */
+
+exports.setNextReview = function (req, res) {
+
+  // Get the token
+  var decoded = token.decode(req);
+
+  Note.get(req.params.id).update({
+    // @TODO: Update using SM-2 algo, calculated on the client
+  }).run().then(function(note) {
+    res.json(note);
+  }).error(function(err) {
+    res.json({
+      message: 'Unable to update time of next review.',
       error: err
     });
   });
