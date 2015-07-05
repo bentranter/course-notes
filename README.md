@@ -1,7 +1,8 @@
-##Course Notes
-A new offline-first way to write, read, and review your notes on your laptop and phone.
+# Course Notes
 
-####How to install and run the web app
+Get straight A's studying for three minutes a day.
+
+### How to install and run the web app
 
 1. Get [node.js](http://nodejs.org/)
 2. Get [RethinkDB](http://rethinkdb.com/)
@@ -17,33 +18,31 @@ $ npm start
 
 The RethinkDB admin console will be on `0.0.0.0:8080` and the Express app will be on `0.0.0.0:3000`.
 
-####Problems?
+### API Endpoints
 
-I haven't updated to RethinkDB 1.16 or to Thinky 1.16. In Thinky 1.16, `then` is a shortcut for `run().then` so that might cause problems if you're running the latest version.
+The API expects the `Content-Type` header to be `x-www-form-urlencoded`, but I'll fix this soon.
 
-###API Endpoints
+###### Not Secure
 
-######Not Secure
-
-- `/api/signup` Post (requires `x-www-form-urlencoded`)
-- `/api/login` Post (requires `x-www-form-urlencoded`)
+- `/api/signup` Post 
+- `/api/login` Post 
 - `/api/people` Get
 - `/api/people/:id` Get
-- `/api/people/:id` Put (requires `x-www-form-urlencoded`)
+- `/api/people/:id` Put
 - `/api/people/:id` Delete
-- `/api/people` Post (requires `x-www-form-urlencoded`)
+- `/api/people` Post 
 
-######Secure
+###### Secure
 
-A request to a secure endpoint requires a valid **JSON web token**, You can get one when you sign up, or login. It will be sent in the response. You must send your token with every request to any secure endpoint. Its recommended that you set it as an `X-Access-Token` in the request header. See below for alternative to ways to send your token.
+A request to a secure endpoint requires a valid **JSON web token**, You can get one when you sign up, or login. It will be sent in the response. You must send your token with every request to any secure endpoint. It's recommended that you set it as an `X-Access-Token` in the request header. See below for alternative to ways to send your token.
 
 - `/api/notes` Get
 - `/api/notes/:id` Get
-- `/api/notes/:id` Put (requires `x-www-form-urlencoded`)
+- `/api/notes/:id` Put 
 - `/api/notes/:id` Delete
-- `/api/notes` Post (requires `x-www-form-urlencoded`)
+- `/api/notes` Post 
 
-####Making a request
+### Making a request
 
 A sample POST request would look something like, 
 
@@ -81,17 +80,14 @@ Supported Data Models:
 - `dateUpdated`: Date
 - `timesReviewed`: Number
 
-######People (our test endpoint)
+### Tests
 
-- `firstName`: String
-- `lastName`: String
-- `coolnessFactor`: Number
+Testig is done with **Mocha**. You'll need Mocha installed globally on your machine (`npm i -g mocha`, if you haven't already). Then start RethinkDB, the Express server, and run `npm test`. 
 
-###Tests
+### Contributing
 
-To run the tests, `cd` into `/web/test`, and run `$ jasmine-node .`. If every test fails, make sure you have RethinkDB and the server running, and then try again.
+Pull requests, feature requests, uhh friend requests... no wait that's Facebook. If you have something to contribute, you're more than welcome to :)
 
-###Roadmap
+### License
 
-- Fix SM-2 implementation
-- Ship!!!
+MIT.

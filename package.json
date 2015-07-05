@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "jasmine-node tests/"
+    "test": "mocha tests/"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -18,25 +18,12 @@
     "jwt-simple": "^0.2.0",
     "method-override": "^1.0.0",
     "moment": "^2.9.0",
-    "morgan": "^1.0.0",
+    "supertest": "^1.0.1",
     "thinky": "^2.0.2",
     "validator": "^3.33.0"
   },
   "devDependencies": {
     "chalk": "^0.5.1",
-    "frisby": "^0.8.5",
     "live-server": "^0.6.4"
-  },
-  "jshintConfig": {
-    "asi": false,
-    "browser": true,
-    "curly": false,
-    "expr": true,
-    "indent": 4,
-    "loopfunc": true,
-    "node": true,
-    "trailing": true,
-    "undef": true,
-    "white": true
   }
 }
