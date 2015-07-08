@@ -88,6 +88,10 @@ Testig is done with **Mocha**. You'll need Mocha installed globally on your mach
 
 Pull requests, feature requests, uhh friend requests... no wait that's Facebook. If you have something to contribute, you're more than welcome to :)
 
+### API
+
+API will follow [JSON API](http://jsonapi.org/) on release.
+
 ### License
 
 MIT.
