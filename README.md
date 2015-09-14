@@ -1,5 +1,7 @@
 # Course Notes
 
+###### Update: StudyPiggy will be released globe-wide this October.
+
 Get straight A's studying for three minutes a day.
 
 ### How to install and run the web app
