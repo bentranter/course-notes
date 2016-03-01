@@ -19,12 +19,14 @@
     "jwt-simple": "^0.2.0",
     "method-override": "^1.0.0",
     "moment": "^2.9.0",
+    "morgan": "^1.7.0",
     "supertest": "^1.0.1",
     "thinky": "^2.0.2",
     "validator": "^3.33.0"
   },
   "devDependencies": {
     "chalk": "^0.5.1",
-    "live-server": "^0.6.4"
+    "live-server": "^0.6.4",
+    "morgan": "^1.7.0"
   }
 }
