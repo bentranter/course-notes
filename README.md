@@ -1,7 +1,5 @@
 # Course Notes
 
-###### Update: StudyPiggy will be released globe-wide this October.
-
 Get straight A's studying for three minutes a day.
 
 ### How to install and run the web app
@@ -26,13 +24,13 @@ The API expects the `Content-Type` header to be `x-www-form-urlencoded`, but I'l
 
 ###### Not Secure
 
-- `/api/signup` Post 
-- `/api/login` Post 
+- `/api/signup` Post
+- `/api/login` Post
 - `/api/people` Get
 - `/api/people/:id` Get
 - `/api/people/:id` Put
 - `/api/people/:id` Delete
-- `/api/people` Post 
+- `/api/people` Post
 
 ###### Secure
 
@@ -40,13 +38,13 @@ A request to a secure endpoint requires a valid **JSON web token**, You can get 
 
 - `/api/notes` Get
 - `/api/notes/:id` Get
-- `/api/notes/:id` Put 
+- `/api/notes/:id` Put
 - `/api/notes/:id` Delete
-- `/api/notes` Post 
+- `/api/notes` Post
 
 ### Making a request
 
-A sample POST request would look something like, 
+A sample POST request would look something like,
 
 ```http
 POST /api/signup HTTP/1.1
@@ -84,15 +82,11 @@ Supported Data Models:
 
 ### Tests
 
-Testig is done with **Mocha**. You'll need Mocha installed globally on your machine (`npm i -g mocha`, if you haven't already). Then start RethinkDB, the Express server, and run `npm test`. 
+Testig is done with **Mocha**. You'll need Mocha installed globally on your machine (`npm i -g mocha`, if you haven't already). Then start RethinkDB, the Express server, and run `npm test`.
 
 ### Contributing
 
 Pull requests, feature requests, uhh friend requests... no wait that's Facebook. If you have something to contribute, you're more than welcome to :)
-
-### API
-
-API will follow [JSON API](http://jsonapi.org/) on release.
 
 ### License
 
